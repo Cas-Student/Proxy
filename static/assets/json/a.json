@@ -238,8 +238,8 @@
     "categories": ["all", "social", "stream", "media"]
   },
   {
-    "name": "Whatsapp",
-    "link": "https://web.whatsapp.com/",
+    "name": "Codes",
+    "link": "codes.txt",
     "image": "/assets/media/icons/whatsapp.webp",
     "categories": ["all", "message", "social"]
   },
