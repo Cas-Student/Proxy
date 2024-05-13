@@ -239,7 +239,7 @@
   },
   {
     "name": "Codes",
-    "link": "codes.txt",
+    "link": "assets/json/codes.txt",
     "image": "/assets/media/icons/whatsapp.webp",
     "categories": ["all", "message", "social"]
   },
