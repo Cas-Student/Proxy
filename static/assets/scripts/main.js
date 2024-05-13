@@ -1,12 +1,3 @@
-function message() {
-  var a = document.createElement("a");
-  a.appendChild(createTextNode("Click Here"));
-  a.title = "Click Here"
-  a.href = "https://forms.office.com/r/8JyNhKAATh"
-  
-  alert("Please " + a + " to request changes.")
-}
-
 document.addEventListener('DOMContentLoaded', function () {
   // Ads
   if (localStorage.getItem('ad') === null || localStorage.getItem('ad') === 'default') {
