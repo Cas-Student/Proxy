@@ -1,5 +1,9 @@
 function message() {
-  alert("Please <a href='https://forms.office.com/r/8JyNhKAATh'>Click Here</a> to request changes.")
+  var a = document.createElement("a");
+  a.title = "Click Here"
+  a.href = "https://forms.office.com/r/8JyNhKAATh"
+  
+  alert("Please " + a + " to request changes.")
 }
 
 document.addEventListener('DOMContentLoaded', function () {
