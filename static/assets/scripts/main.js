@@ -1,3 +1,7 @@
+function message() {
+  alert("Please <a href='https://forms.office.com/r/8JyNhKAATh'>Click Here</a> to request changes.")
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   // Ads
   if (localStorage.getItem('ad') === null || localStorage.getItem('ad') === 'default') {
