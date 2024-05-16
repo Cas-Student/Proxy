@@ -39,21 +39,9 @@ if (!inFrame && !navigator.userAgent.includes('Firefox')) {
       window.onbeforeunload = function (event) {
         const confirmationMessage = 'Leave Site?';
         (event || window.event).returnValue = confirmationMessage;
-        return confirmationMessage;
+        return true;
       };
     `
     doc.head.appendChild(script)
   }
 }
-
-document.addEventListener('DOMContentLoaded', function (event) {
-  if (window.localStorage.getItem('v4Particles') === 'true') {
-    const scr = document.createElement('script')
-    scr.src = '/assets/scripts/particles.js'
-    document.body.appendChild(scr)
-  }
-})
-
-let splashtext = []
-
-document.getElementById('splash').innerText = splashtext[Math.floor(Math.random() * splashtext.length)]

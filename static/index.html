@@ -1,4 +1,4 @@
-s<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,11 +6,16 @@ s<!doctype html>
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" id="tab-favicon" href="favicon.png" />
-    <title id="tab-title">start.hcps.org</title>
+    <title id="tab-title"></title>
+    <!--CSS-->
     <link rel="stylesheet" href="/assets/styles/main.css?v=8" />
-    <link rel="stylesheet" href="/assets/styles/themes/default.css?v=5" />
+    <link rel="stylesheet" href="/assets/styles/themes/default.css?v=5" />'
+    <!--React-->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
-  <body class="center" onload="message()">
+  <body class="center">
     <div class="fixed-nav-bar">
       <div class="fixed-nav-bar-container">
         <a class="icon" href="/./"><img alt="home" id="INImg" src="/assets/media/favicon/main.png" /></a>
@@ -23,7 +28,6 @@ s<!doctype html>
       </div>
     </div>
     <div id="particles-js">
-      <script rel="preload" src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.js"></script>
       <div class="main">
         <h1 class="title">Hacker Hub</h1>
         <div class="search-container">
@@ -33,6 +37,7 @@ s<!doctype html>
         </div>
       </div>
     </div>
+    <script src="/assets/scripts/react/a.js" type="text/babel"></script> <!--React-->
     <script src="/assets/scripts/h.js?v=14"></script>
     <script src="assets/scripts/index.js?v=12"></script>
     <script src="./m/bundle.js?v=5"></script>
@@ -49,6 +54,5 @@ s<!doctype html>
 
       gtag('config', 'G-WKJQ5QHQTJ')
     </script>
-    <div id="adv"></div>
   </body>
 </html>
