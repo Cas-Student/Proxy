@@ -4,11 +4,14 @@
 
 This is a reboot of Hacker Hub.
 
-<a href="https://sound-beverley-hacker-hub-77e91221.koyeb.app/">Reston, Virginia</a>
+This was created by [Cas Macino](https://github.com/Cas-Student) and [Dylan / Shark](https://shxrk.dev)
 
-<a href="https://proxy-xi-three.vercel.app/">Ashburn, Virginia</a>
+Below you can find the links to the proxy in multiple locations:
 
-<a href="https://gay-drucy-calculator-nerd-de2308f9.koyeb.app/">Frankfurt, Germany</a>
+| Vercel / Koyeb | Location | Valid | Link |
+| -------------- | -------- | ----- | ---- |
+| Koyeb | Reston, Virginia | :white_check_mark: | [Link](https://sound-beverley-hacker-hub-77e91221.koyeb.app/) |
+| Vercel | Ashburn, Virginia | :white_check_mark: | [Link](https://proxy-xi-three.vercel.app/) |
+| Koyeb | Frankfurt, Germany | :white_check_mark: | [Link](https://gay-drucy-calculator-nerd-de2308f9.koyeb.app/) |
 
-Here is a form for contributions:
-<a href="https://forms.office.com/r/8JyNhKAATh">Go Here</a>
+[Here](https://forms.office.com/r/8JyNhKAATh) is a form for contributions 
