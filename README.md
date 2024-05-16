@@ -2,18 +2,13 @@
 <h1>Hacker Hub</h1>
 </div>
 
-```
 This is a reboot of Hacker Hub.
 
-Reston, Virginia:
-https://sound-beverley-hacker-hub-77e91221.koyeb.app/
+<a href="https://sound-beverley-hacker-hub-77e91221.koyeb.app/">Reston, Virginia</a>
 
-Ashburn, Virginia:
-https://proxy-xi-three.vercel.app/
+<a href="https://proxy-xi-three.vercel.app/">Ashburn, Virginia</a>
 
-Frankfurt, Germany:
-https://gay-drucy-calculator-nerd-de2308f9.koyeb.app/
+<a href="https://gay-drucy-calculator-nerd-de2308f9.koyeb.app/">Frankfurt, Germany</a>
 
 Here is a form for contributions:
-https://forms.office.com/r/8JyNhKAATh
-```
+<a href="https://forms.office.com/r/8JyNhKAATh">Go Here</a>
