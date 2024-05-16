@@ -5,7 +5,7 @@ Only the following versions will be updated properly (with the most recent secur
 
 | Version | Supported          |
 | ------- | ------------------ |
-| Latest (5.1.x) | :white_check_mark|
+| Latest (5.1.x) | :white_check_mark: |
 | 5.1.x   | :white_check_mark: |
 
 ## Version Details
