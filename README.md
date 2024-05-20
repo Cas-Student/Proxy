@@ -4,7 +4,7 @@
 
 This is a reboot of Hacker Hub.
 
-This was created by [Cas Macino](https://github.com/Cas-Student) and [Dylan / Shark](https://shxrk.dev)
+This was created by [Cas Macino](https://github.com/Cas-Student)
 
 Below you can find the links to the proxy in multiple locations:
 
