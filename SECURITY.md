@@ -15,7 +15,7 @@ The most recent versions of every NPM (Node Package Manager) package will be aut
 If you have an outdated version and you are using a fork, please run `git pull`. 
 
 ## Reporting Vulnerabilities
-Please create an issue and ping / mention either 0xDylan or Cas-Student with the following:
+Please create an issue and ping / mention either Cas-Student with the following:
 - Details about the bug*
 - Which package / component is vulnerable*
 - What steps you did to reproduce the bug*
