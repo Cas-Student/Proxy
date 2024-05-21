@@ -6,7 +6,7 @@ import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
 
-import Accounts from 'assets/accounts.js';
+import Accounts from 'assets/accounts/accounts.js';
 
 const __dirname = process.cwd()
 const server = http.createServer()
@@ -19,7 +19,10 @@ if (config.challenge) {
 
   app.use(
     basicAuth(
-      {authorizer: Authorize}
+      {
+        users: Accounts,
+        //authorizer: Authorize
+      }
     )
   )
   function Authorize() {
@@ -37,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'static')))
 if (config.routes !== false) {
   const routes = [
     { path: '/ap', file: 'apps.html' },
+    { path: '/ac', file: 'account.html'},
     { path: '/g', file: 'games.html' },
     { path: '/s', file: 'settings.html' },
     { path: '/t', file: 'tabs.html' },
