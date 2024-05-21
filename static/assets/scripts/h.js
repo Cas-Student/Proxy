@@ -16,7 +16,7 @@ if (!inFrame && !navigator.userAgent.includes('Firefox')) {
     const style = iframe.style
     const link = doc.createElement('link')
     const name = localStorage.getItem('name') || 'start.hcps.org'
-    const icon = localStorage.getItem('icon') || '../../favicon.png'
+    const icon = localStorage.getItem('icon') || './favicon.png'
 
     doc.title = name
     link.rel = 'icon'

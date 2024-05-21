@@ -5,6 +5,9 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
+
+import Accounts from 'assets/accounts.js';
+
 const __dirname = process.cwd()
 const server = http.createServer()
 const app = express(server)
@@ -15,11 +18,16 @@ if (config.challenge) {
   console.log('Passwords are: ' + Object.values(config.users))
 
   app.use(
-    basicAuth({
-      users: config.users,
-      challenge: true,
-    })
+    basicAuth(
+      {authorizer: Authorize}
+    )
   )
+  function Authorize() {
+    const userMatches = basicAuth.safeCompare(username, 'customuser');
+    const passwordMatches = basicAuth.safeCompare(password, 'custompassword');
+    console.log('Matches from: ' + userMatches & passwordMatches);
+    return userMatches & passwordMatches;
+  }
 }
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
