@@ -246,7 +246,9 @@ document.addEventListener('DOMContentLoaded', function () {
 // Background Image
 document.addEventListener('DOMContentLoaded', function () {
   var savedBackgroundImage = localStorage.getItem('backgroundImage')
-  if (savedBackgroundImage) {
-    document.body.style.backgroundImage = "url('" + savedBackgroundImage + "')"
+  if (savedBackgroundImage === "ALEX") {
+    document.body.style.backgroundImage = "url('assets/media/background/alex.png')";
+  } else if (savedBackgroundImage) {
+    document.body.style.backgroundImage = "url('" + savedBackgroundImage + "')";
   }
 })
