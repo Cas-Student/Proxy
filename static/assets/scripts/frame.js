@@ -65,7 +65,7 @@ function popout() {
 
   if (newWindow) {
     const name = localStorage.getItem('name') || 'start.hcps.org'
-    const icon = localStorage.getItem('icon') || './static/favicon.png'
+    const icon = localStorage.getItem('icon') || '' //favicon
 
     newWindow.document.title = name
 
