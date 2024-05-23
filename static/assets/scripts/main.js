@@ -233,13 +233,20 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
 })
 // Key
+var toggle = 1;
+document.getElementById('ifra');
 document.addEventListener('DOMContentLoaded', function () {
   var eventKey = localStorage.getItem('eventKey') || '`'
   var pLink = localStorage.getItem('pLink') || 'https://start.hcps.org'
 
   document.addEventListener('keydown', function (event) {
-    if (event.key === eventKey) {
-      window.location.href = pLink
+    if (event.key === eventKey & home == 1) {
+      home = 0;
+      site = window.location.href;
+      iframe = pLink;
+    } else if (event.key === eventKey & home == 0) {
+      home = 1;
+      iframe = site;
     }
   })
 })
