@@ -4,7 +4,7 @@ const Accounts = {
 }
 
 const icon = document.getElementsByClassName("account-icon");
-icon.src = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.svgrepo.com%2Fsvg%2F345418%2Faccount-circle&psig=AOvVaw3CpHpkIN69XRSIDCUB6B2j&ust=1716510614215000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPDAzr_CooYDFQAAAAAdAAAAABAE";
-icon.alt = "accounts";
+icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/original/account-symbol-leader-and-workers-team-logo-vector.jpg";
+icon.alt = "Profile";
 
 export default Accounts;
