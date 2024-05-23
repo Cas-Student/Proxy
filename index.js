@@ -21,7 +21,7 @@ if (config.challenge) {
     basicAuth(
       {
         challenge: true,
-        users: Accounts.users
+        users: Accounts
       }
     )
   )
