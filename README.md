@@ -10,7 +10,7 @@ Below you can find the links to the proxy in multiple locations:
 
 | Host | Location | Valid | Link |
 | -------------- | -------- | ----- | ---- |
-| Koyeb | Reston, Virginia | :white_check_mark: | [Link](https://sound-beverley-hacker-hub-77e91221.koyeb.app/) |
+| Koyeb | Reston, Virginia | :white_check_mark: | [Link](https://eldest-lind-hacker-hub-1943c975.koyeb.app/) |
 | Vercel | Ashburn, Virginia | :white_check_mark: | [Link](https://proxy-xi-three.vercel.app/) |
 | Koyeb | Frankfurt, Germany | :white_check_mark: | [Link](https://gay-drucy-calculator-nerd-de2308f9.koyeb.app/) |
 
