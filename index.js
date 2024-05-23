@@ -14,7 +14,8 @@ const app = express(server)
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 if (config.challenge) {
-  console.log('Password protection is enabled. Usernames are: ' + Object.keys(config.users))
+  console.log('Password protection is enabled.')
+  console.log('Usernames are: ' + Object.keys(config.users))
   console.log('Passwords are: ' + Object.values(config.users))
 
   app.use(
@@ -25,6 +26,15 @@ if (config.challenge) {
       }
     )
   )
+} else if (!config.challenge) {
+  console.log('Password protection is disabled.')
+}
+console.log('--------------------')
+console.log('      Accounts      ')
+console.log('--------------------')
+for (user in Accounts) {
+  console.log(user + ' : ' + Accounts[user])
+  console.log('--------------------')
 }
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
