@@ -20,17 +20,11 @@ if (config.challenge) {
   app.use(
     basicAuth(
       {
-        users: Accounts,
-        //authorizer: Authorize
+        challenge: true,
+        users: Accounts.users
       }
     )
   )
-  function Authorize() {
-    const userMatches = basicAuth.safeCompare(username, 'customuser');
-    const passwordMatches = basicAuth.safeCompare(password, 'custompassword');
-    console.log('Matches from: ' + userMatches & passwordMatches);
-    return userMatches & passwordMatches;
-  }
 }
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
