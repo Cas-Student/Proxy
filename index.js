@@ -6,7 +6,7 @@ import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
 
-import Accounts from 'assets/accounts/accounts.js';
+import Accounts from './static/assets/accounts/accounts.js';
 
 const __dirname = process.cwd()
 const server = http.createServer()
