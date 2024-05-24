@@ -7,7 +7,7 @@ import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
 import Accounts from './static/assets/accounts/users.js';
-console.log("finished");
+console.log("Done");
 
 const __dirname = process.cwd()
 const server = http.createServer()
@@ -46,8 +46,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'static')))
-console.log("Done";
+console.log("Done");
 
+console.log("Setting routes")
 if (config.routes !== false) {
   const routes = [
     { path: '/ap', file: 'apps.html' },
@@ -77,7 +78,9 @@ if (config.local !== false) {
     fetchData(req, res, next, baseUrls)
   })
 }
+console.log("Done");
 
+console.log("Fetching data...");
 const fetchData = async (req, res, next, baseUrls) => {
   try {
     const reqTarget = baseUrls.map((baseUrl) => `${baseUrl}/${req.params[0]}`)
