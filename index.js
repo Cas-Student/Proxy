@@ -1,3 +1,4 @@
+console.log("loading imports...");
 import express from 'express'
 import basicAuth from 'express-basic-auth'
 import http from 'node:http'
@@ -5,14 +6,16 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-
 import Accounts from './static/assets/accounts/users.js';
+console.log("finished");
 
 const __dirname = process.cwd()
 const server = http.createServer()
 const app = express(server)
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
+console.log("Running on port: " + PORT);
+
 if (config.challenge) {
   console.log('Password protection is enabled.')
   console.log('Usernames are: ' + Object.keys(config.users))
@@ -29,6 +32,7 @@ if (config.challenge) {
 } else if (!config.challenge) {
   console.log('Password protection is disabled.')
 }
+
 console.log('--------------------')
 console.log('      Accounts      ')
 console.log('--------------------')
@@ -36,10 +40,13 @@ for (let user in Accounts) {
   console.log(user + ' : ' + Accounts[user])
   console.log('--------------------')
 }
+
+console.log("Going to main file...");
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'static')))
+console.log("Done";
 
 if (config.routes !== false) {
   const routes = [
