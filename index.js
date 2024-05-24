@@ -32,7 +32,7 @@ if (config.challenge) {
 console.log('--------------------')
 console.log('      Accounts      ')
 console.log('--------------------')
-for (user in Accounts) {
+for (let user in Accounts) {
   console.log(user + ' : ' + Accounts[user])
   console.log('--------------------')
 }
