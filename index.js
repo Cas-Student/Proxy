@@ -105,6 +105,7 @@ const fetchData = async (req, res, next, baseUrls) => {
     next(error)
   }
 }
+console.log("Done");
 
 server.on('request', (req, res) => {
   if (bareServer.shouldRoute(req)) {
