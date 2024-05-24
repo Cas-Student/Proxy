@@ -10,6 +10,10 @@ const input = document.getElementById('is')
 if (form && input) {
   form.addEventListener('submit', async (event) => {
     event.preventDefault()
+    console.log("----------");
+    console.log(form);
+    console.log(input);
+    console.log("----------");
     processUrl(input.value, '/p')
   })
 }
