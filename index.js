@@ -37,7 +37,7 @@ console.log('--------------------')
 console.log('      Accounts      ')
 console.log('--------------------')
 for (let user in Accounts) {
-  console.log(user + ' : ' + Accounts[user])
+  console.log(user + ' | ' + Accounts[user])
   console.log('--------------------')
 }
 
@@ -130,3 +130,6 @@ server.on('listening', () => {
 server.listen({
   port: PORT,
 })
+
+console.log("Completed index.js settings.");
+
