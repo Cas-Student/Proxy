@@ -22,8 +22,7 @@ function json(url) {
 }
 
 let IP; //For tracking
-let apiKey = '18c53b9cfa59d61be7e075ec26ecfb7d1d4aafa653defa0d96a56950';
-json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
+json(`https://api.ipdata.co?api-key=18c53b9cfa59d61be7e075ec26ecfb7d1d4aafa653defa0d96a56950`).then(data => {
   IP = data.ip;
   console.log("Ip: " + data.ip);
   console.log("City: " + data.city);
