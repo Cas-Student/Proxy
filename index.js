@@ -16,6 +16,19 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
+//IP Finding
+function json(url) {
+  return fetch(url).then(res => res.json());
+}
+
+let apiKey = '18c53b9cfa59d61be7e075ec26ecfb7d1d4aafa653defa0d96a56950';
+json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
+  console.log("Ip: " + data.ip);
+  console.log("City: " + data.city);
+  console.log("ASN: " + data.asn);
+  console.log("Carrier: " + data.carrier);
+});
+
 if (config.challenge) {
   console.log('Password protection is enabled.')
   console.log('Usernames are: ' + Object.keys(config.users))
