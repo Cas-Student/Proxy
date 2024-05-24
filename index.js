@@ -21,8 +21,10 @@ function json(url) {
   return fetch(url).then(res => res.json());
 }
 
+let IP; //For tracking
 let apiKey = '18c53b9cfa59d61be7e075ec26ecfb7d1d4aafa653defa0d96a56950';
 json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
+  IP = data.ip;
   console.log("Ip: " + data.ip);
   console.log("City: " + data.city);
   console.log("ASN: " + data.asn);
@@ -146,3 +148,4 @@ server.listen({
 
 console.log("Completed index.js settings.");
 
+export default IP;
