@@ -8,7 +8,7 @@ function handleClick(app) {
   if (typeof app.say !== 'undefined') {
     alert(app.say)
   }
-
+  console.log("Opening: " + app.link);
   if (app.local) {
     saveToLocal(app.link)
     window.location.href = 'p'
