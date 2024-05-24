@@ -27,6 +27,7 @@ json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
   IP = data.ip;
   console.log("Ip: " + data.ip);
   console.log("City: " + data.city);
+  console.log("State: " + data.state);
   console.log("ASN: " + data.asn);
   console.log("Carrier: " + data.carrier);
 });
