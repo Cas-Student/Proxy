@@ -3,7 +3,7 @@
 document.body.innerHTML = "";
 
 //Re-adds body
-document.body.appendChild('
+document.body.appendChild(`
 <div class="fixed-nav-bar">
   <div class="fixed-nav-bar-container">
     <a class="icon" href="/./"><img alt="home" id="INImg" src="/assets/media/favicon/main.png" /></a>
@@ -44,4 +44,4 @@ document.body.appendChild('
   gtag("js", new Date())
   gtag("config", "G-WKJQ5QHQTJ")
 </script>
-');
+`);
