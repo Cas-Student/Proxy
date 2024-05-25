@@ -1,4 +1,7 @@
 
+//Deletes body
+document.body.innerHTML = "";
+
 //Re-adds body
 document.body.appendChild('
 <div class="fixed-nav-bar">
