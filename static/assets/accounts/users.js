@@ -1,6 +1,7 @@
 const Accounts = {
-    'Wesley' : 'Password',
-    'Cas' : 'Password'
+    'Alexandra' : 'Stanley',
+    'Cas' : 'Macino',
+    'Wesley' : 'Miller',
 }
 
 export default Accounts;
