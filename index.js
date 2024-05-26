@@ -54,12 +54,14 @@ for (let user in Accounts) {
   console.log('--------------------')
 }
 
+/*
 console.log("Going to main file...");
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'static')))
 console.log("Done");
+*/
 
 console.log("Setting routes")
 if (config.routes !== false) {
