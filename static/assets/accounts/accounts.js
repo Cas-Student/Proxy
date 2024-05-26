@@ -4,3 +4,4 @@ icon.alt = "Profile";
 
 //Hides main site
 document.getElementById("site").style.display = "none";
+alert(process.env.Cas");
