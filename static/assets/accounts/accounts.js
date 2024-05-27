@@ -6,10 +6,10 @@ icon.alt = "Profile";
 document.getElementById("site").style.display = "none";
 
 //Adds the CSS
-const link1 document.createElement("link");
+const link1 = document.createElement("link");
 link1.rel="stylesheet";
 link1.href="/assets/styles/main.css";
-const link2 document.createElement("link");
+const link2 = document.createElement("link");
 link2.rel="stylesheet";
 link2.href="/assets/styles/themes/default.css";
 
