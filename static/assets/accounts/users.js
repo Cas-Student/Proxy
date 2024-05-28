@@ -2,11 +2,14 @@ const Accounts = {
     'Alexandra' : 'Stanley',
     'Cas' : 'Macino',
     'Colton' : 'Miller',
+    'Dylan' : 'Szeliga',
     'Evans' : 'Stokley',
+    'Miller' : 'French',
     'Parker' : 'Warren',
     'Paul' : 'Allen',
     'Rocco' : 'Preteroti',
     'Jameson' : 'Mims',
+    'Vin' : 'Galczynski',
     'Wesley' : 'Miller'
 }
 
