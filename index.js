@@ -22,7 +22,7 @@ Ip & User tagging.
 app.get('/', (req, res) => {
   const ip = req.get('X-Forwarded-For');
   console.log("\n");
-  console.log("At: " + Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
+  console.log("At: " + Date());
   console.log("ROOT IP: " + ip);
   res.end();
 });
