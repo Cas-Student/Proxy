@@ -147,4 +147,3 @@ server.listen({
 
 console.log("Completed index.js settings.");
 
-export default IP;
