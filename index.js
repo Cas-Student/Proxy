@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
   const ip = req.get('X-Forwarded-For');
   console.log("ROOT IP: " + ip + "\n\n");
   fetch('https://api.ipdata.co?api-key=18c53b9cfa59d61be7e075ec26ecfb7d1d4aafa653defa0d96a56950')
-  .then(res => res.sjon())
+  .then(res => res.json())
   .then(data => {
     console.log("Ip: " + data.ip);
     console.log("City: " + data.city);
