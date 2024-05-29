@@ -19,7 +19,9 @@ console.log("Running on port: " + PORT);
 //IP Finding
 app.get('/', (req, res) => {
   const ip = req.get('X-Forwarded-For');
-  console.log("\nROOT IP: " + ip + "\n");
+  console.log("\n");
+  console.log("At: " + Date());
+  console.log("ROOT IP: " + ip);
   res.end();
 });
 
