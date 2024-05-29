@@ -18,6 +18,7 @@ console.log("Running on port: " + PORT);
 
 /*
 Ip & User tagging.
+*/
 
 app.get('/', (req, res) => {
   const ip = req.get('X-Forwarded-For');
@@ -26,7 +27,6 @@ app.get('/', (req, res) => {
   console.log("ROOT IP: " + ip);
   res.end();
 });
-*/
 
 if (config.challenge) {
   console.log('Password protection is enabled.')
