@@ -17,6 +17,8 @@ const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
 /*
+Ip & User tagging.
+
 app.get('/', (req, res) => {
   const ip = req.get('X-Forwarded-For');
   console.log("\n");
