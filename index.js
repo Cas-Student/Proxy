@@ -20,7 +20,7 @@ console.log("Running on port: " + PORT);
 app.get('/', (req, res) => {
   const ip = req.get('X-Forwarded-For');
   console.log("\n");
-  console.log("At: " + Date());
+  console.log("At: " + Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
   console.log("ROOT IP: " + ip);
   res.end();
 });
