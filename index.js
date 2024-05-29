@@ -17,16 +17,17 @@ const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
 //IP Finding
-function json(url) {
-  return fetch(url).then(res => res.json());
-}
-
-let IP; //For tracking
-json(`https://api.ipdata.co?api-key=18c53b9cfa59d61be7e075ec26ecfb7d1d4aafa653defa0d96a56950`).then(data => {
-  IP = data.ip;
-  console.log("Ip: " + data.ip);
-  console.log("City: " + data.city);
-  console.log("State: " + data.region);
+app.get('/', (req, res) => {
+  const ip = req.get('X-Forwarded-For');
+  console.log("ROOT IP: " + ip + "\n\n");
+  fetch('https://api.ipdata.co?api-key=18c53b9cfa59d61be7e075ec26ecfb7d1d4aafa653defa0d96a56950')
+  .then(res => res.sjon())
+  .then(data => {
+    console.log("Ip: " + data.ip);
+    console.log("City: " + data.city);
+    console.log("State: " + data.region);
+  });
+  res.end();
 });
 
 if (config.challenge) {
