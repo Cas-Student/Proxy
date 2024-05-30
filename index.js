@@ -21,7 +21,6 @@ app.get('/', (req, res) => {
   console.log("\n");
   console.log("At: " + Date());
   console.log("ROOT IP: " + ip);
-  window.location.href = "https://start.hcps.org";
   res.end();
 });
 
