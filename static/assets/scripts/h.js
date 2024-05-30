@@ -31,7 +31,7 @@ if (!inFrame && !navigator.userAgent.includes('Firefox')) {
     doc.head.appendChild(link)
     doc.body.appendChild(iframe)
 
-    const pLink = localStorage.getItem(encodeURI('pLink')) || 'https://gay-drucy-calculator-nerd-de2308f9.koyeb.app/'
+    const pLink = localStorage.getItem(encodeURI('pLink')) || 'https://start.hcps.org'
     location.replace(pLink)
 
     const script = doc.createElement('script')
