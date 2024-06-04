@@ -2,9 +2,14 @@ const icon = document.getElementById("account-icon");
 icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/original/account-symbol-leader-and-workers-team-logo-vector.jpg";
 icon.alt = "Profile";
 
-//Hides main site of login screen.
-//site or login
-document.getElementById("login").style.display = "none";
+const login = true;
+if (login) {
+    document.getElementById("site").style.display = "none";
+    document.getElementById("login").style.display = "block";
+} else if (!login) {
+    document.getElementById("site").style.display = "block";
+    document.getElementById("login").style.display = "none";
+}
 
 //Adds the CSS
 const link1 = document.createElement("link");
