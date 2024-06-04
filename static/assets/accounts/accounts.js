@@ -4,7 +4,7 @@ icon.alt = "Profile";
 
 //Hides main site of login screen.
 //site or login
-document.getElementById("screen").style.display = "none";
+document.getElementById("login").style.display = "none";
 
 //Adds the CSS
 const link1 = document.createElement("link");
