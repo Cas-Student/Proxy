@@ -22,3 +22,4 @@ link3.href="assets/accounts/login.css";
 
 document.head.appendChild(link1);
 document.head.appendChild(link2);
+document.head.appendChild(link3);
