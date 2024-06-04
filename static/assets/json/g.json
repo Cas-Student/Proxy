@@ -6,6 +6,12 @@
     "custom": "true"
   },
   {
+    "name": "Space Waves",
+    "link": "https://www.crazygames.com/embed/space-waves",
+    "image": "/assets/media/icons/space-waves.webp",
+    "categories": ["all']
+  },
+  {
     "name": "Shotgun Chess",
     "link": "https://yandex.com/games/app/254606?#rupcjaqe",
     "image": "/assets/media/icons/shotgun-chess.webp",
