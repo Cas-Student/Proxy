@@ -11,6 +11,6 @@ Below you can find the links to the proxy in multiple locations:
 | Host | Location | Valid | Link |
 | -------------- | -------- | ----- | ---- |
 | Koyeb | Reston, Virginia | :white_check_mark: | [Link](https://eerie-chantalle-hacker-hub-72c5e9c1.koyeb.app/) |
-| Vercel | Ashburn, Virginia | :white_check_mark: | [Link](https://proxy-xi-three.vercel.app/) |
+| Koyeb | Frankfort, Germany | :white_check_mark: | [Link](https://google.com) |
 
 [Here](https://forms.office.com/r/8JyNhKAATh) is a form for contributions 
