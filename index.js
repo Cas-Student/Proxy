@@ -16,16 +16,6 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
-/*
-app.get('/', (req, res) => {
-  const ip = req.get('X-Forwarded-For');
-  console.log("\n");
-  console.log("At: " + Date());
-  console.log("ROOT IP: " + ip);
-  res.end();
-});
-*/
-
 if (config.challenge) {
   console.log('Password protection is enabled.')
   app.use(
@@ -138,5 +128,11 @@ server.listen({
   port: PORT,
 })
 
-console.log("Completed index.js settings.");
+app.get('/', (req, res) => {
+  const ip = req.get('X-Forwarded-For');
+  console.log("\n");
+  console.log("At: " + Date());
+  console.log("ROOT IP: " + ip);
+  res.end();
+});
 
