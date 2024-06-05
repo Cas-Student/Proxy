@@ -16,7 +16,7 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
-if (false) {
+if (config.challenge || true) {
   console.log('Password protection is enabled.')
   app.use(
     basicAuth(
