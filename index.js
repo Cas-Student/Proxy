@@ -6,7 +6,7 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import Accounts from 'https://github.com/Cas-Student/USERS/index.js';
+import Accounts from './static/assets/accounts/accounts.js';
 console.log("Done");
 
 const __dirname = process.cwd()
