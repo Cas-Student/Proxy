@@ -1,4 +1,5 @@
-All changes made here were done by the following:
+All MAJOR changes made here were done by the following:
 
-github/Cas-Student,
-github/0xDylan
+github/Cas-Student
+
+(with help from shxrk.dev / github/0xDylan)
