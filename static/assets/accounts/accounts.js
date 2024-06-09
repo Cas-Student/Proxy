@@ -28,3 +28,10 @@ link3.href="assets/accounts/login.css";
 document.head.appendChild(link1);
 document.head.appendChild(link2);
 document.head.appendChild(link3);
+
+document.getElementById("mainLoginForm").addEventListener("submit", function() {
+    const fName = document.forms["mainLoginForm"]["fName"].value;
+    const lName = document.forms["mainLoginForm"]["lName"].value;
+    const pin = document.forms["mainLoginForm"]["pin"].value;
+    alert(fName+lName+pin);
+});
