@@ -5,10 +5,10 @@ icon.alt = "Profile";
 const login = true;
 if (login) {
     document.getElementById("site").style.display = "none";
-    document.getElementById("login").style.display = "block";
+    document.getElementById("loginForm").style.display = "block";
 } else if (!login) {
     document.getElementById("site").style.display = "block";
-    document.getElementById("login").style.display = "none";
+    document.getElementById("loginForm").style.display = "none";
 }
 
 //Adds the CSS
