@@ -240,12 +240,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var pLink = localStorage.getItem('pLink') || 'https://start.hcps.org'
 
   document.addEventListener('keydown', function (event) {
-    if (event.key === eventKey & home == 1) {
-      home = 0;
+    if (event.key === eventKey & toggle == 1) {
+      toggle = 0;
       site = window.location.href;
       iframe = pLink;
-    } else if (event.key === eventKey & home == 0) {
-      home = 1;
+    } else if (event.key === eventKey & toggle == 0) {
+      toggle = 1;
       iframe = site;
     }
   })
