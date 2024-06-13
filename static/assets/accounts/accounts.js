@@ -34,6 +34,5 @@ document.getElementById("mainLoginForm").addEventListener("submit", function() {
     const lName = document.forms["mainLoginForm"]["lName"].value;
     const pin = document.forms["mainLoginForm"]["pin"].value;
     alert("Hello " + fName + " " + lName + ". Your pin was: " + pin);
-    document.getElementById("site").style.display = "block";
-    document.getElementById("loginForm").style.display = "none";
+    document.write("logged in");
 });
