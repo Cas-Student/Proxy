@@ -3,10 +3,13 @@ icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/or
 icon.alt = "Profile";
 
 const login = true;
-if (login && localStorage.getItem('login')) {
-    document.getElementById("site").style.display = "none";
+let HTML;
+
+if (login && !localStorage.getItem('login')) {
+    HTML = document.getElementById("site").innerHTML;
+    document.getElementById("site").remove();
     document.getElementById("loginForm").style.display = "block";
-} else if (!login) {
+} else if (!login && localStorage.getItem('login')) {
     document.getElementById("site").style.display = "block";
     document.getElementById("loginForm").style.display = "none";
 }
