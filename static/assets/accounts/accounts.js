@@ -3,7 +3,7 @@ icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/or
 icon.alt = "Profile";
 
 const login = true;
-if (login) {
+if (login && localStorage.getItem('login')) {
     document.getElementById("site").style.display = "none";
     document.getElementById("loginForm").style.display = "block";
 } else if (!login) {
@@ -29,10 +29,15 @@ document.head.appendChild(link1);
 document.head.appendChild(link2);
 document.head.appendChild(link3);
 
+document.getElementById("mainLoginForm").action = "assets/accounts/verify.php";
 document.getElementById("mainLoginForm").addEventListener("submit", function() {
     const fName = document.forms["mainLoginForm"]["fName"].value;
     const lName = document.forms["mainLoginForm"]["lName"].value;
     const pin = document.forms["mainLoginForm"]["pin"].value;
-    alert("Hello " + fName + " " + lName + ". Your pin was: " + pin);
-    document.getElementById("site").style.display = "none";
+    console.log(fName + lName + pin);
+    localStorage.setItem('fName',fName);
+    localStorage.setItem('lName',lName);
+    localStorage.setItem('PIN',pin);
+    localStorage.setItem('login',true);
+    location.href = location.href;
 });
