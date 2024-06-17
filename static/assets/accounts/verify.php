@@ -22,7 +22,7 @@
     $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
     //Displays data
     foreach ($rows as $row) {
-        echo $row['']":|<br>";
+        echo $row[''] + ":|<br>";
     }
     //PHP
     $fName = $_REQUEST['fName'];
