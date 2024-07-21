@@ -7,7 +7,7 @@ import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
 import Accounts from './static/assets/accounts/users.js';
-import versions from 'info.js';
+import versions from './info.js';
 console.log("Done");
 
 const __dirname = process.cwd()
