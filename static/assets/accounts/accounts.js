@@ -1,14 +1,7 @@
 import Accounts from './users.js';
+import versions from '/info.js';
 
-class versions {
-    v = "1.0"; //Main Version
-    bv = 1.0; //Beta Version
-}
-export default versions;
-
-//Version of Website
-
-document.getElementById("version").innerHTML = v;
+document.getElementById("version").innerHTML = versions.v;
 
 const icon = document.getElementById("account-icon");
 icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/original/account-symbol-leader-and-workers-team-logo-vector.jpg";
