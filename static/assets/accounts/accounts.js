@@ -1,3 +1,5 @@
+import Accounts from users.js;
+
 const icon = document.getElementById("account-icon");
 icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/original/account-symbol-leader-and-workers-team-logo-vector.jpg";
 icon.alt = "Profile";
@@ -12,6 +14,9 @@ if (login && !localStorage.getItem('login')) {
 } else if (!login && localStorage.getItem('login')) {
     document.getElementById("site").style.display = "block";
     document.getElementById("loginForm").style.display = "none";
+} else {
+    localStorage.setItem("login",false);
+    location.href = location.href;
 }
 
 //Adds the CSS
@@ -32,15 +37,19 @@ document.head.appendChild(link1);
 document.head.appendChild(link2);
 document.head.appendChild(link3);
 
-document.getElementById("mainLoginForm").action = "assets/accounts/verify.php";
 document.getElementById("mainLoginForm").addEventListener("submit", function() {
     const fName = document.forms["mainLoginForm"]["fName"].value;
     const lName = document.forms["mainLoginForm"]["lName"].value;
-    const pin = document.forms["mainLoginForm"]["pin"].value;
-    console.log(fName + lName + pin);
-    localStorage.setItem('fName',fName);
-    localStorage.setItem('lName',lName);
-    localStorage.setItem('PIN',pin);
-    localStorage.setItem('login',true);
-    location.href = location.href;
+    for (let firstName in Accounts) {
+        if (fName.toUpperCase === firstName.toUpperCase & lName.toUpperCase === Accounts[firstName].toUpperCase) {
+            document.getElementById("site").remove();
+            document.getElementById("loginForm").style.display = "block";
+            localStorage.setItem("login",true)
+            localStorage.setItem("user",fName+"."+lName)
+            alert("You are seen as " + localStorage.getItem("user"));
+        }
+    }
+    if (!localStorage.getItem("login")) {
+        alert("Please enter your first, and last name.")
+    }
 });
