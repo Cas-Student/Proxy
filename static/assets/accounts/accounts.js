@@ -1,4 +1,4 @@
-import Accounts from 'users.js';
+import Accounts from './static/assets/accounts/users.js';
 
 class versions {
     v = "1.0"; //Main Version
