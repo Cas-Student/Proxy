@@ -1,19 +1,23 @@
 import Accounts from users.js;
 
+//Version of Website
+const v="1.0";
+document.getElementById("version").innerHTML = v;
+
 const icon = document.getElementById("account-icon");
 icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/original/account-symbol-leader-and-workers-team-logo-vector.jpg";
 icon.alt = "Profile";
 
-const login = true;
+const useLogin = true;
 let HTML;
 
 if (login && !localStorage.getItem('login')) {
     HTML = document.getElementById("site").innerHTML;
-    document.getElementById("site").remove();
+    document.getElementById("site").style.display = "none";
     document.getElementById("loginForm").style.display = "block";
 } else if (!login && localStorage.getItem('login')) {
     document.getElementById("site").style.display = "block";
-    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("loginForm").remove();
 } else {
     localStorage.setItem("login",false);
     location.href = location.href;
