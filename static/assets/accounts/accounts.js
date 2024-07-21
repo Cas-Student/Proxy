@@ -1,7 +1,12 @@
 import Accounts from users.js;
 
+class versions {
+    v = "1.0"; //Main Version
+    bv = 1.0; //Beta Version
+}
+
 //Version of Website
-const v="1.0";
+
 document.getElementById("version").innerHTML = v;
 
 const icon = document.getElementById("account-icon");
@@ -57,3 +62,5 @@ document.getElementById("mainLoginForm").addEventListener("submit", function() {
         alert("Please enter your first, and last name.")
     }
 });
+
+export default versions;

@@ -7,6 +7,7 @@ import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
 import Accounts from './static/assets/accounts/users.js';
+import versions from './static/assets/accounts/accounts.js';
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -16,6 +17,8 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
+console.log("Version: " + versions.v);
+console.log("Beta Version " + versions.bv)
 if (config.challenge || true) {
   console.log('Password protection is enabled.')
   app.use(
