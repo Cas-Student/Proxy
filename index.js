@@ -58,7 +58,6 @@ if (config.routes !== false) {
     { path: '/t', file: 'tabs.html' },
     { path: '/p', file: 'go.html' },
     { path: '/', file: 'index.html' },
-    { path: '/m', file: 'movies.html' },
   ]
 
   routes.forEach((route) => {

@@ -23,6 +23,8 @@ if (login && !localStorage.getItem('login')) {
 }
 
 //Adds the CSS
+alert("Adding CSS");
+
 const link1 = document.createElement("link");
 link1.rel="stylesheet";
 link1.type="text/css";
