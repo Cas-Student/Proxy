@@ -7,14 +7,14 @@ const icon = document.getElementById("account-icon");
 icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/original/account-symbol-leader-and-workers-team-logo-vector.jpg";
 icon.alt = "Profile";
 
-const useLogin = true;
+const useLogin = false;
 let HTML;
 
-if (login && !localStorage.getItem('login')) {
+if (useLogin && !localStorage.getItem('login')) {
     HTML = document.getElementById("site").innerHTML;
     document.getElementById("site").style.display = "none";
     document.getElementById("loginForm").style.display = "block";
-} else if (!login && localStorage.getItem('login')) {
+} else if (!useLogin || localStorage.getItem('login')) {
     document.getElementById("site").style.display = "block";
     document.getElementById("loginForm").remove();
 } else {
