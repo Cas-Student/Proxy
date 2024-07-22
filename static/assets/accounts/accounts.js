@@ -1,13 +1,17 @@
 import Accounts from './users.js';
 import versions from '/info.js';
 
-document.getElementById("version").innerHTML = versions.v;
+document.getElementById("version").innerHTML = versions.v || "Version Error";
 
 const icon = document.getElementById("account-icon");
 icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/original/account-symbol-leader-and-workers-team-logo-vector.jpg";
 icon.alt = "Profile";
 
 const useLogin = false;
+
+if (useLogin && !localStorage.getItem('login')) {
+    if (location.href != "/./") location.href = "/./";
+} 
 
 if (useLogin && !localStorage.getItem('login')) {
     document.getElementById("site").style.display = "none";
@@ -35,4 +39,9 @@ document.getElementById("mainLoginForm").addEventListener("submit", function() {
     if (!localStorage.getItem("login")) {
         alert("Please enter your first, and last name.")
     }
+});
+
+document.getElementById("logout").onclick(function() {
+    localStorage.setItem("login",false);
+    location.href = location.href;
 });
