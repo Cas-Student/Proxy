@@ -17,6 +17,14 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
+app.get('/', (req, res) => {
+  const ip = req.get('X-Forwarded-For');
+  console.log("\n");
+  console.log("At: " + Date());
+  console.log("ROOT IP: " + ip);
+  res.end();
+});
+
 console.log("Version: " + versions.v);
 console.log("Beta Version " + versions.bv)
 if (config.challenge || true) {
@@ -129,12 +137,3 @@ server.on('listening', () => {
 server.listen({
   port: PORT,
 })
-
-app.get('/', (req, res) => {
-  const ip = req.get('X-Forwarded-For');
-  console.log("\n");
-  console.log("At: " + Date());
-  console.log("ROOT IP: " + ip);
-  res.end();
-});
-
