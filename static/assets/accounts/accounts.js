@@ -8,10 +8,8 @@ icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/or
 icon.alt = "Profile";
 
 const useLogin = false;
-let HTML;
 
 if (useLogin && !localStorage.getItem('login')) {
-    HTML = document.getElementById("site").innerHTML;
     document.getElementById("site").style.display = "none";
     document.getElementById("loginForm").style.display = "block";
 } else if (!useLogin || localStorage.getItem('login')) {
