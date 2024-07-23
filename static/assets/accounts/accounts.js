@@ -32,6 +32,7 @@ document.getElementById("mainLoginForm").addEventListener("submit", function() {
     if (!localStorage.getItem("login")) {
         alert("Please enter your first, and last name.")
     }
+    alert("form sent!");
 });
 
 document.getElementById("logout").onclick(function() {
