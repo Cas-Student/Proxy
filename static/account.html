@@ -24,12 +24,15 @@
                 <a class="account-icon" href="/./ac"><img class="account-icon"></img></a>
             </div>
             <div class="main">
-                <p id="version"></p>
+                <p id="ip"></p>
                 <p>Sorry, This content is unavailable</p>
                 <button id="logout"></button>
             </div>
         </div>
         <script src="/assets/accounts/accounts.js"></script>
         <script src="/assets/scripts/main.js?"></script>
+        <script>
+            document.getElementById(ip).innerHTML = localStorage.getItem("ip");
+        </script>
     </body>
 </html>

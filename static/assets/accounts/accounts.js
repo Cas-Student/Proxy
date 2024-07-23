@@ -1,7 +1,4 @@
 import Accounts from './users.js';
-import versions from '/info.js';
-
-document.getElementById("version").innerHTML = versions.v || "Version Error";
 
 const icon = document.getElementById("account-icon");
 icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/original/account-symbol-leader-and-workers-team-logo-vector.jpg";
