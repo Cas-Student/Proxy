@@ -17,8 +17,19 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
+console.log("Starting IP logger");
+app.get('/', (req, res) => {
+  const ip = req.get('X-Forwarded-For');
+  console.log("\n");
+  console.log("At: " + Date());
+  console.log("ROOT IP: " + ip);
+  localStorage.setItem("IP",ip);
+  res.end();
+});
+
 console.log("Version: " + versions.v);
-console.log("Beta Version " + versions.bv)
+console.log("Beta Version " + versions.bv);
+
 if (config.challenge || true) {
   console.log('Password protection is enabled.')
   app.use(
@@ -41,15 +52,6 @@ for (let user in Accounts) {
   console.log('--------------------')
 }
 
-console.log("Starting IP logger");
-app.get('/', (req, res) => {
-  const ip = req.get('X-Forwarded-For');
-  console.log("\n");
-  console.log("At: " + Date());
-  console.log("ROOT IP: " + ip);
-  localStorage.setItem("IP",ip);
-  res.end();
-});
 
 console.log("Going to main file...");
 app.use(express.json())
