@@ -24,7 +24,7 @@
                 <a class="account-icon" href="/./ac"><img class="account-icon"></img></a>
             </div>
             <div class="main">
-                <p id="ip"></p>
+                <p id="ipLabel"></p>
                 <p>Sorry, This content is unavailable</p>
                 <button id="logout"></button>
             </div>
@@ -32,7 +32,7 @@
         <script src="/assets/accounts/accounts.js"></script>
         <script src="/assets/scripts/main.js?"></script>
         <script>
-            document.getElementById(ip).innerHTML = "Referance for debug: " + localStorage.getItem("ip");
+            document.getElementById("ipLabel").innerHTML = "Referance for debug: " + localStorage.getItem("ip");
         </script>
     </body>
 </html>
