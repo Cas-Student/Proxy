@@ -49,12 +49,12 @@ app.use(express.static(path.join(__dirname, 'static')))
 console.log("Done");
 
 console.log("Starting IP logger");
-const ip;
 app.get('/', (req, res) => {
-  ip = req.get('X-Forwarded-For');
+  const ip = req.get('X-Forwarded-For');
   console.log("\n");
   console.log("At: " + Date());
   console.log("ROOT IP: " + ip);
+  localStorage.setItem("IP",ip);
   res.end();
 });
 
@@ -139,5 +139,3 @@ server.on('listening', () => {
 server.listen({
   port: PORT,
 })
-
-export default ip;

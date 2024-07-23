@@ -1,3 +1,6 @@
+import express from 'express';
+const app = express();
+
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
     scope: '/a/',
@@ -9,12 +12,18 @@ const input = document.getElementById('is')
 
 if (form && input) {
   form.addEventListener('submit', async (event) => {
-    event.preventDefault()
-    console.log("----------");
-    console.log(form);
-    console.log(input);
-    console.log("----------");
-    processUrl(input.value, '/p')
+    app.get('/', (req,res) => {
+      event.preventDefault()
+      console.log("user");
+      console.log("----------");
+      console.log(localStorage.getItem("ip"));
+      console.log("----------");
+      console.log(form);
+      console.log(input);
+      console.log("----------");
+      processUrl(input.value, '/p')
+      res.end();
+    })
   })
 }
 
