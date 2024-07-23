@@ -6,6 +6,12 @@
     "custom": "true"
   },
   {
+    "name": "123 movies",
+    "link": "https://ww16.0123movie.net/",
+    "image": "/assets/media/icons/123movies.webp",
+    "categories": ["all", "media", "stream", "WARNING"]
+  },
+  {
     "name": "Amazon",
     "link": "https://amazon.com/",
     "image": "/assets/media/icons/amazon.webp",
