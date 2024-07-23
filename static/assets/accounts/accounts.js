@@ -7,10 +7,6 @@ icon.alt = "Profile";
 const useLogin = false;
 
 if (useLogin && !localStorage.getItem('login')) {
-    if (location.href != "/./") location.href = "/./";
-} 
-
-if (useLogin && !localStorage.getItem('login')) {
     document.getElementById("site").style.display = "none";
     document.getElementById("loginForm").style.display = "block";
 } else if (!useLogin || localStorage.getItem('login')) {

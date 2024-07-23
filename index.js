@@ -41,13 +41,6 @@ for (let user in Accounts) {
   console.log('--------------------')
 }
 
-console.log("Going to main file...");
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cors())
-app.use(express.static(path.join(__dirname, 'static')))
-console.log("Done");
-
 console.log("Starting IP logger");
 app.get('/', (req, res) => {
   const ip = req.get('X-Forwarded-For');
@@ -57,6 +50,13 @@ app.get('/', (req, res) => {
   localStorage.setItem("IP",ip);
   res.end();
 });
+
+console.log("Going to main file...");
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cors())
+app.use(express.static(path.join(__dirname, 'static')))
+console.log("Done");
 
 console.log("Setting routes")
 if (config.routes !== false) {
