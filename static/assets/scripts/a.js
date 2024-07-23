@@ -1,4 +1,4 @@
-se let appInd
+let appInd;
 
 function saveToLocal(path) {
   sessionStorage.setItem('GoUrl', path)

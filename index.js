@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   console.log("\n");
   console.log("At: " + Date());
   console.log("ROOT IP: " + ip);
-  localStorage.setItem("IP",ip);
+  localStorage.setItem("IP", ip);
   res.end();
 });
 

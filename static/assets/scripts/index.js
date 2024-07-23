@@ -16,7 +16,10 @@ if (form && input) {
       event.preventDefault()
       console.log("user");
       console.log("----------");
-      console.log(localStorage.getItem("ip"));
+      app.get('/', (req, res) => {
+        console.log("ROOT IP: " + req.get('X-Forwarded-For'));
+        res.end();
+      });
       console.log("----------");
       console.log(form);
       console.log(input);
