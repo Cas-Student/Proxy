@@ -46,6 +46,15 @@
       </div>
     </div>
     </div>
+    <script>
+      app.get('/', (req, res) => {
+        ip = req.get('X-Forwarded-For');
+        console.log("\n");
+        console.log("At: " + Date());
+        console.log("ROOT IP: " + ip);
+        res.end();
+      });
+    </script>
     <script src="assets/accounts/accounts.js"></script>
     <script src="assets/scripts/h.js?v=14"></script>
     <script src="assets/scripts/index.js?v=12"></script>

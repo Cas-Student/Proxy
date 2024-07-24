@@ -17,16 +17,6 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
-console.log("Starting IP logger");
-let ip;
-app.get('/', (req, res) => {
-  ip = req.get('X-Forwarded-For');
-  console.log("\n");
-  console.log("At: " + Date());
-  console.log("ROOT IP: " + ip);
-  res.end();
-});
-
 console.log("Version: " + versions.v);
 console.log("Beta Version " + versions.bv);
 
