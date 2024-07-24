@@ -18,12 +18,12 @@ const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
 console.log("Starting IP logger");
+let ip;
 app.get('/', (req, res) => {
-  const ip = req.get('X-Forwarded-For');
+  ip = req.get('X-Forwarded-For');
   console.log("\n");
   console.log("At: " + Date());
   console.log("ROOT IP: " + ip);
-  localStorage.setItem("IP", ip);
   res.end();
 });
 
@@ -141,3 +141,5 @@ server.on('listening', () => {
 server.listen({
   port: PORT,
 })
+
+export default ip;
