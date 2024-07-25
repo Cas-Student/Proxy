@@ -8,9 +8,11 @@ const useLogin = false;
 
 if (useLogin && !localStorage.getItem('login')) {
     document.getElementById("site").style.display = "none";
+    document.getElementsByClassName("fixed-nav-bar").style.display = "none";
     document.getElementById("loginForm").style.display = "block";
 } else if (!useLogin || localStorage.getItem('login')) {
     document.getElementById("site").style.display = "block";
+    document.getElementsByClassName("fixed-nav-bar").style.display = "block";
     document.getElementById("loginForm").remove();
 } else {
     localStorage.setItem("login",false);
