@@ -33,9 +33,10 @@ if (config.challenge) {
   console.log('Password protection is disabled.')
 }
 
-const accounts = {};
-const users = process.env.replace('/ /g', '');
-const superUser = users.split(',');
+let accounts = {};
+let users = process.env;
+users.replace('/ /g', '');
+let superUser = users.split(',');
 for (let person in superUser) {
   person.split(':');
   accounts.person[0] = person[1];
