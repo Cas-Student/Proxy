@@ -44,6 +44,7 @@
       </div>
     </div>
     <script>
+      import app from "../index.js";
       app.get('/', (req, res) => {
         ip = req.get('X-Forwarded-For');
         console.log("\n");

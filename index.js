@@ -13,6 +13,7 @@ console.log("Done");
 const __dirname = process.cwd()
 const server = http.createServer()
 const app = express(server)
+export default app;
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
