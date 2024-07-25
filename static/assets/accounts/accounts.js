@@ -1,16 +1,12 @@
-import Accounts from './users.js';
-
 const icon = document.getElementById("account-icon");
 icon.src = "https://static.vecteezy.com/system/resources/previews/007/407/995/original/account-symbol-leader-and-workers-team-logo-vector.jpg";
 icon.alt = "Profile";
 
-const useLogin = false;
-
-if (useLogin && !localStorage.getItem('login')) {
+if (process.env.login && !localStorage.getItem('login')) {
     document.getElementById("site").style.display = "none";
     document.getElementsByClassName("fixed-nav-bar").style.display = "none";
     document.getElementById("loginForm").style.display = "block";
-} else if (!useLogin || localStorage.getItem('login')) {
+} else if (!process.env.login || localStorage.getItem('login')) {
     document.getElementById("site").style.display = "block";
     document.getElementsByClassName("fixed-nav-bar").style.display = "block";
     document.getElementById("loginForm").remove();
@@ -22,8 +18,8 @@ if (useLogin && !localStorage.getItem('login')) {
 function checkLogin() {
     const fName = document.forms["mainLoginForm"]["fName"].value;
     const lName = document.forms["mainLoginForm"]["lName"].value;
-    for (let firstName in Accounts) {
-        if (fName.toUpperCase === firstName.toUpperCase & lName.toUpperCase === Accounts[firstName].toUpperCase) {
+    for (let firstName in process.env.Accounts) {
+        if (fName.toUpperCase === firstName.toUpperCase & lName.toUpperCase === process.env.Accounts[firstName].toUpperCase) {
             document.getElementById("loginForm").remove();
             document.getElementById("site").style.display = "block";
             localStorage.setItem("login",true)
@@ -37,7 +33,7 @@ function checkLogin() {
     alert("form sent!");
 }
 
-document.getElementById("mainLoginForm").addEventListener("submit", checkLogin());
+document.getElementById("mainLoginForm").addEventListener("submit", alert("Submitted form!"));
 
 document.getElementById("logout").onclick(function() {
     localStorage.setItem("login",false);
