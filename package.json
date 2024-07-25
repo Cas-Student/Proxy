@@ -20,5 +20,11 @@
   },
   "devDependencies": {
     "prettier": "3.3.0"
+  },
+  "eslintConfig": {
+    "env": {
+        "browser": true,
+        "node": true
+    }
   }
 }

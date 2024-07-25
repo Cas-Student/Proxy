@@ -13,7 +13,6 @@ console.log("Done");
 const __dirname = process.cwd()
 const server = http.createServer()
 const app = express(server)
-export default app;
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
@@ -21,7 +20,7 @@ console.log("Running on port: " + PORT);
 console.log("Version: " + versions.v);
 console.log("Beta Version " + versions.bv);
 
-if (config.challenge || true) {
+if (config.challenge) {
   console.log('Password protection is enabled.')
   app.use(
     basicAuth(
