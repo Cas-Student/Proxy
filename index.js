@@ -25,7 +25,7 @@ if (config.challenge) {
     basicAuth(
       {
         challenge: true,
-        users: Accounts
+        users: process.env.Accounts
       }
     )
   )
