@@ -17,13 +17,13 @@ if (useLogin && !localStorage.getItem('login')) {
     location.href = location.href;
 }
 
-document.getElementById("mainLoginForm").addEventListener("submit", function() {
+function checkLogin() {
     const fName = document.forms["mainLoginForm"]["fName"].value;
     const lName = document.forms["mainLoginForm"]["lName"].value;
     for (let firstName in Accounts) {
         if (fName.toUpperCase === firstName.toUpperCase & lName.toUpperCase === Accounts[firstName].toUpperCase) {
-            document.getElementById("site").remove();
-            document.getElementById("loginForm").style.display = "block";
+            document.getElementById("loginForm").remove();
+            document.getElementById("site").style.display = "block";
             localStorage.setItem("login",true)
             localStorage.setItem("user",fName+"."+lName)
             alert("You are seen as " + localStorage.getItem("user"));
@@ -33,7 +33,9 @@ document.getElementById("mainLoginForm").addEventListener("submit", function() {
         alert("Please enter your first, and last name.")
     }
     alert("form sent!");
-});
+}
+
+document.getElementById("mainLoginForm").addEventListener("submit", checkLogin());
 
 document.getElementById("logout").onclick(function() {
     localStorage.setItem("login",false);
