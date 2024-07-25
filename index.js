@@ -35,7 +35,8 @@ if (config.challenge) {
 
 let accounts = {};
 let users = process.env;
-users = String(users.replace('/ /g', ''));
+users = String(users);
+users = users.replace('/ /g', '');
 let superUser = users.split(',');
 for (let person in superUser) {
   person.split(':');
