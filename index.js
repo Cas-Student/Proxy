@@ -19,20 +19,6 @@ console.log("Running on port: " + PORT);
 console.log("Version: " + versions.v);
 console.log("Beta Version " + versions.bv);
 
-if (config.challenge) {
-  console.log('Password protection is enabled.')
-  app.use(
-    basicAuth(
-      {
-        challenge: true,
-        users: process.env.Accounts
-      }
-    )
-  )
-} else if (!config.challenge) {
-  console.log('Password protection is disabled.')
-}
-
 let accounts = {};
 let users = process.env;
 users = String(users);
@@ -41,6 +27,22 @@ let superUser = users.split(',');
 for (let person in superUser) {
   person.split(':');
   accounts.person = person[1];
+}
+
+if (process.env.login === "true") {
+  console.log('Password protection is enabled.')
+  app.use(
+    basicAuth(
+      {
+        challenge: true,
+        users: accounts
+      }
+    )
+  )
+} else if (process.env.login === "false") {
+  console.log('Password protection is disabled.')
+} else {
+  location.href = "https://start.hcps.org"; //Error fallback
 }
 
 console.log('--------------------')
