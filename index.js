@@ -41,8 +41,6 @@ if (process.env.login === "true") {
   )
 } else if (process.env.login === "false") {
   console.log('Password protection is disabled.')
-} else {
-  location.href = "https://start.hcps.org"; //Error fallback
 }
 
 console.log('--------------------')
