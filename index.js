@@ -40,7 +40,7 @@ users = users.replace('/ /g', '');
 let superUser = users.split(',');
 for (let person in superUser) {
   person.split(':');
-  accounts.person[0] = person[1];
+  accounts.person = person[1];
 }
 
 console.log('--------------------')
