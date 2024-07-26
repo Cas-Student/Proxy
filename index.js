@@ -6,7 +6,7 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import versions from './info.js';
+import Accounts from './static/assets/accounts/users.js';
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -16,38 +16,25 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
-console.log("Version: " + versions.v);
-console.log("Beta Version " + versions.bv);
-
-let accounts = {};
-let users = process.env;
-users = String(users);
-users = users.replace('/ /g', '');
-let superUser = users.split(',');
-for (let person in superUser) {
-  person.split(':');
-  accounts.person = person[1];
-}
-
-if (process.env.login === "true") {
+if (config.challenge === "true") {
   console.log('Password protection is enabled.')
   app.use(
     basicAuth(
       {
         challenge: true,
-        users: accounts
+        users: Accounts
       }
     )
   )
-} else if (process.env.login === "false") {
+} else if (config.challenge === "false") {
   console.log('Password protection is disabled.')
 }
 
 console.log('--------------------')
 console.log('      Accounts      ')
 console.log('--------------------')
-for (let user in accounts) {
-  console.log(user + ' | ' + accounts[user])
+for (let user in Accounts) {
+  console.log(user + ' | ' + Accounts[user])
   console.log('--------------------')
 }
 
