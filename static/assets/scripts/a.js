@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  fetch('/assets/json/a.min.json')
+  fetch('/assets/json/a.json')
     .then((response) => {
       return response.json()
     })
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //Warns user of bad websites
         if (app.categories.includes("WARNING")) {
-          app.say = 'This website has been flagged for being either <b>Illigal</b>, and/or has a high chance of <b>malware</b>.';
+          app.say = 'This website has been flagged for being either Illigal, and/or has a high chance of malware.';
         }
         
         let pinNum = appInd
