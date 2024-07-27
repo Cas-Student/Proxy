@@ -62,7 +62,9 @@
       gtag("config", "G-WKJQ5QHQTJ")
       if (!sessionStorage.getItem("refreshed")) {
         sessionStorage.setItem("refreshed", true);
-        location.href = location.href; //reloads window
+        setTimeout(function() {
+          location.href = location.href; //reloads window
+        }, 2000); //after to seconds
       }
     </script>
   </body>
