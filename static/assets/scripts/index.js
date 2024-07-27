@@ -1,6 +1,3 @@
-import express from 'express';
-const app = express();
-
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
     scope: '/a/',
@@ -38,14 +35,6 @@ function processUrl(value, path) {
   } else {
     window.location.href = '/a/' + __uv$config.encodeUrl(url)
   }
-}
-
-function go(value) {
-  processUrl(value, '/p')
-}
-
-function blank(value) {
-  processUrl(value)
 }
 
 function isUrl(val = '') {
