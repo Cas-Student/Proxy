@@ -11,20 +11,10 @@ const form = document.getElementById('fs')
 const input = document.getElementById('is')
 
 if (form && input) {
-  form.addEventListener('submit', async (event) => {
-    app.get('/', (req,res) => {
-      event.preventDefault()
-      console.log("user");
-      console.log("----------");
-      //console.log("ROOT IP: " + req.get('X-Forwarded-For'));
-      console.log("----------");
-      console.log(form);
-      console.log(input);
-      console.log("----------");
-      processUrl(input.value, '/p')
-      res.end();
-    })
-  })
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    processUrl(input.value, "");
+  });
 }
 
 function processUrl(value, path) {
