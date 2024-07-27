@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         //Warns user of bad websites
-        if (app.categories.includes("WARNING") {
+        if (app.categories.includes("WARNING")) {
           app.say = 'This website has been flagged for being either <b>Illigal</b>, and/or has a high chance of <b>malware</b>.';
         }
         
