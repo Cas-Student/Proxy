@@ -16,7 +16,7 @@ if (form && input) {
       event.preventDefault()
       console.log("user");
       console.log("----------");
-      console.log("ROOT IP: " + req.get('X-Forwarded-For'));
+      //console.log("ROOT IP: " + req.get('X-Forwarded-For'));
       console.log("----------");
       console.log(form);
       console.log(input);
