@@ -9,7 +9,7 @@ try {
 if (!inFrame && !navigator.userAgent.includes('Firefox')) {
   const popup = open('about:blank', '_blank')
   if (!popup || popup.closed) {
-    alert('Please allow popups and redirects.')
+    alert('Please allow popups and redirects. Clicking ok won\'t do. Please go to the top right corner of your screen, which says pop-up blocked. allow it, and refresh.')
   } else {
     const doc = popup.document
     const iframe = doc.createElement('iframe')
@@ -36,11 +36,9 @@ if (!inFrame && !navigator.userAgent.includes('Firefox')) {
 
     const script = doc.createElement('script')
     script.textContent = `
-      window.onbeforeunload = function (event) {
-        const confirmationMessage = 'Leave Site?';
-        (event || window.event).returnValue = confirmationMessage;
-        return true;
-      };
+      window.addEventListener('beforeunload', function (event) {
+        event.stopImmediatePropagation();
+      });
     `
     doc.head.appendChild(script)
   }
