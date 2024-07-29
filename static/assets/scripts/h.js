@@ -36,10 +36,12 @@ if (!inFrame && !navigator.userAgent.includes('Firefox')) {
 
     const script = doc.createElement('script')
     script.textContent = `
-      window.addEventListener('beforeunload', function (event) {
-        event.stopImmediatePropagation();
-      });
-    `
+      window.onbeforeunload = function (event) {
+        const confirmationMessage = 'Leave Site?';
+        (event || window.event).returnValue = confirmationMessage;
+        return true;
+      };
+      `
     doc.head.appendChild(script)
   }
 }

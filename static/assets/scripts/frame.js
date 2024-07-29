@@ -84,13 +84,6 @@ function popout() {
     newIframe.src = iframe.src
 
     newWindow.document.body.appendChild(newIframe)
-    const script = newWindow.createElement('script')
-    script.textContent = `
-      window.addEventListener('beforeunload', function (event) {
-        event.stopImmediatePropagation();
-      });
-    `
-    newWindow.head.appendChild(script)
   }
 }
 // Eruda
