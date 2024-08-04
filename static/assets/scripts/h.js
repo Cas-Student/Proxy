@@ -41,7 +41,7 @@ if (!inFrame && !navigator.userAgent.includes('Firefox')) {
         (event || window.event).returnValue = confirmationMessage;
         return true;
       };
-      `
+    `
     doc.head.appendChild(script)
   }
 }
