@@ -11,7 +11,8 @@ console.log("Done");
 
 const __dirname = process.cwd()
 const server = http.createServer((res, req) => {
-  console.log(req.headers['x-forwarded-for'] || req.socket.remoteAddress);
+  console.log("Request:");
+  console.log(req.headers['x-forwarded-for']);
 })
 const app = express(server)
 const bareServer = createBareServer('/o/')
