@@ -10,7 +10,9 @@ import Accounts from './static/assets/accounts/users.js';
 console.log("Done");
 
 const __dirname = process.cwd()
-const server = http.createServer()
+const server = http.createServer((res, req) => {
+  console.log(req.headers['x-forwarded-for'] || req.socket.remoteAddress);
+})
 const app = express(server)
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
