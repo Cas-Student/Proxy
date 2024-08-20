@@ -38,23 +38,21 @@ for (let user in Accounts) {
   console.log('--------------------')
 }
 
-app.use((req, res) => {
-  console.log('----------')
-  console.log('Request:')
-  console.log('----------')
-  console.log('hostname: ' + req.hostname)
-  console.log('path: ' + req.path)
-  console.log('method: ' + req.method)
-  console.log('url: ' + req.url)
-  console.log('headers: ' + JSON.stringify(req.headers).replaceAll(/,/g, ',\n'))
-  res.end()
-})
-
 console.log("Going to main file...");
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'static')))
+app.use(function(req, res) {
+  console.log('----------')
+  console.log('Request:')
+  console.log('----------')ˇ
+  console.log('hostname: ' + req.hostname)
+  console.log('path: ' + req.path)
+  console.log('method: ' + req.method)
+  console.log('url: ' + req.url)
+  console.log('headers: ' + JSON.stringify(req.headers).replaceAll(/,/g, ',\n'))
+})
 console.log("Done");
 
 console.log("Setting routes")
