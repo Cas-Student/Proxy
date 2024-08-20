@@ -10,10 +10,7 @@ import Accounts from './static/assets/accounts/users.js';
 console.log("Done");
 
 const __dirname = process.cwd()
-const server = http.createServer((res, req) => {
-  console.log("Request:");
-  console.log(req.headers['x-forwarded-for']);
-})
+const server = http.createServer()
 const app = express(server)
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
@@ -41,6 +38,16 @@ for (let user in Accounts) {
   console.log('--------------------')
 }
 
+app.use((req, res) => {
+  console.log('----------')
+  console.log('Request:')
+  console.log('----------')
+  console.log('hostname: ' + req.hostname)
+  console.log('path: ' + req.path)
+  console.log('method: ' + req.method)
+  console.log('url: ' + req.url)
+  console.log('headers: ' + JSON.stringify(req.headers).replaceAll(/,/g, ',\n'))
+})
 
 console.log("Going to main file...");
 app.use(express.json())
