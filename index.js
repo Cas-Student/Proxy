@@ -6,7 +6,6 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import Accounts from './static/assets/accounts/users.js';
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -15,6 +14,8 @@ const app = express(server)
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
+
+var Accounts = JSON.parse(process.env.users);
 
 if (config.challenge === "false") {
   console.log('Password protection is enabled.')
@@ -29,9 +30,6 @@ if (config.challenge === "false") {
 } else if (config.challenge === "false") {
   console.log('Password protection is disabled.')
 }
-
-console.log("ENV VARS");
-console.log(process.env.users);
 
 console.log('--------------------')
 console.log('      Accounts      ')
