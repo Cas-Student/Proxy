@@ -1,6 +1,3 @@
-import express from 'express';
-const app = express();
-
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
     scope: '/a/',
@@ -14,10 +11,6 @@ if (form && input) {
   form.addEventListener("submit", async event => {
     event.preventDefault();
     processUrl(input.value, "");
-    app.use(function(req, res) {
-      console.log(req.header["x-forwarded-for"] + ":");
-      console.log(input.value);
-    })
   });
 }
 
