@@ -14,7 +14,6 @@ if (form && input) {
   form.addEventListener("submit", async event => {
     event.preventDefault();
     processUrl(input.value, "");
-    app.use((req, res) => console.log(req.header["x-forwarded-for"] + " : " + input.value));
   });
 }
 
@@ -28,7 +27,7 @@ function processUrl(value, path) {
   } else if (!(url.startsWith('https://') || url.startsWith('http://'))) {
     url = 'https://' + url
   }
-
+  app.use((req, res) => console.log(req.header["x-forwarded-for"] + " : " + url))
   sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(url))
   const dy = localStorage.getItem('dy')
 
