@@ -46,17 +46,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'static')))
-app.use(function(req, res) {
-  console.log('\n\n')
-  console.log('========================================')
-  console.log('Request: ' + req.headers["x-forwarded-for"])
-  console.log('========================================')
-  console.log('hostname: ' + req.hostname)
-  console.log('path: ' + req.path)
-  console.log('method: ' + req.method)
-  console.log('url: ' + req.url)
-  console.log('headers:\n' + JSON.stringify(req.headers).replaceAll(/\",/g, '\",\n  '))
-})
 console.log("Done");
 
 console.log("Setting routes")
@@ -139,4 +128,16 @@ server.on('listening', () => {
 
 server.listen({
   port: PORT,
+})
+
+app.use(function(req, res) {
+  console.log('\n\n')
+  console.log('========================================')
+  console.log('Request: ' + req.headers["x-forwarded-for"])
+  console.log('========================================')
+  console.log('hostname: ' + req.hostname)
+  console.log('path: ' + req.path)
+  console.log('method: ' + req.method)
+  console.log('url: ' + req.url)
+  console.log('headers:\n' + JSON.stringify(req.headers).replace(/\",\"/g, '\",\"\n  '))
 })
