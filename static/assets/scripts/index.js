@@ -1,3 +1,13 @@
+const { application } = require('express');
+
+var express;
+try {
+  express = require('express')
+} catch (e) {
+  alert("Error loading servers, some features may not work.")
+}
+app = express();
+
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
     scope: '/a/',
@@ -11,6 +21,9 @@ if (form && input) {
   form.addEventListener("submit", async event => {
     event.preventDefault();
     processUrl(input.value, "");
+    app.use(function(req,res) {
+      console.log(req.header + ": " + input.value);
+    });
   });
 }
 
