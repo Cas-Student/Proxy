@@ -233,19 +233,19 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
 })
 // Key
-var toggle = 1;
-document.getElementById('ifra');
+localStorage.setItem('hidden', false)
+var iframe = document.getElementById('ifra');
+site = window.location.href;
 document.addEventListener('DOMContentLoaded', function () {
   var eventKey = localStorage.getItem('eventKey') || '`'
   var pLink = localStorage.getItem('pLink') || 'https://start.hcps.org'
 
   document.addEventListener('keydown', function (event) {
-    if (event.key === eventKey & toggle == 1) {
-      toggle = 0;
-      site = window.location.href;
+    if (event.key === eventKey & localStorage.getItem('hidden')) {
+      localStorage.setItem('hidden', false)
       iframe = pLink;
-    } else if (event.key === eventKey & toggle == 0) {
-      toggle = 1;
+    } else if (event.key === eventKey & !localStorage.getItem('hidden')) {
+      localStorage.setItem('hidden', true)
       iframe = site;
     }
   })
