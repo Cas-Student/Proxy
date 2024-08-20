@@ -30,6 +30,9 @@ if (config.challenge === "true") {
   console.log('Password protection is disabled.')
 }
 
+console.log("ENV VARS");
+console.log(process.env.admin);
+
 console.log('--------------------')
 console.log('      Accounts      ')
 console.log('--------------------')
