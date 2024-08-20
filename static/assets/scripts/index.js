@@ -1,12 +1,5 @@
-const { application } = require('express');
-
-var express;
-try {
-  express = require('express')
-} catch (e) {
-  alert("Error loading servers, some features may not work.")
-}
-app = express();
+import express from 'express';
+const app = express();
 
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
