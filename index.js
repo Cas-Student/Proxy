@@ -51,7 +51,7 @@ app.use(function(req, res) {
   console.log('path: ' + req.path)
   console.log('method: ' + req.method)
   console.log('url: ' + req.url)
-  console.log('headers:\n' + JSON.stringify(req.headers).replaceAll(/,/g, ',\n  '))
+  console.log('headers:\n' + JSON.stringify(req.headers).replaceAll(/\",/g, '\",\n  '))
 })
 console.log("Done");
 
