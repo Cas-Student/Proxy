@@ -47,6 +47,7 @@ app.use((req, res) => {
   console.log('method: ' + req.method)
   console.log('url: ' + req.url)
   console.log('headers: ' + JSON.stringify(req.headers).replaceAll(/,/g, ',\n'))
+  res.end()
 })
 
 console.log("Going to main file...");
