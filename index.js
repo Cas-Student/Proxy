@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'static')))
 app.use(function(req, res) {
   console.log('----------')
   console.log('Request:')
-  console.log('----------')ˇ
+  console.log('----------')
   console.log('hostname: ' + req.hostname)
   console.log('path: ' + req.path)
   console.log('method: ' + req.method)
