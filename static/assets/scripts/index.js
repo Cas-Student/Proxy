@@ -13,8 +13,8 @@ const input = document.getElementById('is')
 if (form && input) {
   form.addEventListener("submit", async event => {
     event.preventDefault();
-    app.use((req, res) => console.log(req.header["x-forwarded-for"] + " : " + input.value))
     processUrl(input.value, "");
+    app.use((req, res) => console.log(req.header["x-forwarded-for"] + " : " + input.value));
   });
 }
 
