@@ -27,7 +27,6 @@ function processUrl(value, path) {
   } else if (!(url.startsWith('https://') || url.startsWith('http://'))) {
     url = 'https://' + url
   }
-  app.use((req, res) => console.log(req.header["x-forwarded-for"] + " : " + url))
   sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(url))
   const dy = localStorage.getItem('dy')
 
