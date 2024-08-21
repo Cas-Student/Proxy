@@ -114,7 +114,6 @@ server.on('request', (req, res) => {
 
 server.on('upgrade', (req, socket, head) => {
   if (bareServer.shouldRoute(req)) {
-    console.log('Request: ' + req.headers["x-forwarded-for"])
     bareServer.routeUpgrade(req, socket, head)
   } else {
     socket.end()
