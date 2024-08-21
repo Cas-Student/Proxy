@@ -128,7 +128,6 @@ server.listen({
   port: PORT,
 })
 
-/*
 app.use(function(req, res) {
   console.log('\n\n')
   console.log('========================================')
@@ -147,4 +146,3 @@ app.use(function(req, res) {
     .slice(0, -1) + '\n}'
   console.log(headers)
 })
-*/
