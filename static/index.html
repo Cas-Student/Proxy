@@ -33,10 +33,10 @@
         </div>
       </div>
     </div>
-    <script src="assets/scripts/h.js?v=14"></script>
-    <script type="module" src="assets/scripts/index.js?v=12"></script>
-    <script src="./m/bundle.js?v=5"></script>
-    <script src="./m/config.js?v=5"></script>
+    <script src="assets/scripts/h.js"></script>
+    <script type="module" src="assets/scripts/index.js"></script>
+    <script src="./m/bundle.js"></script>
+    <script src="./m/config.js"></script>
     <script src="https://kit.fontawesome.com/1237c86ba0.js" crossorigin="anonymous"></script>
     <script src="assets/scripts/main.js?v=22"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJQ5QHQTJ"></script>
@@ -48,11 +48,11 @@
       }
       gtag("js", new Date())
       gtag("config", "G-WKJQ5QHQTJ")
-      if (!sessionStorage.getItem("refreshed")) {
+      if (!sessionStorage.getItem("refreshed") || false) {
         sessionStorage.setItem("refreshed", true);
         setTimeout(function() {
           location.href = location.href; //reloads window
-        }, 2000); //after to seconds
+        }, 2000); //after two seconds
       }
     </script>
   </body>
