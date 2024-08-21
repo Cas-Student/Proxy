@@ -1,5 +1,5 @@
-import app from '../../../index.js'
-alert("index.js working");
+import express from 'express'
+const app = express()
 
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
