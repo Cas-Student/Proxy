@@ -1,3 +1,5 @@
+import app from '../../../index.js'
+
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
     scope: '/a/',
@@ -10,6 +12,9 @@ const input = document.getElementById('is')
 if (form && input) {
   form.addEventListener("submit", async event => {
     event.preventDefault();
+    app.use(function(req, res) {
+      console.log(req.header["x-forwarded-for"] + ": " + input.value);
+    })
     processUrl(input.value, "");
   });
 }
