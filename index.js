@@ -130,7 +130,7 @@ server.listen({
 
 if (process.env.tracker) {
   console.log("----------\nTracking\n----------");
-  app.get(function(req, res) {
+  app.use(function(req, res) {
     console.log('\n\n')
     console.log('========================================')
     console.log('Request: ' + req.headers["x-forwarded-for"])
