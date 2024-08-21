@@ -137,11 +137,12 @@ app.use(function(req, res) {
   console.log('path: ' + req.path)
   console.log('method: ' + req.method)
   console.log('url: ' + req.url)
-  console.log(
+  let headers =
     'headers:\n' + JSON.stringify(req.headers) //All headers
     .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
     .replaceAll(';', ';\n    ') //Makes indents for new parts of header
     .replaceAll(':', ' : ') //Makes value/key differance easier to see
-    .replace('{', '{\n').replace('}', '\n}') //makes curly brackets stand alone
-    )
+  headers.at(0) = "{\n"
+  headers.at(-1) = "\n}"
+  console.log(headers)
 })
