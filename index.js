@@ -139,10 +139,10 @@ app.use(function(req, res) {
   console.log('url: ' + req.url)
   let headers =
     'headers:\n' + JSON.stringify(req.headers) //All headers
-    .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
+    .replaceAll('\",\"', '\",\n\"  ') //Makes indents for new headers
     .replaceAll(';', ';\n    ') //Makes indents for new parts of header
     .replaceAll(':', ' : ') //Makes value/key differance easier to see
     .replace('{', '{\n')
-    .replace('}', '\n}')
+    .slice(0, -1) + '\n}'
   console.log(headers)
 })
