@@ -1,8 +1,3 @@
-alert("Loading")
-import express from 'express'
-const app = express()
-alert("Finished")
-
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
     scope: '/a/',
