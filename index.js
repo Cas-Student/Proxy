@@ -128,6 +128,7 @@ server.listen({
   port: PORT,
 })
 
+/*
 app.use(function(req, res) {
   console.log('\n\n')
   console.log('========================================')
@@ -136,8 +137,7 @@ app.use(function(req, res) {
   console.log('hostname: ' + req.hostname)
   console.log('path: ' + req.path)
   console.log('method: ' + req.method)
-  //console.log('url: ' + req.url)
-  /*
+  console.log('url: ' + req.url)
   let headers =
     'headers:\n' + JSON.stringify(req.headers) //All headers
     .replaceAll('\",\"', '\",\n  \"') //Makes indents for new headers
@@ -146,5 +146,5 @@ app.use(function(req, res) {
     .replace('{', '{\n  ')
     .slice(0, -1) + '\n}'
   console.log(headers)
-  */
 })
+*/
