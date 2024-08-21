@@ -1,5 +1,6 @@
+alert("Loading")
 import express from 'express'
-const app = express()
+alert("Finished")
 
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
@@ -13,9 +14,6 @@ const input = document.getElementById('is')
 if (form && input) {
   form.addEventListener("submit", async event => {
     event.preventDefault();
-    app.use(function(req, res) {
-      console.log(req.header["x-forwarded-for"] + ": " + input.value);
-    })
     processUrl(input.value, "");
   });
 }
