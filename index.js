@@ -128,6 +128,7 @@ server.listen({
   port: PORT,
 })
 
+/*
 if (process.env.tracker) {
   app.get(function(req, res) {
     console.log('\n\n')
@@ -147,3 +148,4 @@ if (process.env.tracker) {
     )
   })
 }
+*/
