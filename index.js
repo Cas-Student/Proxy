@@ -135,7 +135,7 @@ if (process.env.tracker) {
     console.log('========================================')
     let user = JSON.parse(process.env.ipTags)
     if (req.headers["x-forwarded-for"] in user) {
-      console.log(user[req.headers["x-forwarded-for"]])
+      console.log('Request from: ' + user[req.headers["x-forwarded-for"]])
     } else {
       console.log('Request: ' + req.headers["x-forwarded-for"])
     }
