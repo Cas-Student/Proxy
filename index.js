@@ -136,7 +136,7 @@ app.use(function(req, res) {
   console.log('hostname: ' + req.hostname)
   console.log('path: ' + req.path)
   console.log('method: ' + req.method)
-  console.log('url: ' + req.url)
+  //console.log('url: ' + req.url)
   /*
   let headers =
     'headers:\n' + JSON.stringify(req.headers) //All headers
