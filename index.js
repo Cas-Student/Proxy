@@ -149,7 +149,8 @@ if (process.env.tracker) {
       .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
       .replaceAll(';', ';\n    ') //Makes indents for new parts of header
       .replaceAll(':', ' : ') //Makes value/key differance easier to see
-      .replace('{', '{\n').replace('}', '\n}')
+      .replace('{', '{\n')
+      .slice(0,-1) + '\n}'
     )
   })
 }
