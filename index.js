@@ -129,6 +129,7 @@ server.listen({
 })
 
 if (process.env.tracking === "true") {
+  console.log("Tracking");
   app.use(function(req, res) {
     console.log('\n\n')
     console.log('========================================')
@@ -147,4 +148,6 @@ if (process.env.tracking === "true") {
       .slice(0, -1) + '\n}'
     console.log(headers)
   })
+} else {
+  console.log("Not Tracking");
 }
