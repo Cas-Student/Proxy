@@ -1,4 +1,5 @@
 import app from '../../../index.js'
+alert("index.js working");
 
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
