@@ -128,27 +128,20 @@ server.listen({
   port: PORT,
 })
 
-if (process.env.tracking === "true") {
-  console.log("Tracking");
-  app.use(function(req, res) {
-    console.log('\n\n')
-    console.log('========================================')
-    console.log('Request: ' + req.headers["x-forwarded-for"])
-    console.log('========================================')
-    console.log('hostname: ' + req.hostname)
-    console.log('path: ' + req.path)
-    console.log('method: ' + req.method)
-    console.log('url: ' + req.url)
-    if (process.env.headers === "true") {
-      let headers ='headers:\n' + JSON.stringify(req.headers) //All headers
-        .replaceAll('\",\"', '\",\n  \"') //Makes indents for new headers
-        .replaceAll(';', ';\n    ') //Makes indents for new parts of header
-        .replaceAll(':', ' : ') //Makes value/key differance easier to see
-        .replace('{', '{\n  ')
-        .slice(0, -1) + '\n}'
-      console.log(headers)
-    }
-  })
-} else {
-  console.log("Not Tracking");
-}
+app.use(function(req, res) {
+  console.log('\n\n')
+  console.log('========================================')
+  console.log('Request: ' + req.headers["x-forwarded-for"])
+  console.log('========================================')
+  console.log('hostname: ' + req.hostname)
+  console.log('path: ' + req.path)
+  console.log('method: ' + req.method)
+  console.log('url: ' + req.url)
+  console.log(
+    'headers:\n' + JSON.stringify(req.headers) //All headers
+    .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
+    .replaceAll(';', ';\n    ') //Makes indents for new parts of header
+    .replaceAll(':', ' : ') //Makes value/key differance easier to see
+    .replace('{', '{\n').replace('}', '\n}')
+    )
+})
