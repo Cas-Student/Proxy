@@ -133,7 +133,12 @@ if (process.env.tracker) {
   app.use(function(req, res) {
     console.log('\n\n')
     console.log('========================================')
-    console.log('Request: ' + req.headers["x-forwarded-for"])
+    let user = JSON.parse(process.env.ipTags)
+    if (req.headers["x-forwarded-for"] in user) {
+      console.log(user[req.headers["x-forwarded-for"]])
+    } else {
+      console.log('Request: ' + req.headers["x-forwarded-for"])
+    }
     console.log('========================================')
     console.log('hostname: ' + req.hostname)
     console.log('path: ' + req.path)
