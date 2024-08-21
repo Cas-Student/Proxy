@@ -142,7 +142,7 @@ app.use(function(req, res) {
     .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
     .replaceAll(';', ';\n    ') //Makes indents for new parts of header
     .replaceAll(':', ' : ') //Makes value/key differance easier to see
-  headers.at(0) = "{\n"
-  headers.at(-1) = "\n}"
+    .replace('{', '{\n')
+    .replace('}', '\n}')
   console.log(headers)
 })
