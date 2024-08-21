@@ -128,9 +128,11 @@ server.listen({
   port: PORT,
 })
 
-app.get((req, res) => {
-  console.log("Request: " + req.headers["x-forwarded-for"]);
-})
+if (process.env.tracker === "true") {
+  app.get((req, res) => {
+    console.log("Request: " + req.headers["x-forwarded-for"]);
+  })
+}
 
 /*
 if (process.env.tracker) {
