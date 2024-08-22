@@ -130,7 +130,7 @@ server.listen({
 
 if (process.env.tracker) {
   console.log("----------\nTracking\n----------");
-  app.use(function(req, res) {
+  app.use((req, res, next) => {
     console.log('\n\n')
     console.log('========================================')
     let user = JSON.parse(process.env.ipTags)
@@ -140,18 +140,20 @@ if (process.env.tracker) {
       console.log('Request: ' + req.headers["x-forwarded-for"])
     }
     console.log('========================================')
-    console.log('hostname: ' + req.hostname)
+    //console.log('hostname: ' + req.hostname)
     console.log('path: ' + req.path)
     console.log('method: ' + req.method)
-    console.log('url: ' + req.url)
-    console.log(
-      'headers:\n' + JSON.stringify(req.headers) //All headers
-      .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
-      .replaceAll(';', ';\n    ') //Makes indents for new parts of header
-      .replaceAll(':', ' : ') //Makes value/key differance easier to see
-      .replace('{', '{\n')
-      .slice(0,-1) + '\n}'
-    )
-    res.end();
+    //console.log('url: ' + req.url)
+    if (process.env.headers === "true") {
+      console.log(
+        'headers:\n' + JSON.stringify(req.headers) //All headers
+        .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
+        .replaceAll(';', ';\n    ') //Makes indents for new parts of header
+        .replaceAll(':', ' : ') //Makes value/key differance easier to see
+        .replace('{', '{\n')
+        .slice(0,-1) + '\n}'
+      )
+    }
+    next()
   })
 }
