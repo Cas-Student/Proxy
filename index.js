@@ -152,5 +152,6 @@ if (process.env.tracker) {
       .replace('{', '{\n')
       .slice(0,-1) + '\n}'
     )
+    res.end();
   })
 }
