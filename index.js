@@ -17,7 +17,7 @@ console.log("Running on port: " + PORT);
 
 var Accounts = JSON.parse(process.env.users);
 
-if (config.challenge === "true") {
+if (process.env.login === "true") {
   console.log('Password protection is enabled.')
   app.use(
     basicAuth(
