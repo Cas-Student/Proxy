@@ -233,7 +233,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
   }
 })
 // Key
-localStorage.setItem('hidden', false)
 var iframe = document.getElementById('ifra');
 site = window.location.href;
 document.addEventListener('DOMContentLoaded', function () {
@@ -244,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (event.key === eventKey & localStorage.getItem('hidden')) {
       localStorage.setItem('hidden', false)
       iframe = pLink;
-    } else if (event.key === eventKey & !localStorage.getItem('hidden')) {
+    } else if (event.key === eventKey & (!localStorage.getItem('hidden') || false)) {
       localStorage.setItem('hidden', true)
       iframe = site;
     }
