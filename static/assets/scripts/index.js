@@ -17,7 +17,8 @@ if (form && input) {
 function processUrl(value, path) {
   let url = value.trim()
   const engine = localStorage.getItem('engine')
-  const searchUrl = engine ? engine : 'https://www.google.com/search?hl=en&lr=en&q='
+  const lang = localStorage.getItem('lang')
+  const searchUrl = engine ? engine : 'https://www.google.com/search?hl=' + lang + '&lr=' + lang + '&q='
 
   if (!isUrl(url)) {
     url = searchUrl + url

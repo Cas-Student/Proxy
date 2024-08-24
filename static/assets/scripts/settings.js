@@ -1,32 +1,3 @@
-// Ads
-document.addEventListener('DOMContentLoaded', function () {
-  function adChange(selectedValue) {
-    if (selectedValue === 'default') {
-      localStorage.setItem('ad', 'on')
-    } else if (selectedValue === 'off') {
-      localStorage.setItem('ad', 'off')
-    }
-  }
-
-  var adTypeElement = document.getElementById('adType')
-
-  if (adTypeElement) {
-    adTypeElement.addEventListener('change', function () {
-      var selectedOption = this.value
-      adChange(selectedOption)
-    })
-
-    var storedAd = localStorage.getItem('ad')
-    if (storedAd === 'on') {
-      adTypeElement.value = 'default'
-    } else if (storedAd === 'off') {
-      adTypeElement.value = 'off'
-    } else {
-      adTypeElement.value = 'default'
-    }
-  }
-})
-
 // Dyn
 document.addEventListener('DOMContentLoaded', function () {
   function pChange(selectedValue) {
@@ -87,6 +58,7 @@ function saveEventKey() {
   localStorage.setItem('eventKey', eventKey)
   localStorage.setItem('pLink', pLink)
 }
+
 // Tab Cloaker
 var dropdown = document.getElementById('dropdown')
 var options = dropdown.getElementsByTagName('option')
@@ -188,6 +160,7 @@ function updateHeadSection(selectedValue) {
     }
   }
 }
+
 // Background Image
 document.addEventListener('DOMContentLoaded', function () {
   var saveButton = document.getElementById('save-button')
@@ -214,27 +187,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.style.backgroundImage = "url('" + savedBackgroundImage + "')"
   }
 })
-// Particles
 
-const switches = document.getElementById('2')
-
-if (window.localStorage.getItem('v4Particles') != '') {
-  if (window.localStorage.getItem('v4Particles') == 'true') {
-    switches.checked = true
-  } else {
-    switches.checked = false
-  }
-}
-
-switches.addEventListener('change', (event) => {
-  if (event.currentTarget.checked) {
-    window.localStorage.setItem('v4Particles', 'true')
-  } else {
-    window.localStorage.setItem('v4Particles', 'false')
-  }
-})
 // Themes
-
 var themeId = localStorage.getItem('theme')
 if (themeId == '') {
   themeId = 'd'
@@ -332,4 +286,10 @@ function SaveEngine() {
   } else {
     alert('Please enter a custom search engine value.')
   }
+}
+
+//Language
+function setLanguage(language) {
+  const l = language.value
+  localStorage.setItem('lang',l)
 }
