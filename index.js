@@ -15,7 +15,12 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
-var Accounts = JSON.parse(process.env.users);
+var users = JSON.parse(process.env.users); //All user data
+
+var Accounts; //username and passwords
+for (key in users) {
+  Accounts[key] = users[key]['password'];
+}
 
 if (process.env.login === "true") {
   console.log('Password protection is enabled.')
@@ -133,11 +138,14 @@ if (process.env.tracker) {
   app.use((req, res, next) => {
     console.log('\n\n')
     console.log('========================================')
-    let user = JSON.parse(process.env.ipTags)
-    if (req.headers["x-forwarded-for"] in user) {
-      console.log('Request from: ' + user[req.headers["x-forwarded-for"]])
-    } else {
-      console.log('Request: ' + req.headers["x-forwarded-for"])
+    for (let user in users) {
+      if ("ip" in users[user]) {
+        if (users[user]["ip"] === req.headers["x-forwarded-for"]) {
+          console.log('Request from: ' + user)
+        } else {
+          console.log('Request: ' + req.headers["x-forwarded-for"])
+        }
+      }
     }
     console.log('========================================')
     //console.log('hostname: ' + req.hostname)
