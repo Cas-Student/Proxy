@@ -19,6 +19,7 @@ var users = JSON.parse(process.env.users); //All user data
 
 var Accounts; //username and passwords
 for (let key in users) {
+  Accounts[key] = "";
   Accounts[key] = users[key]['password'];
 }
 
