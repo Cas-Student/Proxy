@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" id="tab-favicon" href="favicon.png" />
     <title id="tab-title">start.hcps.org</title>
-    <link rel="stylesheet" type="text/css" href="/./assets/styles/tab.css" />
-    <link rel="stylesheet" href="/./assets/styles/tabinner.css" />
+    <link rel="stylesheet" type="text/css" href="assets/styles/tab.css" />
+    <link rel="stylesheet" href="assets/styles/tabinner.css" />
     <script src="/./assets/scripts/tabs.js?v=2"></script>
     <script src="https://kit.fontawesome.com/1237c86ba0.js" crossorigin="anonymous"></script>
     <script>
@@ -72,7 +72,7 @@
       form.addEventListener('submit', async (event) => {
         event.preventDefault()
         const formValue = document.querySelector('form input').value
-        const url = isUrl(formValue) ? prependHttps(formValue) : 'https://www.google.com/search?q=' + formValue
+        const url = isUrl(formValue) ? prependHttps(formValue) : 'https://www.google.com/search?hl=' + localStorage.getItem('lang') + '&lr=' + localStorage.getItem('lang') + '&q=' + formValue
 
         const activeIframe = Array.from(document.getElementById('iframe-container').querySelectorAll('iframe')).find(
           (iframe) => iframe.classList.contains('active')
