@@ -292,5 +292,10 @@ function SaveEngine() {
 function setLanguage(language) {
   const l = language.value || "en"
   localStorage.setItem('lang',l)
-  language.value = l;
+  location.href = location.href;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const l = document.getElementById("lang-drop");
+  l.value = localStorage.getItem('lang') || 'en';
+})
