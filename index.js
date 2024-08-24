@@ -148,10 +148,10 @@ if (process.env.tracker) {
       }
     }
     console.log('========================================')
-    //console.log('hostname: ' + req.hostname)
+    console.log('hostname: ' + req.hostname)
     console.log('path: ' + req.path)
     console.log('method: ' + req.method)
-    //console.log('url: ' + req.url)
+    console.log('url: ' + req.url)
     if (process.env.headers === "true") {
       console.log(
         'headers:\n' + JSON.stringify(req.headers) //All headers
