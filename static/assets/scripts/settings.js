@@ -290,6 +290,7 @@ function SaveEngine() {
 
 //Language
 function setLanguage(language) {
-  const l = language.value
+  const l = language.value || "en"
   localStorage.setItem('lang',l)
+  language.value = l;
 }
