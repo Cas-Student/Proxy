@@ -138,14 +138,21 @@ if (process.env.tracker) {
   app.use((req, res, next) => {
     console.log('\n\n')
     console.log('========================================')
+    let tracked = false;
     for (let user in users) {
       if ("ip" in users[user]) {
         if (users[user]["ip"] === req.headers["x-forwarded-for"]) {
           console.log('Request from: ' + user)
+          tracked = true
         } else {
           console.log('Request: ' + req.headers["x-forwarded-for"])
+          tracked = true
         }
       }
+    }
+    if (!tracked) {
+      console.log('Request: ' + req.headers["x-forwarded-for"])
+      tracked = true;
     }
     console.log('========================================')
     console.log('hostname: ' + req.hostname)
