@@ -18,7 +18,7 @@ console.log("Running on port: " + PORT);
 var users = JSON.parse(process.env.users); //All user data
 
 var Accounts; //username and passwords
-for (key in users) {
+for (let key in users) {
   Accounts[key] = users[key]['password'];
 }
 
