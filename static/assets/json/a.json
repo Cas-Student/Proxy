@@ -6,6 +6,12 @@
     "custom": "true"
   },
   {
+    "name": "Duolingo",
+    "link": "https://www.duolingo.com/",
+    "image": "/assets/media/icons/duolingo.webp",
+    "categories": ["all", "tool"]
+  },
+  {
     "name": "123 movies",
     "link": "https://ww16.0123movie.net/",
     "image": "/assets/media/icons/123movies.webp",
