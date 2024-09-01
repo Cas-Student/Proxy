@@ -134,26 +134,29 @@ server.listen({
   port: PORT,
 })
 
+let IP
 if (process.env.tracker) {
   console.log("----------\nTracking\n----------");
   app.use((req, res, next) => {
+    IP = req.headers["x-forwarded-for"]
     console.log('\n\n')
     console.log('========================================')
     let logged = false;
     for (let user in users) {
       if ("ip" in users[user]) {
-        if (users[user]["ip"] === req.headers["x-forwarded-for"]) {
+        if (users[user]["ip"] === IP) {
           console.log('Request from: ' + user)
           logged = true
         }
       }
     }
     if (!logged) {
-      console.log('Request: ' + req.headers["x-forwarded-for"])
+      console.log('Request: ' + IP)
     }
     console.log('========================================')
-    const bl = process.env.blacklist
-    if (bl.split(/[ ;]+/).includes(req.headers["x-forwarded-for"])) {
+    let bl = process.env.blacklist
+    bl = bl.split(/[ ;]+/)
+    if (bl.includes(IP)) {
       console.log('BLACKLISTED')
       process.exitCode = 1;
     } else {
@@ -176,3 +179,5 @@ if (process.env.tracker) {
     next()
   })
 }
+
+export default IP
