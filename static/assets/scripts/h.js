@@ -1,3 +1,7 @@
+if (!sessionStorage.getItem('Allowed')) {
+  location.replace = 'start.hcps.org'
+}
+
 let inFrame
 
 try {

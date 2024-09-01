@@ -158,9 +158,10 @@ if (process.env.tracker) {
     bl = bl.split(/[ ;]+/)
     if (bl.includes(IP)) {
       console.log('BLACKLISTED')
-      process.exitCode = 1;
+      sessionStorage.setItem('Allowed', 'false')
     } else {
       console.log('ALLOWED')
+      sessionStorage.setItem('Allowed', 'true')
     }
     console.log('hostname: ' + req.hostname)
     console.log('path: ' + req.path)
