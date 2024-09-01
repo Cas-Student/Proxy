@@ -6,6 +6,7 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
+import { platform } from 'node:os';
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -151,7 +152,8 @@ if (process.env.tracker) {
       console.log('Request: ' + req.headers["x-forwarded-for"])
     }
     console.log('========================================')
-    if (JSON.parse(process.env.blacklist).includes(req.headers["x-forwarded-for"])) {
+    const bl = process.env.blacklist
+    if (bl.split(/[ ;]+/).includes(req.headers["x-forwarded-for"])) {
       console.log('BLACKLISTED')
       process.exitCode = 1;
     } else {
