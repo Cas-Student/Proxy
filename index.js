@@ -154,6 +154,8 @@ if (process.env.tracker) {
     if (JSON.parse(process.env.blacklist).includes(req.headers["x-forwarded-for"])) {
       console.log('BLACKLISTED')
       process.exitCode = 1;
+    } else {
+      console.log('ALLOWED')
     }
     console.log('hostname: ' + req.hostname)
     console.log('path: ' + req.path)
