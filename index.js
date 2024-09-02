@@ -157,6 +157,7 @@ if (process.env.tracker) {
     bl = bl.split(/[ ;]+/)
     if (bl.includes(IP)) {
       console.log('BLACKLISTED -- NOT FORCED')
+      process.exit(1)
     } else {
       console.log('ALLOWED')
     }
