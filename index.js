@@ -6,7 +6,6 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import { platform } from 'node:os';
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -158,10 +157,10 @@ if (process.env.tracker) {
     bl = bl.split(/[ ;]+/)
     if (bl.includes(IP)) {
       console.log('BLACKLISTED')
-      sessionStorage.setItem('Allowed', 'false')
+      config.Allowed = false
     } else {
       console.log('ALLOWED')
-      sessionStorage.setItem('Allowed', 'true')
+      config.Allowed = true
     }
     console.log('hostname: ' + req.hostname)
     console.log('path: ' + req.path)

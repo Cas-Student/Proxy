@@ -1,4 +1,4 @@
-if (!sessionStorage.getItem('Allowed')) {
+if (!config.Allowed) {
   location.replace = 'start.hcps.org'
 }
 
