@@ -50,7 +50,6 @@ function route() {
   app.use(express.urlencoded({ extended: true }))
   app.use(cors())
   app.use(express.static(path.join(__dirname, 'static')))
-  console.log("Done");
 
   if (config.routes !== false) {
     const routes = [
@@ -152,7 +151,7 @@ if (process.env.tracker) {
     if (!logged) {
       console.log('Request: ' + IP)
     }
-    console.log('========================================')
+    //console.log('========================================')
     let bl = process.env.blacklist
     bl = bl.split(/[ ;]+/)
     if (bl.includes(IP)) {
