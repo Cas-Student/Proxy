@@ -52,7 +52,7 @@ function route() {
   app.use(express.static(path.join(__dirname, 'static')))
   console.log("Done");
 
-  onsole.log("Setting routes")
+  console.log("Setting routes")
   if (config.routes !== false) {
     const routes = [
       { path: '/ap', file: 'apps.html' },
