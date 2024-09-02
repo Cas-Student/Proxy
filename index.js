@@ -44,30 +44,32 @@ for (let user in Accounts) {
   console.log('--------------------')
 }
 
-console.log("Going to main file...");
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cors())
-app.use(express.static(path.join(__dirname, 'static')))
-console.log("Done");
+function route() {
+  console.log("Going to main file...");
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
+  app.use(cors())
+  app.use(express.static(path.join(__dirname, 'static')))
+  console.log("Done");
 
-console.log("Setting routes")
-if (config.routes !== false) {
-  const routes = [
-    { path: '/ap', file: 'apps.html' },
-    { path: '/ac', file: 'account.html'},
-    { path: '/g', file: 'games.html' },
-    { path: '/s', file: 'settings.html' },
-    { path: '/t', file: 'tabs.html' },
-    { path: '/p', file: 'go.html' },
-    { path: '/', file: 'index.html' },
-  ]
+  onsole.log("Setting routes")
+  if (config.routes !== false) {
+    const routes = [
+      { path: '/ap', file: 'apps.html' },
+      { path: '/ac', file: 'account.html'},
+      { path: '/g', file: 'games.html' },
+      { path: '/s', file: 'settings.html' },
+      { path: '/t', file: 'tabs.html' },
+      { path: '/p', file: 'go.html' },
+      { path: '/', file: 'index.html' },
+    ]
 
-  routes.forEach((route) => {
-    app.get(route.path, (req, res) => {
-      res.sendFile(path.join(__dirname, 'static', route.file))
+    routes.forEach((route) => {
+      app.get(route.path, (req, res) => {
+        res.sendFile(path.join(__dirname, 'static', route.file))
+      })
     })
-  })
+  }
 }
 
 if (config.local !== false) {
@@ -160,6 +162,7 @@ if (process.env.tracker) {
       process.exit(1)
     } else {
       console.log('ALLOWED')
+      route()
     }
     console.log('hostname: ' + req.hostname)
     console.log('path: ' + req.path)
