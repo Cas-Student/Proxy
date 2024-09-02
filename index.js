@@ -160,7 +160,6 @@ if (process.env.tracker) {
       if (!logged) {
         console.log('Request: ' + IP)
       }
-      //console.log('========================================')
       let bl = process.env.blacklist
       bl = bl.split(/[ ;]+/)
       if (bl.includes(IP)) {
@@ -169,9 +168,7 @@ if (process.env.tracker) {
       } else {
         route()
       }
-      //console.log('hostname: ' + req.hostname)
       console.log(req.method + ': ' + file)
-      //console.log('url: ' + req.url)
       if (process.env.headers === "true") {
         console.log(
           'headers:\n' + JSON.stringify(req.headers) //All headers
@@ -187,11 +184,11 @@ if (process.env.tracker) {
       let bl = process.env.blacklist
       bl = bl.split(/[ ;]+/)
       if (bl.includes(IP)) {
-        console.log('BLACKLISTED -- NOT FORCED')
         process.exit(1)
       } else {
         route()
       }
+      next()
     }
   })
 }
