@@ -44,15 +44,14 @@ for (let user in Accounts) {
   console.log('--------------------')
 }
 
+console.log("Loading routes")
 function route() {
-  console.log("Going to main file...");
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
   app.use(cors())
   app.use(express.static(path.join(__dirname, 'static')))
   console.log("Done");
 
-  console.log("Setting routes")
   if (config.routes !== false) {
     const routes = [
       { path: '/ap', file: 'apps.html' },
@@ -140,7 +139,6 @@ if (process.env.tracker) {
   console.log("----------\nTracking\n----------");
   app.use((req, res, next) => {
     IP = req.headers["x-forwarded-for"]
-    console.log('\n\n')
     console.log('========================================')
     let logged = false;
     for (let user in users) {
@@ -161,13 +159,11 @@ if (process.env.tracker) {
       console.log('BLACKLISTED -- NOT FORCED')
       process.exit(1)
     } else {
-      console.log('ALLOWED')
       route()
     }
-    console.log('hostname: ' + req.hostname)
-    console.log('path: ' + req.path)
-    console.log('method: ' + req.method)
-    console.log('url: ' + req.url)
+    //console.log('hostname: ' + req.hostname)
+    console.log(req.method + ': ' + req.path)
+    //console.log('url: ' + req.url)
     if (process.env.headers === "true") {
       console.log(
         'headers:\n' + JSON.stringify(req.headers) //All headers
