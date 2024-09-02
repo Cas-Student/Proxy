@@ -181,21 +181,6 @@ if (process.env.tracker) {
       }
       next()
     } else {
-      /*
-      console.log('========================================')
-      let logged = false;
-      for (let user in users) {
-        if ("ip" in users[user]) {
-          if (users[user]["ip"] === IP) {
-            console.log('Request from: ' + user)
-            logged = true
-          }
-        }
-      }
-      if (!logged) {
-        console.log('Request: ' + IP)
-      }
-      */
       let bl = process.env.blacklist
       bl = bl.split(/[ ;]+/)
       if (bl.includes(IP)) {
@@ -205,6 +190,7 @@ if (process.env.tracker) {
         route()
       }
       console.log(req.method + ': ' + file)
+      /*
       if (process.env.headers === "true") {
         console.log(
           'headers:\n' + JSON.stringify(req.headers) //All headers
@@ -215,6 +201,7 @@ if (process.env.tracker) {
           .slice(0,-1) + '\n}'
         )
       }
+        */
       next()
     }
   })
