@@ -141,10 +141,10 @@ if (process.env.tracker) {
     if (
       (process.env.debug === 'true') ||
       (
-        !(path.substring(0, 4) === '/dy/') &&
-        !(path.substring(0, 3) === '/m/') &&
-        !(path.substring(0, 9) === '/bundles/') &&
-        !(path.substring(0, 8) === '/assets/')
+        !(file.substring(0, 4) === '/dy/') &&
+        !(file.substring(0, 3) === '/m/') &&
+        !(file.substring(0, 9) === '/bundles/') &&
+        !(file.substring(0, 8) === '/assets/')
       )
     ) {
       console.log('========================================')
