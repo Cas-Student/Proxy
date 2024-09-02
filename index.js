@@ -189,19 +189,6 @@ if (process.env.tracker) {
       } else {
         route()
       }
-      console.log(req.method + ': ' + file)
-      /*
-      if (process.env.headers === "true") {
-        console.log(
-          'headers:\n' + JSON.stringify(req.headers) //All headers
-          .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
-          .replaceAll(';', ';\n    ') //Makes indents for new parts of header
-          .replaceAll(':', ' : ') //Makes value/key differance easier to see
-          .replace('{', '{\n')
-          .slice(0,-1) + '\n}'
-        )
-      }
-        */
       next()
     }
   })
