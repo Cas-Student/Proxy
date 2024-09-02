@@ -181,6 +181,7 @@ if (process.env.tracker) {
       }
       next()
     } else {
+      /*
       console.log('========================================')
       let logged = false;
       for (let user in users) {
@@ -194,6 +195,7 @@ if (process.env.tracker) {
       if (!logged) {
         console.log('Request: ' + IP)
       }
+      */
       let bl = process.env.blacklist
       bl = bl.split(/[ ;]+/)
       if (bl.includes(IP)) {
