@@ -133,48 +133,56 @@ server.listen({
   port: PORT,
 })
 
-let IP
 if (process.env.tracker) {
   console.log("----------\nTracking\n----------");
   app.use((req, res, next) => {
-    IP = req.headers["x-forwarded-for"]
-    console.log('========================================')
-    let logged = false;
-    for (let user in users) {
-      if ("ip" in users[user]) {
-        if (users[user]["ip"] === IP) {
-          console.log('Request from: ' + user)
-          logged = true
+    let file = req.path
+    let IP = req.headers["x-forwarded-for"]
+    if (
+      (process.env.debug === 'true') ||
+      (
+        !(path.substring(0, 4) === '/dy/') &&
+        !(path.substring(0, 3) === '/m/') &&
+        !(path.substring(0, 9) === '/bundles/') &&
+        !(path.substring(0, 8) === '/assets/')
+      )
+    ) {
+      console.log('========================================')
+      let logged = false;
+      for (let user in users) {
+        if ("ip" in users[user]) {
+          if (users[user]["ip"] === IP) {
+            console.log('Request from: ' + user)
+            logged = true
+          }
         }
       }
+      if (!logged) {
+        console.log('Request: ' + IP)
+      }
+      //console.log('========================================')
+      let bl = process.env.blacklist
+      bl = bl.split(/[ ;]+/)
+      if (bl.includes(IP)) {
+        console.log('BLACKLISTED -- NOT FORCED')
+        process.exit(1)
+      } else {
+        route()
+      }
+      //console.log('hostname: ' + req.hostname)
+      console.log(req.method + ': ' + file)
+      //console.log('url: ' + req.url)
+      if (process.env.headers === "true") {
+        console.log(
+          'headers:\n' + JSON.stringify(req.headers) //All headers
+          .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
+          .replaceAll(';', ';\n    ') //Makes indents for new parts of header
+          .replaceAll(':', ' : ') //Makes value/key differance easier to see
+          .replace('{', '{\n')
+          .slice(0,-1) + '\n}'
+        )
+      }
+      next()
     }
-    if (!logged) {
-      console.log('Request: ' + IP)
-    }
-    //console.log('========================================')
-    let bl = process.env.blacklist
-    bl = bl.split(/[ ;]+/)
-    if (bl.includes(IP)) {
-      console.log('BLACKLISTED -- NOT FORCED')
-      process.exit(1)
-    } else {
-      route()
-    }
-    //console.log('hostname: ' + req.hostname)
-    console.log(req.method + ': ' + req.path)
-    //console.log('url: ' + req.url)
-    if (process.env.headers === "true") {
-      console.log(
-        'headers:\n' + JSON.stringify(req.headers) //All headers
-        .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
-        .replaceAll(';', ';\n    ') //Makes indents for new parts of header
-        .replaceAll(':', ' : ') //Makes value/key differance easier to see
-        .replace('{', '{\n')
-        .slice(0,-1) + '\n}'
-      )
-    }
-    next()
   })
 }
-
-export default IP
