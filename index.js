@@ -181,12 +181,37 @@ if (process.env.tracker) {
       }
       next()
     } else {
+      console.log('========================================')
+      let logged = false;
+      for (let user in users) {
+        if ("ip" in users[user]) {
+          if (users[user]["ip"] === IP) {
+            console.log('Request from: ' + user)
+            logged = true
+          }
+        }
+      }
+      if (!logged) {
+        console.log('Request: ' + IP)
+      }
       let bl = process.env.blacklist
       bl = bl.split(/[ ;]+/)
       if (bl.includes(IP)) {
+        console.log('BLACKLISTED -- NOT FORCED')
         process.exit(1)
       } else {
         route()
+      }
+      console.log(req.method + ': ' + file)
+      if (process.env.headers === "true") {
+        console.log(
+          'headers:\n' + JSON.stringify(req.headers) //All headers
+          .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
+          .replaceAll(';', ';\n    ') //Makes indents for new parts of header
+          .replaceAll(':', ' : ') //Makes value/key differance easier to see
+          .replace('{', '{\n')
+          .slice(0,-1) + '\n}'
+        )
       }
       next()
     }
