@@ -183,15 +183,10 @@ if (process.env.tracker) {
         )
       }
       next()
-    } else {
-      let bl = process.env.blacklist
-      bl = bl.split(/[ ;]+/)
-      if (bl.includes(IP)) {
-        console.log('BLACKLISTED -- NOT FORCED')
-        process.exit(1)
-      } else {
-        route()
-      }
+    } else if (
+      !((process.env.blacklist).split(/[ ;]+/).includes(IP))
+    ) {
+      route()
     }
   })
 }
