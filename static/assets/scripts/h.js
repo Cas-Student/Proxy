@@ -1,7 +1,3 @@
-if (!config.Allowed) {
-  location.replace = 'start.hcps.org'
-} else if (config.Allowed) {
-
 let inFrame
 
 try {
@@ -49,6 +45,3 @@ if (!inFrame && !navigator.userAgent.includes('Firefox')) {
     doc.head.appendChild(script)
   }
 }
-
-} //Config.Allow block
-

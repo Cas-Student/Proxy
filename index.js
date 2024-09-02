@@ -156,11 +156,9 @@ if (process.env.tracker) {
     let bl = process.env.blacklist
     bl = bl.split(/[ ;]+/)
     if (bl.includes(IP)) {
-      console.log('BLACKLISTED')
-      config.Allowed = false
+      console.log('BLACKLISTED -- NOT FORCED')
     } else {
       console.log('ALLOWED')
-      config.Allowed = true
     }
     console.log('hostname: ' + req.hostname)
     console.log('path: ' + req.path)
