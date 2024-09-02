@@ -183,10 +183,6 @@ if (process.env.tracker) {
         )
       }
       next()
-    } else if (
-      !((process.env.blacklist).split(/[ ;]+/).includes(IP))
-    ) {
-      route()
     }
   })
 }
