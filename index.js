@@ -146,28 +146,28 @@ if (process.env.tracker) {
         !(file.substring(0, 8) === '/assets/')
       )
     ) {
-      console.log('========================================')
+      let output = ''
       let logged = false;
       for (let user in users) {
         if ("ip" in users[user]) {
           if (users[user]["ip"] === IP) {
-            console.log('Request from: ' + user)
+            output += 'Request from: ' + user
             logged = true
           }
         }
       }
       if (!logged) {
-        console.log('Request: ' + IP)
+        output += 'Request: ' + IP
       }
       let bl = process.env.blacklist
       bl = bl.split(/[ ;]+/)
       if (bl.includes(IP)) {
-        console.log('BLACKLISTED -- NOT FORCED')
+        console.log(output + ' > BLACKLISTED')
         process.exit(1)
       } else {
         route()
       }
-      console.log(req.method + ': ' + file)
+      console.log(output + ' > ' + req.method + ': ' + file)
       if (process.env.headers === "true") {
         console.log(
           'headers:\n' + JSON.stringify(req.headers) //All headers
