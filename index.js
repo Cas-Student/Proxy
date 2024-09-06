@@ -183,7 +183,7 @@ if (process.env.tracker) {
       let bl = process.env.blacklist
       bl = bl.split(/[ ;]+/)
       if (bl.includes(IP)) {
-        console.log('BLACKLISTED -- NOT FORCED')
+        console.log('Request: ' + IP + ' > BLACKLISTED')
         process.exit(1)
       } else {
         route()
