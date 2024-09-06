@@ -179,37 +179,6 @@ if (process.env.tracker) {
         )
       }
       next()
-    } else if(process.env.clean === 'true' && (
-      (file.substring(0, 2) === '/g') ||
-      (file.substring(0, 3) === '/ap') ||
-      (file.substring(0, 2) === '/s')  ||
-      (file.substring(0, 2) === '/t') ||
-      (file.substring(0, 2) === '/p') ||
-      (file.substring(0, 1) === '/') ||
-      (file.slice(0, 3) === '/a/')
-    )) {
-      let output
-      let logged = false;
-      for (let user in users) {
-        if ("ip" in users[user]) {
-          if (users[user]["ip"] === IP) {
-            output = 'Request from: ' + user
-            logged = true
-          }
-        }
-      }
-      if (!logged) {
-        output = 'Request: ' + IP
-      }
-      let bl = process.env.blacklist
-      bl = bl.split(/[ ;]+/)
-      if (bl.includes(IP)) {
-        console.log(output + '  BLACKLISTED')
-        process.exit(1)
-      } else {
-        route()
-      }
-      console.log(output + ' > ' + req.method + ': ' + file)
     } else {
       let bl = process.env.blacklist
       bl = bl.split(/[ ;]+/)
