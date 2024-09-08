@@ -1,3 +1,7 @@
+window.addEventListener('beforeunload', function (event) {
+  event.stopImmediatePropagation();
+});
+
 let inFrame
 
 try {
