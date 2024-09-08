@@ -66,7 +66,7 @@ function route() {
         if (process.env.tracker === 'true') {
           for (let user in users) {
             if ("ip"in users[user]) {
-              if (users[user][ip] === req.headers['x-forwarded-for']) {
+              if (users[user]["ip"] === req.headers['x-forwarded-for']) {
                 if ("permissions" in users[user]) {
                   let role = users[user]["permissions"]
                   if (role === "ADMIN") {
