@@ -63,25 +63,7 @@ function route() {
 
     routes.forEach((route) => {
       app.get(route.path, (req, res) => {
-        if (process.env.tracker === 'true') {
-          for (let user in users) {
-            if ("ip"in users[user]) {
-              if (users[user]["ip"] === req.headers['x-forwarded-for']) {
-                if ("permissions" in users[user]) {
-                  let role = users[user]["permissions"]
-                  if (role === "ADMIN") {
-                    res.sendFile(path.join(__dirname, 'static', route.file))
-                  } else if (role === "MEMBER" && route.file === "settings.html") {
-                    res.sendFile(path.join(__dirname, 'static', route.file))
-                  } else {
-                    if (!(route.file === "games.html") || !(route.file  === "apps.html"))
-                    res.sendFile(path.join(__dirname, 'static', route.file))
-                  }
-                }
-              }
-            }
-          }
-        }
+        res.sendFile(path.join(__dirname, 'static', route.file))
       })
     })
   }
