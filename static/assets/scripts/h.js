@@ -36,11 +36,9 @@ if (!inFrame && !navigator.userAgent.includes('Firefox')) {
 
     const script = doc.createElement('script')
     script.textContent = `
-      window.onbeforeunload = function (event) {
-        const confirmationMessage = 'Leave Site?';
-        (event || window.event).returnValue = confirmationMessage;
-        return true;
-      };
+      window.addEventListener('beforeunload', function (event) {
+        event.stopImmediatePropagation();
+      });
     `
     doc.head.appendChild(script)
   }
