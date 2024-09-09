@@ -19,7 +19,9 @@ var users = JSON.parse(process.env.users); //All user data
 
 var Accounts = {}; //username and passwords
 for (let key in users) {
-  Accounts[key] = users[key]['password'];
+  if (!("CLOSED" in users[key])) {
+    Accounts[key] = users[key]['password'];
+  }
 }
 
 if (process.env.login === "true") {
