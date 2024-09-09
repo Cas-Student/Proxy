@@ -22,7 +22,7 @@ function handleClick(app) {
   } else if (app.custom) {
     Custom(app)
   } else {
-    blank(app.link)
+    processUrl(app.link, '')
   }
 
   return false
