@@ -8,7 +8,6 @@ function handleClick(app) {
   if (typeof app.say !== 'undefined') {
     alert(app.say)
   }
-  console.log("Opening: " + app.link);
   if (app.local) {
     saveToLocal(app.link)
     window.location.href = 'p'
@@ -22,7 +21,7 @@ function handleClick(app) {
   } else if (app.custom) {
     Custom(app)
   } else {
-    go(app.link)
+    processUrl(app.link, '') // go(app.link)
   }
 
   return false
