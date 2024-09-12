@@ -1,3 +1,9 @@
+window.addEventListener('load', () => {
+  navigator.serviceWorker.register('../sw.js?v=4', {
+    scope: '/a/',
+  })
+})
+
 let appInd
 
 function saveToLocal(path) {
@@ -8,21 +14,15 @@ function handleClick(app) {
   if (typeof app.say !== 'undefined') {
     alert(app.say)
   }
+  sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(app.link))
+  const dy = localStorage.getItem('dy')
 
-  if (app.local) {
-    saveToLocal(app.link)
-    window.location.href = 'p'
-  } else if (app.local2) {
-    saveToLocal(app.link)
-    window.location.href = app.link
-  } else if (app.blank) {
-    blank(app.link)
-  } else if (app.now) {
-    now(app.link)
-  } else if (app.custom) {
-    Custom(app)
+  if (path) {
+    location.href = path
+  } else if (dy === 'true') {
+    window.location.href = '/a/q/' + __uv$config.encodeUrl(app.link)
   } else {
-    processUrl(app.link, '') // go(app.link)
+    window.location.href = '/a/' + __uv$config.encodeUrl(app.link)
   }
 
   return false
