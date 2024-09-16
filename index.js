@@ -4,7 +4,7 @@ const debug = process.env.debug || "false";
 const headers = process.env.headers || "false";
 const login  = process.env.login || "false";
 const tracker = process.env.tracker || "true";
-let pnpm = true // For Running pnpm
+let pnpm = false // For Running pnpm
 let users; // Pre-declares users
 if (pnpm) {
   users = {"user":{"passwd":"null"}}; //All user data
