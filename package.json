@@ -15,7 +15,7 @@
   "dependencies": {
     "@tomphttp/bare-server-node": "2.0.3",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "express-basic-auth": "^1.2.1"
   },
   "devDependencies": {
@@ -23,8 +23,9 @@
   },
   "eslintConfig": {
     "env": {
-        "browser": true,
-        "node": true
+      "browser": true,
+      "node": true
     }
-  }
+  },
+  "packageManager": "pnpm@9.5.0"
 }
