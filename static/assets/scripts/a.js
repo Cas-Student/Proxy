@@ -10,7 +10,7 @@ function saveToLocal(path) {
   sessionStorage.setItem('GoUrl', path)
 }
 
-function handleClick(app) {
+function handleClick(app, path) {
   if (typeof app.say !== 'undefined') {
     alert(app.say)
   }

@@ -10,13 +10,12 @@ function saveToLocal(path) {
   sessionStorage.setItem('GoUrl', path)
 }
 
-function handleClick(app) {
+function handleClick(app, path) {
   if (typeof app.say !== 'undefined') {
     alert(app.say)
   }
   sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(app.link))
   const dy = localStorage.getItem('dy')
-
   if (path) {
     location.href = path
   } else if (dy === 'true') {
