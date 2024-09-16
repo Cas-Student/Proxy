@@ -4,7 +4,13 @@ const debug = process.env.debug || "false";
 const headers = process.env.headers || "false";
 const login  = process.env.login || "false";
 const tracker = process.env.tracker || "true";
-const users = JSON.parse(process.env.users) || {"":{"":""}}; //All user data
+let pnpm = true // For Running pnpm
+let users; // Pre-declares users
+if (pnpm) {
+  users = {"user":{"passwd":"null"}}; //All user data
+} else {
+  users = JSON.parse(process.env.users);
+}
 
 //Imports
 console.log("loading imports...");
