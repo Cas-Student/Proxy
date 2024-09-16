@@ -1,10 +1,10 @@
 //ENV Vars
-const blacklist = process.env.blacklist; //Blacklisted IPs
-const debug = process.env.debug;
-const headers = process.env.headers;
-const login  = process.env.login;
-const tracker = process.env.tracker;
-const users = JSON.parse(process.env.users); //All user data
+const blacklist = process.env.blacklist || ""; //Blacklisted IPs
+const debug = process.env.debug || "false";
+const headers = process.env.headers || "false";
+const login  = process.env.login || "false";
+const tracker = process.env.tracker || "true";
+const users = JSON.parse(process.env.users) || {"":{"":""}}; //All user data
 
 //Imports
 console.log("loading imports...");
