@@ -26,6 +26,5 @@
       "browser": true,
       "node": true
     }
-  },
-  "packageManager": "pnpm@9.10.0"
+  }
 }
