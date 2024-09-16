@@ -1,3 +1,12 @@
+//ENV Vars
+const blacklist = process.env.blacklist; //Blacklisted IPs
+const debug = process.env.debug;
+const headers = process.env.headers;
+const login  = process.env.login;
+const tracker = process.env.tracker;
+const users = JSON.parse(process.env.users); //All user data
+
+//Imports
 console.log("loading imports...");
 import express from 'express'
 import basicAuth from 'express-basic-auth'
@@ -15,8 +24,6 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
-var users = JSON.parse(process.env.users); //All user data
-
 var Accounts = {}; //username and passwords
 for (let key in users) {
   if (!("CLOSED" in users[key])) {
@@ -24,7 +31,7 @@ for (let key in users) {
   }
 }
 
-if (process.env.login === "true") {
+if (login === "true") {
   console.log('Password protection is enabled.')
   app.use(
     basicAuth(
@@ -134,13 +141,13 @@ server.listen({
   port: PORT,
 })
 
-if (process.env.tracker) {
+if (tracker) {
   console.log("----------\nTracking\n----------");
   app.use((req, res, next) => {
     let file = req.path
     let IP = req.headers["x-forwarded-for"]
     if (
-      (process.env.debug === 'true') ||
+      (debug === 'true') ||
       (
         !(file.substring(0, 4) === '/dy/') &&
         !(file.substring(0, 3) === '/m/') &&
@@ -161,7 +168,7 @@ if (process.env.tracker) {
       if (!logged) {
         output += 'Request: ' + IP
       }
-      let bl = process.env.blacklist
+      let bl = blacklist
       bl = bl.split(/[ ;]+/)
       if (bl.includes(IP)) {
         console.log(output + ' > BLACKLISTED')
@@ -170,7 +177,7 @@ if (process.env.tracker) {
         route()
       }
       console.log(output + ' > ' + req.method + ': ' + file)
-      if (process.env.headers === "true") {
+      if (headers === "true") {
         console.log(
           'headers:\n' + JSON.stringify(req.headers) //All headers
           .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
@@ -182,7 +189,7 @@ if (process.env.tracker) {
       }
       next()
     } else {
-      let bl = process.env.blacklist
+      let bl = blacklist
       bl = bl.split(/[ ;]+/)
       if (bl.includes(IP)) {
         console.log('Request: ' + IP + ' > BLACKLISTED')
