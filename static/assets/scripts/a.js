@@ -16,6 +16,7 @@ function handleClick(app, path) {
   }
   sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(app.link))
   const dy = localStorage.getItem('dy')
+  console.log(dy)
 
   if (path) {
     location.href = path
