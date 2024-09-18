@@ -29,6 +29,8 @@ function processUrl(value, path) {
 
   if (path) {
     location.href = path
+  } else if (process.env.url) {
+    window.location.href = url
   } else if (dy === 'true') {
     window.location.href = '/a/q/' + __uv$config.encodeUrl(url)
   } else {
