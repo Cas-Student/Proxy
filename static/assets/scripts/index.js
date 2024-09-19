@@ -10,7 +10,12 @@ const input = document.getElementById('is')
 if (form && input) {
   form.addEventListener("submit", async event => {
     event.preventDefault();
-    processUrl(input.value, "");
+    if (input.value === '/') {
+      alert('Error: '  + window.location)
+      location.href = location.href;
+    } else {
+      processUrl(input.value, "");
+    }
   });
 }
 
