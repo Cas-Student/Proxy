@@ -25,11 +25,11 @@ When using this proxy, 6 enviormental variables must be configured.
     </li>
     <li>
         <h2>login</h2>
-        <p></p>
+        <p>login is another true/false variable. When true, it uses http methods to ask for usernames, and passwords provided by <a href="#users">users</a></p>
     </li>
     <li>
         <h2 name="tracker">tracker</h2>
-        <p></p>
+        <p>This is a true/false variable.</p>
     </li>
     <li>
         <h2 name="users">users</h2>
