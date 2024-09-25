@@ -6,6 +6,12 @@
     "custom": "true"
   },
   {
+    "name": "Soccer Random",
+    "link": "https://www.twoplayergames.org/embed/soccer-random",
+    "image": "/assets/media/icons/soccer-random.webp",
+    "categories": ["all"]
+  },
+  {
     "name": "Space Waves",
     "link": "https://www.crazygames.com/embed/space-waves",
     "image": "/assets/media/icons/space-waves.webp",
