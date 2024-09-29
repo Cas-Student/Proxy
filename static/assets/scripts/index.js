@@ -1,6 +1,8 @@
 var url = new URL(location.href);
-var c = url.searchParams.get("search");
-alert(c);
+var URL_Search = url.searchParams.get("search");
+if (URL_Search !== undefined) {
+  processURL(URL_Search, '')
+}
 
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
