@@ -1,3 +1,7 @@
+var url = new URL(location.href);
+var c = url.searchParams.get("search");
+alert(c);
+
 window.addEventListener('load', () => {
   navigator.serviceWorker.register('../sw.js?v=4', {
     scope: '/a/',
