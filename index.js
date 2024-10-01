@@ -173,9 +173,7 @@ if (tracker) {
       if (!logged) {
         output += 'Request: ' + IP
       }
-      let bl = blacklist
-      bl = bl.split(/[ ;]+/)
-      if (bl.includes(IP)) {
+      if ((blacklist.split(/[ ;]+/)).includes(IP)) {
         console.log(output + ' > BLACKLISTED')
         process.exit(1)
       } else {
@@ -194,9 +192,7 @@ if (tracker) {
       }
       next()
     } else {
-      let bl = blacklist
-      bl = bl.split(/[ ;]+/)
-      if (bl.includes(IP)) {
+      if ((blacklist.split(/[ ;]+/)).includes(IP)) {
         console.log('Request: ' + IP + ' > BLACKLISTED')
         process.exit(1)
       } else {
