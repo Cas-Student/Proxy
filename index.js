@@ -72,7 +72,7 @@ function route() {
       { path: '/s', file: 'settings.html' },
       { path: '/t', file: 'tabs.html' },
       { path: '/p', file: 'go.html' },
-      { path: '/', file: 'index.php' },
+      { path: '/', file: 'index.html' },
     ]
 
     routes.forEach((route) => {
