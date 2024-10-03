@@ -127,6 +127,7 @@ function goBack() {
   if (iframe) {
     iframe.contentWindow.history.back()
   } else {
+    alert('Error')
     console.error('No iframe found')
   }
 }
@@ -135,6 +136,7 @@ function goForward() {
   if (iframe) {
     iframe.contentWindow.history.forward()
   } else {
+    alert('Error')
     console.error('No iframe found')
   }
 }
