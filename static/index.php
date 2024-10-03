@@ -33,7 +33,12 @@
       </div>
     </div>
     <script src="assets/scripts/h.js"></script>
-    <script type="module" src="assets/scripts/index.js"></script>
+    <script type="module" src="assets/scripts/index.js">
+      const s = <?php return $_GET['search'] ?>
+      if (s == null) {
+        processUrl(s, '')
+      }
+    </script>
     <script src="./m/bundle.js"></script>
     <script src="./m/config.js"></script>
     <script src="https://kit.fontawesome.com/1237c86ba0.js" crossorigin="anonymous"></script>
