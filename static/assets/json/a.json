@@ -1,5 +1,11 @@
 [
   {
+    "name": "Deep AI",
+    "link": "https://deepai.org/chat",
+    "image": "/assets/media/icons/custom.webp",
+    "categories": ["all", "AI"]
+  },
+  {
     "name": "! Create Custom App",
     "image": "/assets/media/icons/custom.webp",
     "categories": ["all"],
