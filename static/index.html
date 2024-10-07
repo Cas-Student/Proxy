@@ -35,7 +35,8 @@
     <script src="assets/scripts/h.js"></script>
     <script type="module" src="assets/scripts/index.js">
       const s = <?php return $_GET['search'] ?>
-      if (s == null) {
+      alert(s)
+      if (s !== null) {
         processUrl(s, '')
       }
     </script>
