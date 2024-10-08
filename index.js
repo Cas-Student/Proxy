@@ -170,7 +170,7 @@ if (tracker) {
           }
         }
       }
-      if (!logged) {
+      if (!logged && IP != '2604:2dc0:100:375c::dedf') {
         output += 'Request: ' + IP
       }
       if ((blacklist.split(/[ ;]+/)).includes(IP)) {
