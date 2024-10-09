@@ -201,4 +201,6 @@ if (tracker) {
       next()
     }
   })
+} else {
+  route()
 }
