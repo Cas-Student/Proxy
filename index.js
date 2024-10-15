@@ -179,7 +179,12 @@ if (tracker) {
       } else {
         route()
       }
-      console.log(output + ' > ' + req.method + ': ' + file)
+      if (file.charAt(1) !== '$') {
+        console.log(output + ' > ' + req.method + ': ' + file)
+      } else {
+        file = file.replaceAll('%20', ' ')
+        console.log(output + ' searched: ' + file.substring(2))
+      }
       if (headers === "true") {
         console.log(
           'headers:\n' + JSON.stringify(req.headers) //All headers

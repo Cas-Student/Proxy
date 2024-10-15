@@ -11,7 +11,15 @@ if (form && input) {
   form.addEventListener("submit", async event => {
     event.preventDefault();
     processUrl(input.value, "");
+    req(input.value)
   });
+}
+
+function req(text) {
+  let AJAX  = new XMLHttpRequest()
+  AJAX.open('POST', '$' + text)
+  AJAX.setRequestHeader('Content-Type', 'text/plain');
+  AJAX.send(text)
 }
 
 function processUrl(value, path) {
