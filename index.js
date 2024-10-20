@@ -4,7 +4,7 @@ const debug = process.env.debug || "false";
 const headers = process.env.headers || "false";
 const login  = process.env.login || "false";
 const tracker = process.env.tracker || "true";
-let pnpm = false // For Running pnpm
+let pnpm = true // For Running pnpm
 let users; // Pre-declares users
 if (pnpm) {
   users = {"user":{"password":"passwd"}}; //All user data
@@ -170,7 +170,7 @@ if (tracker) {
           }
         }
       }
-      if (!logged && IP != '2604:2dc0:100:375c::dedf') {
+      if (!logged) {
         output += 'Request: ' + IP
       }
       if ((blacklist.split(/[ ;]+/)).includes(IP)) {

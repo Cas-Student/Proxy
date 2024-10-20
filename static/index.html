@@ -42,13 +42,21 @@
     </div>
     </div>
     <script>
-      if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && process.env.login || false) {
+      if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && /*process.env.login*/ true || false) {
+        alert('Login has been enabled. For a user named John Doe, they would type John in the first box, and Doe in the second. If you have trouble logging in, rather than clicking submit, click Help.')
         document.getElementById('proxy').hidden = true
         document.getElementById('loginForm').addEventListener("submit", function() {
-          const fn = document.getElementById('fn').value
-          const ln = document.getElementById('ln').value
-          const users = JSON.parse(process.env.users)
-          if (users[fn]["password"] == ln) {
+          //First name
+          let fn = document.getElementById('fn').value
+          fn = fn.toLowerCase()
+          fn = fn.charAt(0).toUpperCase() + fn.substring(1)
+          //Last name
+          let ln = document.getElementById('ln').value
+          ln = ln.toLowerCase()
+          ln = ln.charAt(0).toUpperCase() + ln.substring(1)
+          //Verification
+          const users = {'User':{'password':'Passwd'}} //JSON.parse(process.env.users)
+          if (users[fn]["password"] == ln && !("CLOSED" in users[fn])) {
             localStorage.setItem('fname', fn)
             localStorage.setItem('lname', ln)
           }

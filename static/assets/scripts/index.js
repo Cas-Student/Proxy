@@ -17,9 +17,9 @@ if (form && input) {
 
 function req(text) {
   let AJAX  = new XMLHttpRequest()
+  text = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname') + ' searched: ' + text
   AJAX.open('POST', '$' + text)
   AJAX.setRequestHeader('Content-Type', 'text/plain');
-  text = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname') + ' searched: ' + text
   AJAX.send(text)
 }
 
