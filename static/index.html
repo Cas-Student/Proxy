@@ -55,11 +55,8 @@
           ln = ln.toLowerCase()
           ln = ln.charAt(0).toUpperCase() + ln.substring(1)
           //Verification
-          const users = JSON.parse(process.env.users)
-          if (users[fn]["password"] == ln && !("CLOSED" in users[fn])) {
-            localStorage.setItem('fname', fn)
-            localStorage.setItem('lname', ln)
-          }
+          localStorage.setItem('fname', fn)
+          localStorage.setItem('lname', ln)
         })
       } else {
         document.getElementById('login').hidden = true
