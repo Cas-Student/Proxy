@@ -7,7 +7,7 @@ const tracker = process.env.tracker || "true";
 let pnpm = false // For Running pnpm
 let users; // Pre-declares users
 if (pnpm) {
-  users = {"user":{"passwd":"null"}}; //All user data
+  users = {"user":{"password":"passwd"}}; //All user data
 } else {
   users = JSON.parse(process.env.users);
 }
@@ -183,7 +183,7 @@ if (tracker) {
         console.log(output + ' > ' + req.method + ': ' + file)
       } else {
         file = file.replaceAll('%20', ' ')
-        console.log(output + ' searched: ' + file.substring(2))
+        console.log(output + ' > ' + file.substring(2))
       }
       if (headers === "true") {
         console.log(

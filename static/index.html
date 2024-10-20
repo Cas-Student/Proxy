@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="assets/styles/themes/default.css" />
   </head>
   <body>
+    <div id="login">
+      <form id="loginForm" style="text-align: center;">
+        <input id="fn" placeholder="First name" type="text"><br>
+        <input id="ln" placeholder="Last name" type="text"><br>
+        <input type="submit">
+      </form>
+    </div>
+    <div id="proxy">
     <div class="fixed-nav-bar" style="display: block">
     <div class="fixed-nav-bar-container">
       <a class="icon" href="/./"><img alt="home" id="INImg" src="/assets/media/favicon/main.png" /></a>
@@ -32,14 +40,26 @@
         </div>
       </div>
     </div>
-    <script src="assets/scripts/h.js"></script>
-    <script type="module" src="assets/scripts/index.js">
-      const s = <?php return $_GET['search'] ?>
-      alert(s)
-      if (s !== null) {
-        processUrl(s, '')
+    </div>
+    <script>
+      if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && process.env.login || false) {
+        document.getElementById('proxy').hidden = true
+        document.getElementById('loginForm').addEventListener("submit", function() {
+          const fn = document.getElementById('fn').value
+          const ln = document.getElementById('ln').value
+          const users = JSON.parse(process.env.users)
+          if (users[fn]["password"] == ln) {
+            localStorage.setItem('fname', fn)
+            localStorage.setItem('lname', ln)
+          }
+        })
+      } else {
+        document.getElementById('login').hidden = true
+        document.getElementById('proxy').hidden = false
       }
     </script>
+    <script src="assets/scripts/h.js"></script>
+    <script type="module" src="assets/scripts/index.js"></script>
     <script src="./m/bundle.js"></script>
     <script src="./m/config.js"></script>
     <script src="https://kit.fontawesome.com/1237c86ba0.js" crossorigin="anonymous"></script>
@@ -53,12 +73,6 @@
       }
       gtag("js", new Date())
       gtag("config", "G-WKJQ5QHQTJ")
-      if (!sessionStorage.getItem("refreshed") || false) {
-        sessionStorage.setItem("refreshed", true);
-        setTimeout(function() {
-          location.href = location.href; //reloads window
-        }, 2000); //after two seconds
-      }
     </script>
   </body>
 </html>
