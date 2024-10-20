@@ -36,7 +36,7 @@ for (let key in users) {
     Accounts[key] = users[key]['password'];
   }
 }
-
+/*
 if (login === "true") {
   console.log('Password protection is enabled.')
   app.use(
@@ -47,9 +47,10 @@ if (login === "true") {
       }
     )
   )
-} else if (config.challenge === "false") {
+} else if (login === "false") {
   console.log('Password protection is disabled.')
 }
+*/
 
 console.log('--------------------')
 console.log('      Accounts      ')
