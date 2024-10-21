@@ -29,8 +29,9 @@
       <div class="settings-container">
         <div class="settings-card">
           <h3>Password</h3>
-          <p>Set your password for proxy logins.</p>
-          <input type="text">
+          <p>Set your password for proxy logins. Currently: <script> document.write(localStorage.getItem('lname'))</script></p>
+          <input id="password" name="password" type="text">
+          <button type="submit" onclick="localStorage.setItem('lname', document.getElementById('password').value); location.href = location.href">
         </div>
         <div class="settings-card">
           <h3>About:Blank</h3>
