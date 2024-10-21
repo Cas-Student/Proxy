@@ -42,7 +42,7 @@
     </div>
     </div>
     <script>
-      if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && process.env.login || false) {
+      if ((!(localStorage.getItem('fname')) && !(localStorage.getItem('lname'))) || false) {
         alert('Login has been enabled. For a user named John Doe, they would type John in the first box, and Doe in the second. If you have trouble logging in, rather than clicking submit, click Help.')
         document.getElementById('proxy').hidden = true
         document.getElementById('loginForm').addEventListener("submit", function() {
