@@ -43,7 +43,7 @@
     </div>
     <script>
       if ((!(localStorage.getItem('fname')) && !(localStorage.getItem('lname'))) || false) {
-        alert('Login has been enabled. For a user named John Doe, they would type John in the first box, and Doe in the second. If you have trouble logging in, rather than clicking submit, click Help.')
+        alert('Login has been enabled. For a user named John Doe, they would type John in the first box, and Doe in the second. If you have trouble logging in, rather than clicking submit, click Help. Please use your REAL NAME. When the login system is finished, an incorrect id will cause many problems. To set a password, go to the settings tab.')
         document.getElementById('proxy').hidden = true
         document.getElementById('loginForm').addEventListener("submit", function() {
           //First name
