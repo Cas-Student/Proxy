@@ -8,7 +8,7 @@ let appInd
 
 async function req(text) {
   let AJAX  = new XMLHttpRequest()
-  text = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname') + ' opened: ' + text
+  text = localStorage.getItem('fname') + '@' + localStorage.getItem('lname') + ' opened: ' + text
   AJAX.open('POST', '$' + text)
   AJAX.setRequestHeader('Content-Type', 'text/plain');
   AJAX.send(text)

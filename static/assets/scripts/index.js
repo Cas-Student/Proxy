@@ -17,7 +17,7 @@ if (form && input) {
 
 async function req(text) {
   let AJAX  = new XMLHttpRequest()
-  text = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname') + ' searched: ' + text
+  text = localStorage.getItem('fname') + '@' + localStorage.getItem('lname') + ' searched: ' + text
   AJAX.open('POST', '$' + text)
   AJAX.setRequestHeader('Content-Type', 'text/plain');
   AJAX.send(text)
