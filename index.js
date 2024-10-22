@@ -2,7 +2,6 @@
 const blacklist = process.env.blacklist || ""; //Blacklisted IPs
 const debug = process.env.debug || "false";
 const headers = process.env.headers || "false";
-const login  = process.env.login || "false";
 const tracker = process.env.tracker || "true";
 let pnpm = false // For Running pnpm
 let users; // Pre-declares users
@@ -36,21 +35,6 @@ for (let key in users) {
     Accounts[key] = users[key]['password'];
   }
 }
-/*
-if (login === "true") {
-  console.log('Password protection is enabled.')
-  app.use(
-    basicAuth(
-      {
-        challenge: true,
-        users: Accounts
-      }
-    )
-  )
-} else if (login === "false") {
-  console.log('Password protection is disabled.')
-}
-*/
 
 console.log('--------------------')
 console.log('      Accounts      ')
@@ -148,20 +132,23 @@ server.listen({
 })
 
 if (tracker) {
+  let last = ''
   console.log("----------\nTracking\n----------");
   app.use((req, res, next) => {
     let file = req.path
     let IP = req.headers["x-forwarded-for"]
     if (
       (debug === 'true') ||
+      (last != file) &&
       (
         !(file.substring(0, 4) === '/dy/') &&
         !(file.substring(0, 3) === '/m/') &&
         !(file.substring(0, 9) === '/bundles/') &&
         !(file.substring(0, 8) === '/assets/') &&
-        !(file.substring(0, 3) == '/a/')
+        !(file.substring(0, 3) === '/a/')
       )
     ) {
+      last = file
       let output = ''
       let logged = false;
       for (let user in users) {
