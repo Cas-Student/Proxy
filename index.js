@@ -158,7 +158,8 @@ if (tracker) {
         !(file.substring(0, 4) === '/dy/') &&
         !(file.substring(0, 3) === '/m/') &&
         !(file.substring(0, 9) === '/bundles/') &&
-        !(file.substring(0, 8) === '/assets/')
+        !(file.substring(0, 8) === '/assets/') &&
+        !(file.substring(0, 3) == '/a/')
       )
     ) {
       let output = ''
