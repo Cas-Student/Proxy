@@ -15,7 +15,7 @@ if (form && input) {
   });
 }
 
-function req(text) {
+async function req(text) {
   let AJAX  = new XMLHttpRequest()
   text = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname') + ' searched: ' + text
   AJAX.open('POST', '$' + text)
