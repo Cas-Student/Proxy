@@ -27,15 +27,16 @@ function processUrl(value, path) {
   let url = value.trim()
   const engine = localStorage.getItem('engine')
   const searchUrl = engine ? engine : 'https://www.google.com/search?hl=' + localStorage.getItem('lang') + '&lr=' + localStorage.getItem('lang') + '&q='
-
   if (!isUrl(url)) {
     url = searchUrl + url
   } else if (!(url.startsWith('https://') || url.startsWith('http://'))) {
     url = 'https://' + url
+  } else if (url.includes(location.href)) {
+    location.href = url
+    sessionStorage.setItem('GoUrl', url)
   }
   sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(url))
   const dy = localStorage.getItem('dy')
-
   if (path) {
     location.href = path
   } else if (dy === 'true') {
