@@ -37,6 +37,25 @@ async function req(text, type) {
   AJAX.send(text)
 }
 
+document.getElementById('wipeButton').addEventListener('click', function() {
+  let l = []
+  let fname, lname
+  for(var i=0, len=localStorage.length; i<len; i++) {
+    var key = localStorage.key(i);
+    if (key != 'fname' && key!= 'lname') {
+      l += key
+    } else if (key == 'fname') {
+      fname = localStorage.getItem(key)
+    } else if (key == 'lname') {
+      lname = localStorage.getItem(key)
+    }
+  }
+  localStorage.clear()
+  localStorage.setItem('fname', fname)
+  localStorage.setItem('lname', lname)
+  req(l, 'wiped')
+})
+
 document.getElementById('loginButton').addEventListener('click', function() {
   let input = document.getElementById('password').value
   if (input.charAt(0) == '|') {
