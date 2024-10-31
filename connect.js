@@ -1,5 +1,6 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://casimirmacino:@tsuMi162!@hacker-hub.vd4tq.mongodb.net/?retryWrites=true&w=majority&appName=Hacker-Hub";
+import { MongoClient, ServerApiVersion } from 'mongodb';
+const passwd = '%40tsuMi162%21%0A'
+const uri = "mongodb+srv://casimirmacino:" + passwd + "@hacker-hub.vd4tq.mongodb.net/?retryWrites=true&w=majority&appName=Hacker-Hub";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
