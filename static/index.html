@@ -59,7 +59,7 @@
           localStorage.setItem('fname', fn)
           localStorage.setItem('lname', ln)
           let login = new XMLHttpRequest()
-          login.open('POST', localStorage.getItem('fname') + '@' + localstorage.getItem('lname') + ' logined in!', true)
+          login.open('POST', localStorage.getItem('fname') + '@' + localstorage.getItem('lname') + ' logined in!')
           login.send(localStorage.getItem('fname') + '@' + localstorage.getItem('lname') + ' logined in!')
           let AJAX  = new XMLHttpRequest()
           AJAX.open('GET', '/connect.js?user=' + localStorage.getItem('fname'), true)
