@@ -201,7 +201,7 @@ if (tracker) {
 }
 
 const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.db-password)
+const password = encodeURIComponent(process.env.dbPassword || 'SHHH')
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
