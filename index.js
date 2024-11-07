@@ -1,3 +1,5 @@
+console.log(process.env.KOYEB_PUBLIC_DOMAIN)
+
 //ENV Vars
 const blacklist = process.env.blacklist || ""; //Blacklisted IPs
 const debug = process.env.debug || "false";
@@ -21,6 +23,8 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
+import { hostname } from "node:os";
+import { Domain } from "node:domain";
 console.log("Done");
 
 const __dirname = process.cwd()
