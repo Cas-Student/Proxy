@@ -1,17 +1,10 @@
-console.log(process.env.KOYEB_PUBLIC_DOMAIN)
+console.log()
 
 //ENV Vars
 const blacklist = process.env.blacklist || ""; //Blacklisted IPs
 const debug = process.env.debug || "false";
 const headers = process.env.headers || "false";
 const tracker = process.env.tracker || "true";
-let pnpm = true // For Running pnpm
-let users; // Pre-declares users
-if (pnpm) {
-  users = {"user":{"password":"passwd"}}; //All user data
-} else {
-  users = JSON.parse(process.env.users);
-}
 
 //Imports
 console.log("loading imports...");
@@ -23,8 +16,6 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import { hostname } from "node:os";
-import { Domain } from "node:domain";
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -34,18 +25,31 @@ const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
 console.log("Running on port: " + PORT);
 
-var Accounts = {}; //username and passwords
-for (let key in users) {
-  if (!("CLOSED" in users[key])) {
-    Accounts[key] = users[key]['password'];
-  }
+//Stored Accounts
+let Accounts = {}
+
+const username = encodeURIComponent("userProbe")
+const password = encodeURIComponent(process.env.dbPassword || 'qaANtuGAGx23eM10')
+const cluster = "hacker-hub.vd4tq.mongodb.net"
+const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
+const client = new MongoClient(uri)
+try {
+  await client.connect()
+  const database = client.db("Accounts")
+  const ratings = database.collection("Users")
+  const cursor = ratings.find()
+  await cursor.forEach(doc => Accounts = doc)
+} catch {
+  Accounts = {}
+} finally {
+  await client.close();
 }
 
 console.log('--------------------')
 console.log('      Accounts      ')
 console.log('--------------------')
 for (let user in Accounts) {
-  console.log(user + ' | ' + Accounts[user])
+  console.log(user + ' | ' + Accounts[user]['name'])
   console.log('--------------------')
 }
 
@@ -156,9 +160,9 @@ if (tracker) {
       last = file
       let output = ''
       let logged = false;
-      for (let user in users) {
-        if ("ip" in users[user]) {
-          if (users[user]["ip"] === IP) {
+      for (let user in Accounts) {
+        if ("ip" in Accounts[user]) {
+          if (Accounts[user]["ip"] === IP) {
             output += 'Request from: ' + user
             logged = true
           }
@@ -203,12 +207,6 @@ if (tracker) {
 } else {
   route()
 }
-
-const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword || 'SHHH')
-const cluster = "hacker-hub.vd4tq.mongodb.net"
-const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
-const client = new MongoClient(uri)
 
 app.get('/data', async(req, res) => {
   try {
