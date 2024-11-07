@@ -3,7 +3,7 @@ const blacklist = process.env.blacklist || ""; //Blacklisted IPs
 const debug = process.env.debug || "false";
 const headers = process.env.headers || "false";
 const tracker = process.env.tracker || "true";
-let pnpm = false // For Running pnpm
+let pnpm = true // For Running pnpm
 let users; // Pre-declares users
 if (pnpm) {
   users = {"user":{"password":"passwd"}}; //All user data
@@ -13,6 +13,7 @@ if (pnpm) {
 
 //Imports
 console.log("loading imports...");
+import { MongoClient } from "mongodb";
 import express from 'express'
 import basicAuth from 'express-basic-auth'
 import http from 'node:http'
@@ -198,3 +199,23 @@ if (tracker) {
 } else {
   route()
 }
+
+const username = encodeURIComponent("userProbe")
+const password = encodeURIComponent(process.env.db-password)
+const cluster = "hacker-hub.vd4tq.mongodb.net"
+const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
+const client = new MongoClient(uri)
+
+app.get('/data', async(req, res) => {
+  try {
+    await client.connect()
+    const database = client.db("Accounts")
+    const ratings = database.collection("Users")
+    const cursor = ratings.find()
+    await cursor.forEach(doc => res.status(200).json(doc))
+  } catch {
+    res.status(500).json({message: error.message})
+  } finally {
+    await client.close();
+  }
+})

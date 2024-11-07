@@ -29,14 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 })
 
-async function req(text, type) {
-  let AJAX  = new XMLHttpRequest()
-  text = localStorage.getItem('fname') + '@' + localStorage.getItem('lname') + ' ' + type + ': ' + text
-  AJAX.open('POST', '$' + text)
-  AJAX.setRequestHeader('Content-Type', 'text/plain');
-  AJAX.send(text)
-}
-
+//Data wipe
 document.getElementById('wipeButton').addEventListener('click', function() {
   let l = []
   let fname, lname
@@ -53,23 +46,11 @@ document.getElementById('wipeButton').addEventListener('click', function() {
   localStorage.clear()
   localStorage.setItem('fname', fname)
   localStorage.setItem('lname', lname)
-  req(l, 'wiped')
-})
-
-document.getElementById('loginButton').addEventListener('click', function() {
-  let input = document.getElementById('password').value
-  if (input.charAt(0) == '|') {
-    input = input.substring(1)
-    req(input, 'pinged')
-  } else if (input.charAt(0) == '~') {
-    input = input.substring(1)
-    localStorage.setItem('fname', input);
-    req(input, 'changed username')
-  } else {
-    localStorage.setItem('lname', input);
-    req(input, 'changed password')
-  }
-  location.href = location.href
+  let AJAX  = new XMLHttpRequest()
+  const text = localStorage.getItem('fname') + '@' + localStorage.getItem('lname') + ' wiped: ' + l
+  AJAX.open('POST', '$' + text)
+  AJAX.setRequestHeader('Content-Type', 'text/plain');
+  AJAX.send(text)
 })
 
 // Key

@@ -15,6 +15,7 @@
       <form id="loginForm" style="text-align: center;">
         <input id="fn" placeholder="First name" type="text"><br>
         <input id="ln" placeholder="Last name" type="text"><br>
+        <input id="passwd" placeholder="Password (case sensitive)" type="password"><br>
         <input type="submit">
       </form>
     </div>
@@ -55,18 +56,20 @@
           let ln = document.getElementById('ln').value
           ln = ln.toLowerCase()
           ln = ln.charAt(0).toUpperCase() + ln.substring(1)
+          let passwd = document.getElementById('passwd').value
           //Verification
-          localStorage.setItem('fname', fn)
-          localStorage.setItem('lname', ln)
-          let login = new XMLHttpRequest()
-          login.open('POST', localStorage.getItem('fname') + '@' + localstorage.getItem('lname') + ' logined in!')
-          login.send(localStorage.getItem('fname') + '@' + localstorage.getItem('lname') + ' logined in!')
           let AJAX  = new XMLHttpRequest()
-          AJAX.open('GET', '/connect.js?user=' + localStorage.getItem('fname'), true)
+          AJAX.open('GET', '/data')
           AJAX.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-              console.log(this.responseText)
-              location.href = location.href
+              const data = JSON.parse(this.responseText)
+              if ((data[fn]['name'] == ln) && data[fn]['password'] == passwd) {
+                localStorage.setItem('fname', fn)
+                localStorage.setItem('lname', ln)
+                location.href = location.href
+              } else {
+                alert('Error logining in! Contact the developer if the issue continues.')
+              }
             }
           }
           AJAX.send()
