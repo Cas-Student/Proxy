@@ -177,11 +177,13 @@ if (tracker) {
       } else {
         route()
       }
-      if (file.charAt(1) !== '$') {
-        console.log(output + ' > ' + req.method + ': ' + file)
-      } else {
-        file = file.replaceAll('%20', ' ')
-        console.log(output + ' > ' + file.substring(2))
+      if (file.substring(0, 6) != 'ADMIN@') {
+        if (file.charAt(1) !== '$') {
+          console.log(output + ' > ' + req.method + ': ' + file)
+        } else {
+          file = file.replaceAll('%20', ' ')
+          console.log(output + ' > ' + file.substring(2))
+        }
       }
       if (headers === "true") {
         console.log(
