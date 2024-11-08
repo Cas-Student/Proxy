@@ -217,8 +217,8 @@ app.get('/data', async(req, res) => {
     const ratings = database.collection("Users")
     const cursor = ratings.find()
     await cursor.forEach(doc => res.status(200).json(doc))
-  } catch {
-    res.status(500).json({message: error.message})
+  } catch (error) {
+    res.status(500).json({'message': error.message})
   } finally {
     await client.close();
   }
