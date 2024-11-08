@@ -176,8 +176,8 @@ if (tracker) {
         process.exit(1)
       } else {
         route()
-      }
-      if (file.substring(0, 6) != 'ADMIN@') {
+      }2
+      if (file.substring(2, 8) != 'ADMIN@') {
         if (file.charAt(1) !== '$') {
           console.log(output + ' > ' + req.method + ': ' + file)
         } else {
