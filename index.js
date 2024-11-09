@@ -37,7 +37,7 @@ const client = new MongoClient(uri)
 try {
   await client.connect()
   const database = client.db("Accounts")
-  const ratings = database.collection("Users")
+  const ratings = database.collection("Information")
   const cursor = ratings.find()
   await cursor.forEach(doc => Accounts = doc)
 } catch {
