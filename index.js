@@ -10,12 +10,12 @@ const tracker = process.env.tracker || "true";
 console.log("loading imports...");
 import { MongoClient } from "mongodb";
 import express from 'express'
-import basicAuth from 'express-basic-auth'
 import http from 'node:http'
 import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
+import assert from "node:assert";
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -33,6 +33,7 @@ const password = encodeURIComponent(process.env.dbPassword)
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
+
 try {
   await client.connect()
   const database = client.db("Accounts")
@@ -210,7 +211,15 @@ if (tracker) {
   route()
 }
 
-app.get('/data', async(req, res) => {
+/*
+const username = encodeURIComponent("userProbe")
+const password = encodeURIComponent(process.env.dbPassword)
+const cluster = "hacker-hub.vd4tq.mongodb.net"
+const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
+const client = new MongoClient(uri)
+*/
+
+app.get('/get-database', async(req, res) => {
   try {
     await client.connect()
     const database = client.db("Accounts")
@@ -221,5 +230,22 @@ app.get('/data', async(req, res) => {
     res.status(500).json({'message': error.message})
   } finally {
     await client.close();
+  }
+})
+
+app.post('/insert-database', async(req, res) => {
+  let date = Date()
+  let data = {
+    date: req.body['is']
+  }
+  try {
+    await client.connect()
+    const database = client.db('Accounts')
+    const ratings = database.collection('Users')
+    ratings.insertOne(data)
+  } catch (error) {
+    res.status(500).json({'message': error.message})
+  } finally {
+    await client.close()
   }
 })

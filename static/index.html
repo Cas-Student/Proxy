@@ -35,8 +35,8 @@
       <div class="main">
         <h1 class="title">Hacker Hub</h1>
         <div class="search-container">
-          <form id="fs" method="POST" autofocus>
-            <input id="is" class="main-search" placeholder="A World, Uncensored" type="text" />
+          <form id="fs" method="POST" action="/insert-database" autofocus>
+            <input id="is" name="is" class="main-search" placeholder="A World, Uncensored" type="text" />
           </form>
         </div>
       </div>
@@ -59,7 +59,7 @@
           let passwd = document.getElementById('passwd').value
           //Verification
           let AJAX  = new XMLHttpRequest()
-          AJAX.open('GET', '/data')
+          AJAX.open('GET', '/get-database')
           AJAX.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
               const data = JSON.parse(this.responseText)
