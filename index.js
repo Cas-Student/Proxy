@@ -234,16 +234,14 @@ app.get('/get-database', async(req, res) => {
 })
 
 app.post('/insert-database', async(req, res) => {
-  let date = Date()
-  let data = {
-    date: req.body['is']
-  }
+  let data = {}
+  data[req.body.user] = req.body.is
   try {
     await client.connect()
     const database = client.db('Accounts')
     const ratings = database.collection('Users')
     ratings.insertOne(data)
-    res.render('/?search=' + req.body['is'])
+    res.render('/?search=' + req.body.is)
   } catch (error) {
     res.status(500).json({'message': error.message})
   } finally {

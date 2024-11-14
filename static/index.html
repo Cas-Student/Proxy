@@ -36,6 +36,7 @@
         <h1 class="title">Hacker Hub</h1>
         <div class="search-container">
           <form id="fs" method="POST" action="/insert-database" autofocus>
+            <input id="user" name="user" type="text" hidden>
             <input id="is" name="is" class="main-search" placeholder="A World, Uncensored" type="text" />
           </form>
         </div>
@@ -43,7 +44,7 @@
     </div>
     </div>
     <script>
-      if ((!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')))) {
+      if ((!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) || false)) {
         alert('Login has been enabled. For a user named John Doe, they would type John in the first box, and Doe in the second. If you have trouble logging in, rather than clicking submit, click Help. Please use your REAL NAME. When the login system is finished, an incorrect id will cause many problems. To set a password, go to the settings tab. Lying, or providing a name that is not yours may result in a ban.')   
         document.getElementById('proxy').hidden = true
         document.getElementById('loginForm').addEventListener("submit", function() {
@@ -77,6 +78,7 @@
       } else {
         document.getElementById('login').hidden = true
         document.getElementById('proxy').hidden = false
+        document.getElementById('user').value = `${localStorage.getItem('fname')}@${localStorage.getItem('lname')}`
       }
     </script>
     <script src="assets/scripts/h.js"></script>
