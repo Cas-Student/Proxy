@@ -7,13 +7,15 @@ window.addEventListener('load', () => {
 const form = document.getElementById('fs')
 const input = document.getElementById('is')
 
-if (form && input) {
-  form.addEventListener("submit", async event => {
-    event.preventDefault();
+const uri = new URLSearchParams(window.location.search)
+
+if (uri.has('search')) {
+  if (form && input) {
     processUrl(input.value, "");
     req(input.value)
-  });
+  }
 }
+
 
 async function req(text) {
   let AJAX  = new XMLHttpRequest()
