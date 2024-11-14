@@ -10,10 +10,8 @@ const input = document.getElementById('is')
 const uri = new URLSearchParams(window.location.search)
 
 if (uri.has('search')) {
-  if (form && input) {
-    processUrl(input.value, "");
-    req(input.value)
-  }
+  processUrl(uri.get('search'), "");
+  req(uri.get('search'))
 }
 
 
