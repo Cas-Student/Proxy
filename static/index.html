@@ -37,13 +37,16 @@
         <div class="search-container">
           <form id="fs" method="POST" action="/insert-database" autofocus>
             <input id="user" name="user" type="text" hidden>
-            <input id="is" name="is" class="main-search" placeholder="A World, Uncensored" type="text" />
+            <div class="search-bar">
+              <input id="is" name="is" class="main-search" placeholder="A World, Uncensored" type="text">
+              <button type="submit" class="fa-solid fa-search search-button"></button>
+            </div>
           </form>
         </div>
       </div>
     </div>
     </div>
-    <script>
+    <script>/*
       if ((!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) || false)) {
         alert('Login has been enabled. For a user named John Doe, they would type John in the first box, and Doe in the second. If you have trouble logging in, rather than clicking submit, click Help. Please use your REAL NAME. When the login system is finished, an incorrect id will cause many problems. To set a password, go to the settings tab. Lying, or providing a name that is not yours may result in a ban.')   
         document.getElementById('proxy').hidden = true
@@ -75,11 +78,11 @@
           }
           AJAX.send()
         })
-      } else {
+      } else {*/
         document.getElementById('login').hidden = true
         document.getElementById('proxy').hidden = false
         document.getElementById('user').value = `${localStorage.getItem('fname')}@${localStorage.getItem('lname')}`
-      }
+      //}
     </script>
     <script src="assets/scripts/h.js"></script>
     <script type="module" src="assets/scripts/index.js"></script>

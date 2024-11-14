@@ -2,7 +2,7 @@ console.log()
 
 //ENV Vars
 const blacklist = process.env.blacklist || ""; //Blacklisted IPs
-const debug = process.env.debug || "false";
+const debug = process.env.debug || "true";
 const headers = process.env.headers || "false";
 const tracker = process.env.tracker || "true";
 
