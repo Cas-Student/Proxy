@@ -67,7 +67,7 @@
           AJAX.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
               const data = JSON.parse(this.responseText)
-              if ((data[fn]['name'] == ln) && data[fn]['password'] == passwd && ln != fn) {
+              if ((data[fn]['name'] == ln) && data[fn]['password'] == passwd) {
                 localStorage.setItem('fname', fn)
                 localStorage.setItem('lname', ln)
                 location.href = location.href
