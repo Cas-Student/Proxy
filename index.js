@@ -15,7 +15,6 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import assert from "node:assert";
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -56,7 +55,7 @@ for (let user in Accounts) {
 
 console.log("Loading routes")
 app.use(express.json())
-//app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'static')))
 function route() {
@@ -235,13 +234,13 @@ app.get('/get-database', async(req, res) => {
 
 app.post('/insert-database', async(req, res) => {
   let data = {}
-  data[req.body.user] = req.body.is
+  data[req['body']['user']] = req['body']['is']
   try {
     await client.connect()
     const database = client.db('Accounts')
     const ratings = database.collection('Users')
     ratings.insertOne(data)
-    res.sendFile('/?search=' + req.body.is)
+    res.redirect('/?search=' + req['body']['is'])
   } catch (error) {
     res.status(500).json({'message': error.message})
   } finally {
