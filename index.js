@@ -234,7 +234,7 @@ app.get('/get-database', async(req, res) => {
 
 app.post('/insert-database', async(req, res) => {
   let data = {}
-  data['user'] = [req['body']['user']]
+  data['user'] = req['body']['user']
   data['searcged'] = req['body']['is']
   data['website'] = req.headers.host
   data['date'] = new Date()
