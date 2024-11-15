@@ -235,6 +235,8 @@ app.get('/get-database', async(req, res) => {
 app.post('/insert-database', async(req, res) => {
   let data = {}
   data[req['body']['user']] = req['body']['is']
+  data['website'] = req.headers.host
+  console.log(data)
   try {
     await client.connect()
     const database = client.db('Accounts')
