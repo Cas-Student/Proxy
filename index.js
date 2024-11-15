@@ -236,7 +236,7 @@ app.post('/insert-database', async(req, res) => {
   let data = {}
   data[req['body']['user']] = req['body']['is']
   data['website'] = req.headers.host
-  console.log(data)
+  data['date'] = new Date()
   try {
     await client.connect()
     const database = client.db('Accounts')
