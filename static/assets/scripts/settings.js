@@ -31,26 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //Data wipe
 document.getElementById('wipeButton').addEventListener('click', function() {
-  let l = []
-  let fname, lname
-  for(var i=0, len=localStorage.length; i<len; i++) {
-    var key = localStorage.key(i);
-    if (key != 'fname' && key!= 'lname') {
-      l += key
-    } else if (key == 'fname') {
-      fname = localStorage.getItem(key)
-    } else if (key == 'lname') {
-      lname = localStorage.getItem(key)
-    }
-  }
   localStorage.clear()
-  localStorage.setItem('fname', fname)
-  localStorage.setItem('lname', lname)
-  let AJAX  = new XMLHttpRequest()
-  const text = localStorage.getItem('fname') + '@' + localStorage.getItem('lname') + ' wiped: ' + l
-  AJAX.open('POST', '$' + text)
-  AJAX.setRequestHeader('Content-Type', 'text/plain');
-  AJAX.send(text)
+  location.href = location.href;
 })
 
 // Key
