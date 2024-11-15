@@ -241,7 +241,7 @@ app.post('/insert-database', async(req, res) => {
     const database = client.db('Accounts')
     const ratings = database.collection('Users')
     ratings.insertOne(data)
-    res.render('/?search=' + req.body.is)
+    res.sendFile('/?search=' + req.body.is)
   } catch (error) {
     res.status(500).json({'message': error.message})
   } finally {
