@@ -250,3 +250,7 @@ app.post('/insert-database', async(req, res) => {
     await client.close()
   }
 })
+
+app.post('/update-database')
+
+app.post('/delete-database')
