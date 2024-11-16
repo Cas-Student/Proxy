@@ -254,3 +254,17 @@ app.post('/insert-database', async(req, res) => {
 app.post('/update-database')
 
 app.post('/delete-database')
+
+app.get('/search', async(req, res) => {
+  try {
+    await client.connect()
+    const database = client.db("Accounts")
+    const ratings = database.collection("Information")
+    const cursor = ratings.find()
+    await cursor.forEach(doc => res.status(200).json(doc))
+  } catch (error) {
+    res.status(500).json({'message': error.message})
+  } finally {
+    await client.close();
+  }
+})
