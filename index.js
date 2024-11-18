@@ -251,6 +251,33 @@ app.post('/insert-database', async(req, res) => {
   }
 })
 
-app.post('/update-database')
+app.post('/active', async(req, res) => {
+  try {
+    await client.connect()
+    const database = client.db('Accounts')
+    const ratings  = database.collection('Active')
+    let active = req.body.active
+    let a
+    a[req.body.user] = active
+    b[req.body.user] = !active
+    ratings.updateOne(a, b)
+  } finally {
+    await client.close()
+  }
+})
 
-app.post('/delete-database')
+app.get('/active', async(req, res) => {
+  try {
+    await client.connect()
+    const database = client.db('Accounts')
+    const ratings = database.collection('Active')
+    const cursor = ratings.find()
+    await cursor.forEach(doc => {
+      res.status(200).json(doc)
+    })
+  } catch (error)  {
+    res.status(500).json({error: error.message})
+  } finally {
+    await client.close()
+  }
+})
