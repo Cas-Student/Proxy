@@ -274,7 +274,7 @@ app.get('/get-active', async(req, res) => {
     const cursor = ratings.find()
     await cursor.forEach(doc => {
       let active = []
-      for (key in doc) {}
+      for (let key in doc) {}
       res.status(200).json(doc)
     })
   } catch (error)  {
