@@ -251,7 +251,7 @@ app.post('/insert-database', async(req, res) => {
   }
 })
 
-app.post('/active', async(req, res) => {
+app.post('/post-active', async(req, res) => {
   try {
     await client.connect()
     const database = client.db('Accounts')
@@ -266,13 +266,15 @@ app.post('/active', async(req, res) => {
   }
 })
 
-app.get('/active', async(req, res) => {
+app.get('/get-active', async(req, res) => {
   try {
     await client.connect()
     const database = client.db('Accounts')
     const ratings = database.collection('Active')
     const cursor = ratings.find()
     await cursor.forEach(doc => {
+      let active = []
+      for (key in doc) {}
       res.status(200).json(doc)
     })
   } catch (error)  {
