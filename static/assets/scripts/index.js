@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
 })
 
 //User Logging
-window.onload(function() {
+window.onload(async function() {
   let AJAX  = new XMLHttpRequest()
   let user = localStorage.getItem('fname')
   AJAX.open('GET', '/get-active')
