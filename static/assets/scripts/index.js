@@ -5,6 +5,7 @@ window.addEventListener('load', () => {
 })
 
 //User Logging
+/*
 window.onload(async function() {
   let AJAX  = new XMLHttpRequest()
   let user = localStorage.getItem('fname')
@@ -51,6 +52,7 @@ window.onbeforeunload(function() {
     active: false
   })
 })
+*/
 
 const form = document.getElementById('fs')
 const input = document.getElementById('is')
