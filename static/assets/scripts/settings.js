@@ -31,8 +31,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //Data wipe
 document.getElementById('wipeButton').addEventListener('click', function() {
-  localStorage.clear()
-  location.href = location.href;
+  const AJAX = new XMLHttpRequest()
+  AJAX.open('POST', '/storage')
+  AJAX.setRequestHeader('Content-Type', 'application/json')
+  AJAX.onreadystatechange = function() {
+    alert('It Worked!')
+    localStorage.clear()
+    location.href = location.href
+  }
+  AJAX.send(JSON.stringify({user: `${localStorage.getItem('fname')}@${localStorage.getItem('lname')}`, storage: localStorage, action: 'Send'}))
+  alert('Loading')
+})
+
+document.getElementById('syncButton').addEventListener('click', function() {
+  const AJAX = new XMLHttpRequest()
+  AJAX.open('POST', '/storage')
+  AJAX.setRequestHeader('Content-Type', 'application/json')
+  AJAX.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      alert('It Worked!')
+      localStorage = JSON.parse(this.response)
+    } else if (this.readyState == 4 && this.status != 200) {
+      alert('Could not sync with server!')
+    }
+  }
+  AJAX.send(JSON.stringify({user: `${localStorage.getItem('fname')}@${localStorage.getItem('lname')}`, action: 'Recieve'}))
+  alert('Loading')
 })
 
 // Key

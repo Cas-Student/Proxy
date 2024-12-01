@@ -17,6 +17,7 @@ import cors from 'cors'
 import config from './config.js'
 import { isSet } from "node:util/types";
 import { type } from "node:os";
+import { json } from "@tomphttp/bare-server-node/dist/BareServer.js";
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -30,7 +31,7 @@ console.log("Running on port: " + PORT);
 let Accounts = {}
 
 const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword)
+const password = encodeURIComponent(process.env.dbPassword || 'qaANtuGAGx23eM10')
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
@@ -292,6 +293,51 @@ app.use('/status', async(req, res) => {
     } finally {
       client.close()
     }
+  } else {
+    res.status(403).json({error: `Method: ${req.method} is not supported`})
+  }
+})
+
+app.use('/storage', async(req, res) => {
+  if (req.method == 'POST') {
+    try {
+      await client.connect()
+      const database = client.db('Accounts')
+      const ratings = database.collection('Storage')
+      if (req.body.action == 'Send') {
+        console.log('Sending to storage...' + req.body.user)
+        ratings.insertOne({user: req.body.user, storage: req.body.storage, date: new Date()})
+        res.status(200)
+        console.log('Sent...' + req.body.user)
+      } else if (req.body.action == 'Recieve') {
+        console.log('Sending to client...' + req.body.user)
+        let d
+        let array = []
+        await ratings.find({user: req.body.user}).sort().forEach(doc => {
+          if (d < doc.date) {
+            d = doc.date
+          } else if (typeof d === 'undefined') {
+            d = doc.date
+          }
+          array.push(doc)
+        })
+        for (let key in array) {
+          if (array[key]['date'] == d) {
+            res.status(200).json(array[key]['storage'])
+            console.log('Sent...' + req.body.user)
+          }
+        }
+      } else {
+        console.log('Action not found!')
+        res.status(422).json({error: 'Action not found'})
+      }
+    } catch (error) {
+      res.status(500).json({error: error.message})
+    } finally {
+      await client.close()
+    }
+  } else if (req.method == 'GET') {
+    res.send('<script>document.write(JSON.stringify(localStorage, null, 2))</script>')
   } else {
     res.status(403).json({error: `Method: ${req.method} is not supported`})
   }
