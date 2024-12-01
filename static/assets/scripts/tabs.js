@@ -191,6 +191,7 @@ function goForward() {
   const activeIframe = iframes.find((iframe) => iframe.classList.contains('active'))
   activeIframe.contentWindow.history.forward()
 }
+
 function erudaToggle() {
   const iframeContainer = document.getElementById('iframe-container')
   const iframes = Array.from(iframeContainer.querySelectorAll('iframe'))

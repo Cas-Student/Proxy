@@ -14,7 +14,7 @@ const input = document.getElementById('is')
 const uri = new URLSearchParams(window.location.search)
 
 if (uri.has('search')) {
-  processUrl(uri.get('search'), "");
+  go(uri.get('search'));
   req(uri.get('search'))
 }
 
