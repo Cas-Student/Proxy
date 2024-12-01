@@ -15,6 +15,8 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
+import { isSet } from "node:util/types";
+import { type } from "node:os";
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -28,7 +30,7 @@ console.log("Running on port: " + PORT);
 let Accounts = {}
 
 const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword)
+const password = encodeURIComponent(process.env.dbPassword  || 'qaANtuGAGx23eM10')
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
@@ -218,13 +220,25 @@ const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&
 const client = new MongoClient(uri)
 */
 
-app.get('/get-database', async(req, res) => {
+app.post('/validate-user', async(req, res) => {
   try {
     await client.connect()
     const database = client.db("Accounts")
     const ratings = database.collection("Information")
     const cursor = ratings.find()
-    await cursor.forEach(doc => res.status(200).json(doc))
+    await cursor.forEach(doc => {
+      let data = (req.body.user in doc) ? doc[req.body.user] : {error: `Could not find: "${req.body.user}"`}
+      if (!error in data) {
+        let msg = {}
+        msg[req.body.name] = req.body.name in data
+        msg[req.body.password] = req.body.password in data
+        msg.status = data.status
+        res.status(200).json(msg)
+      } else {
+        res.status(404).json(data)
+      }
+      res.status(200).json(data || doc)
+    })
   } catch (error) {
     res.status(500).json({'message': error.message})
   } finally {

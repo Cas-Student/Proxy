@@ -63,20 +63,25 @@
           let passwd = document.getElementById('passwd').value
           //Verification
           let AJAX  = new XMLHttpRequest()
-          AJAX.open('GET', '/get-database')
+          AJAX.open('POST', '/validate-user')
+          AJAX.setRequestHeader("Content-type", "application/json")
           AJAX.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
               const data = JSON.parse(this.responseText)
-              if ((data[fn]['name'] == ln) && data[fn]['password'] == passwd) {
+              let valid = true
+              for (let key in data) {
+                if (!data[key]) valid = false
+              }
+              if (valid) {
                 localStorage.setItem('fname', fn)
                 localStorage.setItem('lname', ln)
-                location.href = location.href
-              } else {
-                alert('Error logining in! Contact the developer if the issue continues.')
+                location.reload()
               }
+            } else if (this.readyState == 4 && this.status != 200) {
+              alert(this.status + ': ' + JSON.parse(this.responseText).message)
             }
           }
-          AJAX.send()
+          AJAX.send(JSON.stringify({user: fn, name: ln, password: passwd}))
         })
       } else {
         document.getElementById('login').hidden = true
