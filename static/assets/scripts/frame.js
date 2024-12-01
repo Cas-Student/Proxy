@@ -40,7 +40,6 @@ function decodeXor(input) {
 function iframeLoad() {
   if (document.readyState === 'complete') {
     const website = iframe.contentWindow?.location.href.replace(window.location.origin, '')
-
     if (website.includes('/a/')) {
       const website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/', '')
       document.getElementById('is').value = decodeXor(website)
