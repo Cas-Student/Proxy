@@ -220,29 +220,33 @@ const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&
 const client = new MongoClient(uri)
 */
 
-app.post('/validate-user', async(req, res) => {
-  try {
-    await client.connect()
-    const database = client.db("Accounts")
-    const ratings = database.collection("Information")
-    const cursor = ratings.find()
-    await cursor.forEach(doc => {
-      let data = (req.body.user in doc) ? doc[req.body.user] : {error: `Could not find: "${req.body.user}"`}
-      if (!error in data) {
-        let msg = {}
-        msg[req.body.name] = req.body.name in data
-        msg[req.body.password] = req.body.password in data
-        msg.status = data.status
-        res.status(200).json(msg)
-      } else {
-        res.status(404).json(data)
-      }
-      res.status(200).json(data || doc)
-    })
-  } catch (error) {
-    res.status(500).json({'message': error.message})
-  } finally {
-    await client.close();
+app.use('/validate-user', async(req, res) => {
+  if (req.method == 'POST') {
+    try {
+      await client.connect()
+      const database = client.db("Accounts")
+      const ratings = database.collection("Information")
+      const cursor = ratings.find()
+      await cursor.forEach(doc => {
+        let data = (req.body.user in doc) ? doc[req.body.user] : {error: `Could not find: "${req.body.user}"`}
+        if (!('error' in data)) {
+          let msg = {}
+          msg[req.body.name] = (data.name = req.body.name)
+          msg[req.body.password] = (data.password = req.body.password)
+          msg.status = data.status
+          console.log(req.body.user + ' attempted to log in')
+          res.status(200).json(msg)
+        } else {
+          res.status(404).json(data)
+        }
+      })
+    } catch (error) {
+      res.status(500).json({error: error.message})
+    } finally {
+      await client.close();
+    }
+  } else {
+    res.status(403).json({error: `Method: ${req.method} is not supported`})
   }
 })
 
@@ -259,41 +263,36 @@ app.post('/insert-database', async(req, res) => {
     ratings.insertOne(data)
     res.redirect('/?search=' + req['body']['is'])
   } catch (error) {
-    res.status(500).json({'message': error.message})
-  } finally {
-    await client.close()
-  }
-})
-
-app.post('/post-active', async(req, res) => {
-  try {
-    await client.connect()
-    const database = client.db('Accounts')
-    const ratings  = database.collection('Active')
-    let active = req.body.active
-    let a
-    a[req.body.user] = active
-    b[req.body.user] = !active
-    ratings.updateOne(a, b)
-  } finally {
-    await client.close()
-  }
-})
-
-app.get('/get-active', async(req, res) => {
-  try {
-    await client.connect()
-    const database = client.db('Accounts')
-    const ratings = database.collection('Active')
-    const cursor = ratings.find()
-    await cursor.forEach(doc => {
-      let active = []
-      for (let key in doc) {}
-      res.status(200).json(doc)
-    })
-  } catch (error)  {
     res.status(500).json({error: error.message})
   } finally {
     await client.close()
+  }
+})
+
+app.use('/status', async(req, res) => {
+  if (req.method = 'POST') {
+    try {
+      await client.connect()
+      const database = client.db("Accounts")
+      const ratings = database.collection("Information")
+      const cursor = ratings.find()
+      await cursor.forEach(doc => {
+        if (typeof req.body.user !== 'undefined') {
+          if (req.body.user in doc)  {
+            res.status(200).json({status: true})
+          } else {
+            res.status(404).json({error: `Could not find: "${req.body.user}"`})
+          }
+        } else {
+          res.status(422).json({error: 'User is undifined'})
+        }
+      })
+    } catch (error) {
+      res.status(500).json({error: error.message})
+    } finally {
+      client.close()
+    }
+  } else {
+    res.status(403).json({error: `Method: ${req.method} is not supported`})
   }
 })

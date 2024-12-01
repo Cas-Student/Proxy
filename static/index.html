@@ -70,15 +70,18 @@
               const data = JSON.parse(this.responseText)
               let valid = true
               for (let key in data) {
-                if (!data[key]) valid = false
+                if (!data[key]) {
+                  valid = false
+                  alert(key + ': ' + data[key])
+                }
               }
               if (valid) {
                 localStorage.setItem('fname', fn)
                 localStorage.setItem('lname', ln)
-                location.reload()
+                location.href = location.href
               }
             } else if (this.readyState == 4 && this.status != 200) {
-              alert(this.status + ': ' + JSON.parse(this.responseText).message)
+              alert(this.status + ': ' + JSON.parse(this.responseText).error)
             }
           }
           AJAX.send(JSON.stringify({user: fn, name: ln, password: passwd}))
