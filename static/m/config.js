@@ -1,5 +1,5 @@
 self.__uv$config = {
-    prefix: '/ultra/',
+    prefix: '/a/',
     bare: '/o/',
     encodeUrl:  Ultraviolet.codec.xor.encode,
     decodeUrl: Ultraviolet.codec.xor.decode,
