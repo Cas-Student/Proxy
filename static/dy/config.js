@@ -1,5 +1,5 @@
 self.__dynamic$config = {
-  prefix: '/a/q/',
+  prefix: '/dynamic/',
   encoding: 'xor',
   mode: 'production',
   logLevel: 0,
@@ -8,8 +8,8 @@ self.__dynamic$config = {
     path: '/o/',
   },
   tab: {
-    title: null,
-    icon: null,
+    title: 'start.hcps.org',
+    icon: 'assets/media/favicon/hcps.ico',
     ua: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.3'
   },
   assets: {
