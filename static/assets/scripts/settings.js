@@ -59,6 +59,13 @@ document.getElementById('syncButton').addEventListener('click', function() {
   alert('Loading')
 })
 
+//ASP
+document.getElementById('ASP').checked = (localStorage.getItem('ASP') === 'true')
+document.getElementById('ASP').addEventListener('change', function () {
+  let ASP = (localStorage.getItem('ASP') === 'true')
+  localStorage.setItem('ASP', !ASP)
+})
+
 // Key
 var eventKey = localStorage.getItem('eventKey') || '`'
 var pLink = localStorage.getItem('pLink') || 'https://classroom.google.com/'
@@ -321,7 +328,7 @@ function SaveEngine() {
 //Language
 function setLanguage(language) {
   const l = language.value || "en"
-  localStorage.setItem('lang',l)
+  localStorage.setItem('lang', l)
   location.href = location.href;
 }
 

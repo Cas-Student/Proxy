@@ -337,7 +337,14 @@ app.use('/storage', async(req, res) => {
       await client.close()
     }
   } else if (req.method == 'GET') {
-    res.send('<script>document.write(JSON.stringify(localStorage, null, 2))</script>')
+    res.send(`
+      <script>
+      document.write(JSON.stringify(localStorage)
+      .replaceAll(',"', ',<br><dd>"')
+      .replace('{', '{<br><dd>')
+      .replace('}', '<br></dd>}'))
+      </script>
+      `)
   } else {
     res.status(403).json({error: `Method: ${req.method} is not supported`})
   }

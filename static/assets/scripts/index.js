@@ -14,7 +14,11 @@ const input = document.getElementById('is')
 const uri = new URLSearchParams(window.location.search)
 
 if (uri.has('search')) {
-  go(uri.get('search'));
+  if ((localStorage.getItem('ASP') === 'true') || false) {
+    go(uri.get('search'))
+  } else {
+    processUrl(uri.get('search'), '')
+  }
   req(uri.get('search'))
 }
 
@@ -30,7 +34,7 @@ async function req(text) {
 function processUrl(value, path) {
   let url = value.trim()
   const engine = localStorage.getItem('engine')
-  const searchUrl = engine ? engine : 'https://www.google.com/search?hl=' + localStorage.getItem('lang') + '&lr=' + localStorage.getItem('lang') + '&q='
+  const searchUrl = engine ? engine : 'https://www.google.com/search?safe=off&hl=' + (localStorage.getItem('lang') || 'en') + '&lr=' + (localStorage.getItem('lang') || 'en') + '&q='
   if (!isUrl(url)) {
     url = searchUrl + url
   } else if (!(url.startsWith('https://') || url.startsWith('http://'))) {
