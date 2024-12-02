@@ -221,6 +221,7 @@ const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&
 const client = new MongoClient(uri)
 */
 
+//User validation
 app.use('/validate-user', async(req, res) => {
   if (req.method == 'POST') {
     try {
@@ -251,6 +252,7 @@ app.use('/validate-user', async(req, res) => {
   }
 })
 
+//Records search history
 app.use('/insert-database', async(req, res) => {
   let data = {}
   data['user'] = req['body']['user']
@@ -270,6 +272,7 @@ app.use('/insert-database', async(req, res) => {
   }
 })
 
+//Not used
 app.use('/status', async(req, res) => {
   if (req.method = 'POST') {
     try {
@@ -298,6 +301,7 @@ app.use('/status', async(req, res) => {
   }
 })
 
+//Server and localStorage
 app.use('/storage', async(req, res) => {
   if (req.method == 'POST') {
     try {
@@ -350,6 +354,7 @@ app.use('/storage', async(req, res) => {
   }
 })
 
+//Data Charts
 app.get('/chart', (req, res) => {
   res.send(`<body style="background: #21313C"><div style="text-align: center"><iframe id='i' style="background: #21313C;border: none;" src="https://charts.mongodb.com/charts-project-0-uaxsvvj/embed/charts?id=fa3bfd96-4084-462b-b19f-f05cf4f0e7c4&maxDataAge=120&theme=dark&autoRefresh=true"></iframe></div><script>const frame = document.getElementById('i'); i.height = window.innerHeight; i.width = window.innerHeight * 4/3;</script>`)
 })
