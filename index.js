@@ -251,12 +251,12 @@ app.use('/validate-user', async(req, res) => {
   }
 })
 
-app.post('/insert-database', async(req, res) => {
+app.use('/insert-database', async(req, res) => {
   let data = {}
   data['user'] = req['body']['user']
   data['searched'] = req['body']['is']
   data['website'] = req.headers.host
-  data['date'] = new Date()
+  data['date'] =  new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"long", day:"numeric", hour: "numeric", minute: 'numeric', second: 'numeric'})
   try {
     await client.connect()
     const database = client.db('Accounts')
