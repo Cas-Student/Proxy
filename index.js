@@ -314,7 +314,7 @@ app.use('/storage', async(req, res) => {
         let d
         let array = []
         await ratings.find({user: req.body.user}).sort().forEach(doc => {
-          if (d < doc.date) {
+          if (d > doc.date) {
             d = doc.date
           } else if (typeof d === 'undefined') {
             d = doc.date
