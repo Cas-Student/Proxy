@@ -351,5 +351,5 @@ app.use('/storage', async(req, res) => {
 })
 
 app.get('/chart', (req, res) => {
-  res.send(`<body style="background: #21313C"><div style="text-align: center"><iframe id='i' style="background: #21313C;border: none;" src="https://charts.mongodb.com/charts-project-0-uaxsvvj/embed/charts?id=fa3bfd96-4084-462b-b19f-f05cf4f0e7c4&maxDataAge=-1&theme=dark&autoRefresh=false"></iframe></div><script>const frame = document.getElementById('i'); i.height = window.innerHeight; i.width = window.innerHeight * 4/3;</script>`)
+  res.send(`<body style="background: #21313C"><div style="text-align: center"><iframe id='i' style="background: #21313C;border: none;" src="https://charts.mongodb.com/charts-project-0-uaxsvvj/embed/charts?id=fa3bfd96-4084-462b-b19f-f05cf4f0e7c4&maxDataAge=120&theme=dark&autoRefresh=true"></iframe></div><script>const frame = document.getElementById('i'); i.height = window.innerHeight; i.width = window.innerHeight * 4/3;</script>`)
 })
