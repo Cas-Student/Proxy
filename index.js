@@ -15,9 +15,6 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import { isSet } from "node:util/types";
-import { type } from "node:os";
-import { json } from "@tomphttp/bare-server-node/dist/BareServer.js";
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -31,7 +28,7 @@ console.log("Running on port: " + PORT);
 let Accounts = {}
 
 const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword)
+const password = encodeURIComponent(process.env.dbPassword || 'qaANtuGAGx23eM10')
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
@@ -354,7 +351,20 @@ app.use('/storage', async(req, res) => {
   }
 })
 
+//Route to /dev
+const dev = express.Router()
+dev.route('/*')
+.all((req, res, next) => {
+  if (req.method != 'GET') {
+    res.send(`Cannot send ${req.method} request to ${req.url}`)
+  } else {
+    next()
+  }
+})
+
 //Data Charts
-app.get('/chart', (req, res) => {
+dev.get('/chart', (req, res) => {
   res.send(`<body style="background: #21313C"><div style="text-align: center"><iframe id='i' style="background: #21313C;border: none;" src="https://charts.mongodb.com/charts-project-0-uaxsvvj/embed/charts?id=fa3bfd96-4084-462b-b19f-f05cf4f0e7c4&maxDataAge=120&theme=dark&autoRefresh=true"></iframe></div><script>const frame = document.getElementById('i'); i.height = window.innerHeight; i.width = window.innerHeight * 4/3;</script>`)
 })
+
+app.use('/dev', dev)
