@@ -220,8 +220,20 @@ const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&
 const client = new MongoClient(uri)
 */
 
+const dev = express.Router()
+app.use('/dev', dev)
+
+//Checks if request was made by a set user
+dev.use((req, res, next) => {
+  if (typeof req.body.user !== 'undefined' && req.body.user in Accounts) {
+    next()
+  } else {
+    res.status(422).json({error: 'user not found'})
+  }
+})
+
 //User validation
-app.use('/validate-user', async(req, res) => {
+dev.use('/validate-user', async(req, res) => {
   if (req.method == 'POST') {
     try {
       await client.connect()
@@ -252,10 +264,16 @@ app.use('/validate-user', async(req, res) => {
 })
 
 //Records search history
-app.use('/insert-database', async(req, res) => {
+dev.use('/insert-database', async(req, res) => {
   let data = {}
   data['user'] = req['body']['user']
-  data['searched'] = req['body']['is']
+  if (typeof req.body.is !== 'undefined') {
+    data['searched'] = req['body']['is']
+  } else if (typeof req.body.opened !== 'undefined') {
+    data['opened'] = req.body.opened
+  } else {
+    console.log(`Error in ${req.body.user}'s request: ${req.body}`)
+  }
   data['website'] = req.headers.host
   data['date'] = new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"long", day:"numeric", hour: "numeric", minute: 'numeric', second: 'numeric'})
   if (!req.body.marked) {
@@ -264,7 +282,11 @@ app.use('/insert-database', async(req, res) => {
       const database = client.db('Accounts')
       const ratings = database.collection('Users')
       ratings.insertOne(data)
-      res.redirect('/?search=' + req['body']['is'])
+      if (data.user) {
+        res.redirect('/?search=' + req.body.is)
+      } else {
+        res.end()
+      }
     } catch (error) {
       res.status(500).json({error: error.message})
     } finally {
@@ -275,37 +297,8 @@ app.use('/insert-database', async(req, res) => {
   }
 })
 
-//Not used
-app.use('/status', async(req, res) => {
-  if (req.method = 'POST') {
-    try {
-      await client.connect()
-      const database = client.db("Accounts")
-      const ratings = database.collection("Information")
-      const cursor = ratings.find()
-      await cursor.forEach(doc => {
-        if (typeof req.body.user !== 'undefined') {
-          if (req.body.user in doc)  {
-            res.status(200).json({status: true})
-          } else {
-            res.status(404).json({error: `Could not find: "${req.body.user}"`})
-          }
-        } else {
-          res.status(422).json({error: 'User is undifined'})
-        }
-      })
-    } catch (error) {
-      res.status(500).json({error: error.message})
-    } finally {
-      client.close()
-    }
-  } else {
-    res.status(403).json({error: `Method: ${req.method} is not supported`})
-  }
-})
-
 //Server and localStorage
-app.use('/storage', async(req, res) => {
+dev.use('/storage', async(req, res) => {
   if (req.method == 'POST') {
     try {
       await client.connect()
@@ -360,6 +353,7 @@ app.use('/storage', async(req, res) => {
 //Route to /stat
 const stat = express.Router()
 app.use('/stat', stat)
+
 stat.route('/*').all((req, res, next) => {
   if (req.method != 'GET') {
     res.send(`Cannot send ${req.method} request to ${req.url}`)
