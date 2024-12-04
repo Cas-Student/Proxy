@@ -67,7 +67,7 @@
           let passwd = document.getElementById('passwd').value
           //Verification
           let AJAX  = new XMLHttpRequest()
-          AJAX.open('POST', '/validate-user')
+          AJAX.open('POST', '/dev/validate-user')
           AJAX.setRequestHeader("Content-type", "application/json")
           AJAX.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {

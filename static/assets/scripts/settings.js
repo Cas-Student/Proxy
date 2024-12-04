@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 //Data wipe
 document.getElementById('wipeButton').addEventListener('click', function() {
   const AJAX = new XMLHttpRequest()
-  AJAX.open('POST', '/storage')
+  AJAX.open('POST', '/dev/storage')
   AJAX.setRequestHeader('Content-Type', 'application/json')
   AJAX.onreadystatechange = function() {
     alert('It Worked!')
@@ -45,12 +45,16 @@ document.getElementById('wipeButton').addEventListener('click', function() {
 
 document.getElementById('syncButton').addEventListener('click', function() {
   const AJAX = new XMLHttpRequest()
-  AJAX.open('POST', '/storage')
+  AJAX.open('POST', '/dev/storage')
   AJAX.setRequestHeader('Content-Type', 'application/json')
   AJAX.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      alert('It Worked!')
       localStorage = JSON.parse(this.response)
+      if (localStorage == JSON.parse(this.response)) {
+        alert('It Worked!')
+      } else {
+        alert('Could not sync with server!')
+      }
     } else if (this.readyState == 4 && this.status != 200) {
       alert('Could not sync with server!')
     }
