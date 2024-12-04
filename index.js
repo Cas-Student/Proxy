@@ -242,7 +242,7 @@ app.use('/validate-user', async(req, res) => {
     } catch (error) {
       res.status(500).json({error: error.message})
     } finally {
-      await client.close();
+      await client.close(true);
     }
   } else {
     res.status(403).json({error: `Method: ${req.method} is not supported`})
@@ -265,7 +265,7 @@ app.use('/insert-database', async(req, res) => {
   } catch (error) {
     res.status(500).json({error: error.message})
   } finally {
-    await client.close()
+    await client.close(true)
   }
 })
 
