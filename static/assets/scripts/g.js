@@ -10,7 +10,7 @@ async function req(app) {
   let AJAX  = new XMLHttpRequest()
   AJAX.open('POST', '/dev/insert-database')
   AJAX.setRequestHeader('Content-Type', 'application/json');
-  AJAX.send({user: `${localStorage.getItem('fname')}@${localStorage.getItem('lname')}`, opened: app})
+  AJAX.send(JSON.stringify({user: `${localStorage.getItem('fname')}@${localStorage.getItem('lname')}`, opened: app}))
 }
 
 function saveToLocal(path) {
