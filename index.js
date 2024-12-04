@@ -1,4 +1,4 @@
-console.log()
+const bufferArray = ['Cas']
 
 //ENV Vars
 const blacklist = process.env.blacklist || ""; //Blacklisted IPs
@@ -232,6 +232,13 @@ dev.use((req, res, next) => {
     res.status(422).json({error: 'user not found', user: req.body.user.split('@')[0]})
   }
 })
+dev.use((req, res, next) => {
+  if (req.body.user.split('@')[0] in bufferArray) {
+    res.redirect('/buffer')
+  } else {
+    next()
+  }
+})
 
 //User validation
 dev.use('/validate-user', async(req, res) => {
@@ -277,24 +284,20 @@ dev.use('/insert-database', async(req, res) => {
   }
   data['website'] = req.headers.host
   data['date'] = new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"long", day:"numeric", hour: "numeric", minute: 'numeric', second: 'numeric'})
-  if (!req.body.marked) {
-    try {
-      await client.connect()
-      const database = client.db('Accounts')
-      const ratings = database.collection('Users')
-      ratings.insertOne(data)
-      if (data.user) {
-        res.redirect('/?search=' + req.body.is)
-      } else {
-        res.end()
-      }
-    } catch (error) {
-      res.status(500).json({error: error.message})
-    } finally {
-      await client.close(true)
+  try {
+    await client.connect()
+    const database = client.db('Accounts')
+    const ratings = database.collection('Users')
+    ratings.insertOne(data)
+    if (data.user) {
+      res.redirect('/?search=' + req.body.is)
+    } else {
+      res.end()
     }
-  } else {
-    res.redirect('/buffer')
+  } catch (error) {
+    res.status(500).json({error: error.message})
+  } finally {
+    await client.close(true)
   }
 })
 
