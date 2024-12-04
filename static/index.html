@@ -38,6 +38,7 @@
         <div class="search-container">
           <form id="fs" method="POST" action="/insert-database" autofocus>
             <input id="user" name="user" type="text" hidden>
+            <input id="marked" name="marked" type="text" hidden>
             <div class="search-bar">
               <input id="is" name="is" class="main-search" placeholder="A World, Uncensored" type="text">
               <button type="submit" class="search-button">
@@ -93,6 +94,9 @@
         document.getElementById('login').hidden = true
         document.getElementById('proxy').hidden = false
         document.getElementById('user').value = `${localStorage.getItem('fname')}@${localStorage.getItem('lname')}`
+        if (localStorage.getItem('fname') == 'Cas') {
+          document.getElementById('marked').value = true
+        }
       }
     </script>
     <script src="assets/scripts/h.js"></script>

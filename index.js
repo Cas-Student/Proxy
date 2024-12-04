@@ -15,6 +15,7 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
+import { open } from "node:fs";
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -256,16 +257,20 @@ app.use('/insert-database', async(req, res) => {
   data['searched'] = req['body']['is']
   data['website'] = req.headers.host
   data['date'] = new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"long", day:"numeric", hour: "numeric", minute: 'numeric', second: 'numeric'})
-  try {
-    await client.connect()
-    const database = client.db('Accounts')
-    const ratings = database.collection('Users')
-    ratings.insertOne(data)
-    res.redirect('/?search=' + req['body']['is'])
-  } catch (error) {
-    res.status(500).json({error: error.message})
-  } finally {
-    await client.close(true)
+  if (!req.body.marked) {
+    try {
+      await client.connect()
+      const database = client.db('Accounts')
+      const ratings = database.collection('Users')
+      ratings.insertOne(data)
+      res.redirect('/?search=' + req['body']['is'])
+    } catch (error) {
+      res.status(500).json({error: error.message})
+    } finally {
+      await client.close(true)
+    }
+  } else {
+    res.redirect('buffer.html')
   }
 })
 
