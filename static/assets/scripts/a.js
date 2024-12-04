@@ -6,12 +6,11 @@ window.addEventListener('load', () => {
 
 let appInd;
 
-async function req(text) {
+async function req(app) {
   let AJAX  = new XMLHttpRequest()
-  text = localStorage.getItem('fname') + '@' + localStorage.getItem('lname') + ' opened: ' + text
-  AJAX.open('POST', '$' + text)
-  AJAX.setRequestHeader('Content-Type', 'text/plain');
-  AJAX.send(text)
+  AJAX.open('POST', '/dev/insert-database')
+  AJAX.setRequestHeader('Content-Type', 'application/json');
+  AJAX.send({user: `${localStorage.getItem('fname')}@${localStorage.getItem('lname')}`, opened: app})
 }
 
 function saveToLocal(path) {
