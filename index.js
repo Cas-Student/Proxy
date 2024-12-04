@@ -221,7 +221,7 @@ const client = new MongoClient(uri)
 */
 
 const dev = express.Router()
-app.use('/dev', dev)
+app.use(dev)
 
 //Checks if request was made by a set user
 dev.use((req, res, next) => {
@@ -336,15 +336,6 @@ dev.use('/storage', async(req, res) => {
     } finally {
       await client.close()
     }
-  } else if (req.method == 'GET') {
-    res.send(`
-      <script>
-      document.write(JSON.stringify(localStorage)
-      .replaceAll(',"', ',<br><dd>"')
-      .replace('{', '{<br><dd>')
-      .replace('}', '<br></dd>}'))
-      </script>
-      `)
   } else {
     res.status(403).json({error: `Method: ${req.method} is not supported`})
   }
@@ -369,3 +360,4 @@ stat.get('/chart', (req, res) => {
 
 const msg = express.Router()
 app.use('/msg', msg)
+
