@@ -68,6 +68,7 @@ function route() {
       { path: '/t', file: 'tabs.html' },
       { path: '/p', file: 'go.html' },
       { path: '/', file: 'index.html' },
+      { path: '/buffer', file: 'buffer.html' }
     ]
 
     routes.forEach((route) => {
@@ -270,7 +271,7 @@ app.use('/insert-database', async(req, res) => {
       await client.close(true)
     }
   } else {
-    res.redirect('buffer.html')
+    res.redirect('/buffer')
   }
 })
 
