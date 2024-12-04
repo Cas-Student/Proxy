@@ -220,6 +220,7 @@ const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&
 const client = new MongoClient(uri)
 */
 
+//Route to /dev - system directory
 const dev = express.Router()
 app.use('/dev', dev)
 
@@ -344,14 +345,6 @@ dev.use('/storage', async(req, res) => {
 //Route to /stat
 const stat = express.Router()
 app.use('/stat', stat)
-
-stat.route('/*').all((req, res, next) => {
-  if (req.method != 'GET') {
-    res.send(`Cannot send ${req.method} request to ${req.url}`)
-  } else {
-    next()
-  }
-})
 
 //Data Charts
 stat.get('/chart', (req, res) => {
