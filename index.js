@@ -232,8 +232,10 @@ dev.use((req, res, next) => {
     res.status(422).json({error: 'user not found', user: req.body.user.split('@')[0]})
   }
 })
+
+//Checks user's buffer state
 dev.use((req, res, next) => {
-  if (req.body.user.split('@')[0] in bufferArray) {
+  if ((req.body.user).split('@')[0] in bufferArray) {
     res.redirect('/buffer')
   } else {
     next()
