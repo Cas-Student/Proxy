@@ -13,7 +13,7 @@ const input = document.getElementById('is')
 
 const uri = new URLSearchParams(window.location.search)
 
-if (uri.has('search')) {
+if (uri.has('search') && sessionStorage.getItem('popup')) {
   if ((localStorage.getItem('ASP') === 'true') || false) {
     go(uri.get('search'))
   } else {
