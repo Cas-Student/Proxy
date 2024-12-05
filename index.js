@@ -299,7 +299,11 @@ dev.use('/insert-database', async(req, res) => {
   } catch (error) {
     res.status(500).json({error: error.message})
   } finally {
-    await client.close(true)
+    try {
+      await client.close(false)
+    } catch (error) {
+      console.log(error)
+    }
   }
 })
 
