@@ -12,7 +12,6 @@ try {
 
 if (!inFrame && !navigator.userAgent.includes('Firefox')) {
   const popup = open('about:blank', '_blank')
-  sessionStorage.setItem('popup', popup || !popup.closed)
   if (!popup || popup.closed) {
     alert('Please allow popups and redirects. Clicking ok won\'t do. Please go to the top right corner of your screen, which says pop-up blocked. allow it, and refresh.')
   } else {
