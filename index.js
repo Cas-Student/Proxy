@@ -226,7 +226,7 @@ app.use('/dev', dev)
 
 //Checks if request was made by a set user
 dev.use((req, res, next) => {
-  let user = req.body.user
+  const user = req.body.user
   if (typeof req.body.user !== 'undefined') {
     next()
   } else {
@@ -235,7 +235,7 @@ dev.use((req, res, next) => {
 })
 
 dev.use((req, res, next) => {
-  user = req.body.user
+  const user = req.body.user
   if (user.split('@')[0] in Accounts) {
     next()
   } else {
