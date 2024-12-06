@@ -224,7 +224,6 @@ const client = new MongoClient(uri)
 const dev = express.Router()
 app.use('/dev', dev)
 
-/*
 //Checks if request was made by a set user
 dev.use((req, res, next) => {
   let user = req.body.user
@@ -261,8 +260,6 @@ dev.use((req, res, next) => {
     next()
   }
 })
-
-*/
 
 //User validation
 dev.post('/validate-user', async(req, res) => {
@@ -403,7 +400,7 @@ shell.get('/execute', (req, res) => {
       res.send(error)
     }
     res.setHeader('Content-Type', 'text/plain')
-    res.send('------\nOutput\n------' + stdout + '------\nERROR\n------' + stderr)
+    res.send('------\nOutput\n------\n' + stdout.replace('\\\\n', '\\n') + '------\nERROR\n------' + stderr)
   })
 })
 
