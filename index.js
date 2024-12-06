@@ -15,7 +15,7 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import { open } from "node:fs";
+import exec from 'child_process'
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -234,7 +234,6 @@ dev.use((req, res, next) => {
     res.status(422).json({error: 'user not found', user: user.split('@')[0]})
   }
 })
-*/
 
 //Reduces requests
 let lastRequest, lastMinute
@@ -255,12 +254,15 @@ dev.use((req, res, next) => {
 
 //Checks user's buffer state
 dev.use((req, res, next) => {
-  if ((req.body.user).split('@')[0] in bufferArray) {
+  const user = req.body.user
+  if (user.split('@')[0] in bufferArray) {
     res.redirect('/buffer')
   } else {
     next()
   }
 })
+
+*/
 
 //User validation
 dev.post('/validate-user', async(req, res) => {
@@ -378,6 +380,31 @@ app.use('/stat', stat)
 //Data Charts
 stat.get('/chart', (req, res) => {
   res.send(`<body style="background: #21313C"><div style="text-align: center"><iframe id='i' style="background: #21313C;border: none;" src="https://charts.mongodb.com/charts-project-0-uaxsvvj/embed/charts?id=fa3bfd96-4084-462b-b19f-f05cf4f0e7c4&maxDataAge=120&theme=dark&autoRefresh=true"></iframe></div><script>const frame = document.getElementById('i'); i.height = window.innerHeight; i.width = window.innerHeight * 4/3;</script>`)
+})
+
+const shell = express.Router()
+dev.use('/shell', shell)
+
+shell.post('/execute', (req, res) => {
+  if (typeof req.body.command !== 'undefined' && typeof req.body.password !== 'undefined' && req.body.password == Accounts.Admin.password) {
+    exec.exec(`echo ${req.body.command} >> commands.txt`)
+    exec.exec(req.body.command, (error, stdout, stderr) => {
+      if (error) {
+        res.send(JSON.stringify({error: error}))
+      }
+      res.send(JSON.stringify({stdout: stdout, stderr: stderr}))
+    })
+  }
+})
+shell.get('/execute', (req, res) => {
+  exec.exec('cat commands.txt', (error, stdout, stderr) => {
+    if (error) {
+      res.setHeader('Content-Type', 'text/plain')
+      res.send(error)
+    }
+    res.setHeader('Content-Type', 'text/plain')
+    res.send('------\nOutput\n------' + stdout + '------\nERROR\n------' + stderr)
+  })
 })
 
 const msg = express.Router()
