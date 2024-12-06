@@ -224,12 +224,32 @@ const client = new MongoClient(uri)
 const dev = express.Router()
 app.use('/dev', dev)
 
+/*
 //Checks if request was made by a set user
 dev.use((req, res, next) => {
-  if (typeof req.body.user !== 'undefined' && req.body.user.split('@')[0] in Accounts) {
+  let user = req.body.user
+  if (typeof req.body.user !== 'undefined' && user.split('@')[0] in Accounts) {
     next()
   } else {
-    res.status(422).json({error: 'user not found', user: req.body.user.split('@')[0]})
+    res.status(422).json({error: 'user not found', user: user.split('@')[0]})
+  }
+})
+*/
+
+//Reduces requests
+let lastRequest, lastMinute
+dev.use((req, res, next) => {
+  if (req != lastRequest) {
+    lastRequest = req
+    lastMinute = new Date().getMinutes()
+    next()
+  } else if(lastMinute = new Date().getMinutes()) {
+    lastRequest = req
+    lastMinute = new Date().getMinutes()
+    next()
+  } else {
+    console.log(`Spam request from: ${req.body.user}`)
+    res.send(JSON.stringify({error: 'Request made too soon!'}))
   }
 })
 
@@ -243,7 +263,7 @@ dev.use((req, res, next) => {
 })
 
 //User validation
-dev.use('/validate-user', async(req, res) => {
+dev.post('/validate-user', async(req, res) => {
   if (req.method == 'POST') {
     try {
       await client.connect()
@@ -274,7 +294,7 @@ dev.use('/validate-user', async(req, res) => {
 })
 
 //Records search history
-dev.use('/insert-database', async(req, res) => {
+dev.post('/insert-database', async(req, res) => {
   let data = {}
   data['user'] = req['body']['user']
   if (typeof req.body.is !== 'undefined') {
@@ -362,4 +382,3 @@ stat.get('/chart', (req, res) => {
 
 const msg = express.Router()
 app.use('/msg', msg)
-
