@@ -224,16 +224,20 @@ const client = new MongoClient(uri)
 const dev = express.Router()
 app.use('/dev', dev)
 
-//Checks if request was made by a set user
+//Checks if user exists
 dev.use((req, res, next) => {
   const user = req.body.user
   if (typeof req.body.user !== 'undefined') {
+    if (typeof req.body.name !== 'undefined') {
+      req.body.user += '@' + req.body.name
+    }
     next()
   } else {
     res.status(422).json({error: 'No user provided'})
   }
 })
 
+//Checks if request was made by a set user
 dev.use((req, res, next) => {
   const user = req.body.user
   if (user.split('@')[0] in Accounts) {
