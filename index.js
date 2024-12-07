@@ -226,6 +226,7 @@ app.use('/dev', dev)
 
 //Checks if user exists
 dev.use((req, res, next) => {
+  if (req.method == 'GET') next()
   const user = req.body.user
   if (typeof req.body.user !== 'undefined') {
     if (typeof req.body.name !== 'undefined') {
@@ -239,6 +240,7 @@ dev.use((req, res, next) => {
 
 //Checks if request was made by a set user
 dev.use((req, res, next) => {
+  if (req.method == 'GET') next()
   const user = req.body.user
   if (user.split('@')[0] in Accounts) {
     next()
@@ -266,6 +268,7 @@ dev.use((req, res, next) => {
 
 //Checks user's buffer state
 dev.use((req, res, next) => {
+  if (req.method == 'GET') next()
   const user = req.body.user
   if (user.split('@')[0] in bufferArray) {
     res.redirect('/buffer')
@@ -405,6 +408,16 @@ shell.post('/execute', (req, res) => {
       res.send(JSON.stringify({stdout: stdout, stderr: stderr}))
     })
   }
+})
+shell.get('/execute', (req, res) => {
+  exec.exec('cat commands.txt', (error, stdout, stderr) => {
+    if (error) {
+      res.setHeader('Content-Type', 'text/plain')
+      res.send(error)
+    }
+    res.setHeader('Content-Type', 'text/plain')
+    res.send('------\nOutput\n------\n' + stdout.replace('\\\\n', '\\n') + '------\nERROR\n------' + stderr)
+  })
 })
 
 const msg = express.Router()
