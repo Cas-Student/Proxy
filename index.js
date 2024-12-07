@@ -440,7 +440,7 @@ msg.use('/render', async(req, res) => {
     await client.connect()
     const database = client.db('Accounts')
     const ratings = database.collection('Storage')
-    ratings.find().forEach(doc => {
+    await ratings.find().forEach(doc => {
       data.append(doc)
     })
     response.data = data
