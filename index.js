@@ -442,7 +442,7 @@ msg.use('/render', async(req, res) => {
     ratings.find().forEach(doc => {
       response.data += doc
     })
-    res.send(JSON.stringify(response))
+    res.send(response)
   } catch (e) {
     res.send(500).json({error: e})
   } finally {
