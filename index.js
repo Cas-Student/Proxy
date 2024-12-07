@@ -68,8 +68,7 @@ function route() {
       { path: '/t', file: 'tabs.html' },
       { path: '/p', file: 'go.html' },
       { path: '/', file: 'index.html' },
-      { path: '/buffer', file: 'buffer.html' },
-      { path: '/msg', file: 'msg.html' }
+      { path: '/buffer', file: 'buffer.html' }
     ]
 
     routes.forEach((route) => {
@@ -425,5 +424,5 @@ const msg = express.Router()
 app.use('/msg', msg)
 
 msg.use('render', (req, res) => {
-  res.send('Messages')
+  res.send(new Date())
 })
