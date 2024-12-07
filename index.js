@@ -435,13 +435,15 @@ msg.use('/render', async(req, res) => {
   let response = {
     date: new Date()
   }
+  let data = []
   try {
     await client.connect()
     const database = client.db('Accounts')
     const ratings = database.collection('Storage')
     ratings.find().forEach(doc => {
-      response.data += doc
+      data.append(doc)
     })
+    response.data = data
     res.send(response)
   } catch (e) {
     res.send(500).json({error: e})
