@@ -301,7 +301,11 @@ dev.post('/validate-user', async(req, res) => {
     } catch (error) {
       res.status(500).json({error: error.message})
     } finally {
-      await client.close(true);
+      try {
+        await client.close(false)
+       } catch (error) {
+        console.log(error)
+      }
     }
   } else {
     res.status(403).json({error: `Method: ${req.method} is not supported`})
@@ -336,7 +340,7 @@ dev.post('/insert-database', async(req, res) => {
   } finally {
     try {
       await client.close(false)
-    } catch (error) {
+     } catch (error) {
       console.log(error)
     }
   }
@@ -379,7 +383,11 @@ dev.use('/storage', async(req, res) => {
     } catch (error) {
       res.status(500).json({error: error.message})
     } finally {
-      await client.close()
+      try {
+        await client.close(false)
+      } catch (error) {
+        console.log(error)
+      }
     }
   } else {
     res.status(403).json({error: `Method: ${req.method} is not supported`})
@@ -423,6 +431,25 @@ shell.get('/execute', (req, res) => {
 const msg = express.Router()
 app.use('/msg', msg)
 
-msg.use('/render', (req, res) => {
-  res.send(new Date())
+msg.use('/render', async(req, res) => {
+  let response = {
+    date: new Date()
+  }
+  try {
+    await client.connect()
+    const database = client.db('Accounts')
+    const ratings = database.collection('Storage')
+    ratings.find().forEach(doc => {
+      response.data += doc
+    })
+    res.send(JSON.stringify(response))
+  } catch (e) {
+    res.send(500).json({error: e})
+  } finally {
+    try {
+      await client.close(false)
+     } catch (error) {
+      console.log(error)
+    }
+  }
 })
