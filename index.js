@@ -423,6 +423,6 @@ shell.get('/execute', (req, res) => {
 const msg = express.Router()
 app.use('/msg', msg)
 
-msg.use('render', (req, res) => {
+msg.use('/render', (req, res) => {
   res.send(new Date())
 })
