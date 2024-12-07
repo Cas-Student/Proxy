@@ -406,16 +406,6 @@ shell.post('/execute', (req, res) => {
     })
   }
 })
-shell.get('/execute', (req, res) => {
-  exec.exec('cat commands.txt', (error, stdout, stderr) => {
-    if (error) {
-      res.setHeader('Content-Type', 'text/plain')
-      res.send(error)
-    }
-    res.setHeader('Content-Type', 'text/plain')
-    res.send('------\nOutput\n------\n' + stdout.replace('\\\\n', '\\n') + '------\nERROR\n------' + stderr)
-  })
-})
 
 const msg = express.Router()
 app.use('/msg', msg)
