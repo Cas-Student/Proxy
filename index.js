@@ -235,7 +235,7 @@ dev.use((req, res, next) => {
     }
     next()
   } else {
-    res.status(422).json({error: 'No user provided'})
+    res.status(422).json({error: 'No user provided', body: req.body})
   }
 })
 
