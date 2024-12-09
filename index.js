@@ -37,8 +37,8 @@ const client = new MongoClient(uri)
 try {
   await client.connect()
   const database = client.db("Accounts")
-  const ratings = database.collection("Information")
-  const cursor = ratings.find()
+  const db = database.collection("Information")
+  const cursor = db.find()
   await cursor.forEach(doc => Accounts = doc)
 } catch {
   Accounts = {}
@@ -178,7 +178,7 @@ if (tracker) {
         process.exit(1)
       } else {
         route()
-      }2
+      }
       if (file.substring(2, 8) != 'ADMIN@') {
         if (file.charAt(1) !== '$') {
           console.log(output + ' > ' + req.method + ': ' + file)
@@ -283,8 +283,8 @@ dev.post('/validate-user', async(req, res) => {
     try {
       await client.connect()
       const database = client.db("Accounts")
-      const ratings = database.collection("Information")
-      const cursor = ratings.find()
+      const db = database.collection("Information")
+      const cursor = db.find()
       await cursor.forEach(doc => {
         let data = (req.body.user in doc) ? doc[req.body.user] : {error: `Could not find: "${req.body.user}"`}
         if (!('error' in data)) {
@@ -328,8 +328,8 @@ dev.post('/insert-database', async(req, res) => {
   try {
     await client.connect()
     const database = client.db('Accounts')
-    const ratings = database.collection('Users')
-    ratings.insertOne(data)
+    const db = database.collection('Users')
+    db.insertOne(data)
     if (data.user) {
       res.redirect('/?search=' + req.body.is)
     } else {
@@ -352,17 +352,17 @@ dev.use('/storage', async(req, res) => {
     try {
       await client.connect()
       const database = client.db('Accounts')
-      const ratings = database.collection('Storage')
+      const db = database.collection('Storage')
       if (req.body.action == 'Send') {
         console.log('Sending to storage...' + req.body.user)
-        ratings.insertOne({user: req.body.user, storage: req.body.storage, date: new Date()})
+        db.insertOne({user: req.body.user, storage: req.body.storage, date: new Date()})
         res.status(200)
         console.log('Sent...' + req.body.user)
       } else if (req.body.action == 'Recieve') {
         console.log('Sending to client...' + req.body.user)
         let d
         let array = []
-        await ratings.find({user: req.body.user}).sort().forEach(doc => {
+        await db.find({user: req.body.user}).sort().forEach(doc => {
           if (d > doc.date) {
             d = doc.date
           } else if (typeof d === 'undefined') {
@@ -439,8 +439,8 @@ msg.use('/render', async(req, res) => {
   try {
     await client.connect()
     const database = client.db('Accounts')
-    const ratings = database.collection('Storage')
-    await ratings.find().forEach(doc => {
+    const db = database.collection('Storage')
+    await db.find().forEach(doc => {
       data.append(doc)
     })
     response.data = data
