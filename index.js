@@ -226,8 +226,9 @@ app.use('/dev', dev)
 
 //Checks if user exists
 dev.use((req, res, next) => {
-  if (req.method == 'GET') next()
-  const user = req.body.user
+  if (req.method == 'GET') {
+    next()
+  }
   if (typeof req.body.user !== 'undefined') {
     if (typeof req.body.name !== 'undefined') {
       req.body.user += '@' + req.body.name
@@ -240,7 +241,9 @@ dev.use((req, res, next) => {
 
 //Checks if request was made by a set user
 dev.use((req, res, next) => {
-  if (req.method == 'GET') next()
+  if (req.method == 'GET') {
+    next()
+  }
   const user = req.body.user
   if (user.split('@')[0] in Accounts) {
     next()
@@ -268,7 +271,9 @@ dev.use((req, res, next) => {
 
 //Checks user's buffer state
 dev.use((req, res, next) => {
-  if (req.method == 'GET') next()
+  if (req.method == 'GET') {
+    next()
+  }
   const user = req.body.user
   if (user.split('@')[0] in bufferArray) {
     res.redirect('/buffer')
