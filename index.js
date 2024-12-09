@@ -244,11 +244,12 @@ dev.use((req, res, next) => {
   if (req.method == 'GET') {
     next()
   }
-  const user = req.body.user
-  if (user.split('@')[0] in Accounts) {
+  let user = req.body.user
+  user = user.split('@')
+  if (user[0] in Accounts) {
     next()
   } else {
-    res.status(422).json({error: 'user not found', user: user.split('@')[0]})
+    res.status(422).json({error: 'user not found', user: user[0]})
   }
 })
 
