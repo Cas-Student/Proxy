@@ -249,6 +249,7 @@ dev.use((req, res, next) => {
   if (user[0] in Accounts) {
     next()
   } else {
+    console.log('Error loging in... ' + req.body)
     res.status(422).json({error: 'user not found', user: user[0]})
   }
 })
