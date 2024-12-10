@@ -303,8 +303,8 @@ dev.post('/validate-user', async(req, res) => {
           console.log(req.body.user + ' attempted to log in')
           res.status(200).json(msg)
         } else {
-          console.log('Body: ' + req.body)
-          console.log('Response' + data)
+          console.log('Body: ' + JSON.stringify(req.body))
+          console.log('Response' + JSON.stringify(data))
           res.status(404).json(data)
         }
       })
