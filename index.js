@@ -293,7 +293,7 @@ dev.post('/validate-user', async(req, res) => {
       const db = database.collection("Information")
       const cursor = db.find()
       await cursor.forEach(doc => {
-        const user = req.body.user
+        const user = (req.body.user).split('@')[0]
         let data = (user in doc) ? doc[user] : {error: `Could not find: "${req.body.user}"`}
         if (!('error' in data)) {
           let msg = {}
