@@ -249,7 +249,7 @@ dev.use((req, res, next) => {
   if (user[0] in Accounts) {
     next()
   } else {
-    console.log('Error loging in... ' + req.body)
+    console.log('Error loging in... ' + JSON.parse(req.body))
     res.status(422).json({error: 'user not found', user: user[0]})
   }
 })
@@ -293,7 +293,8 @@ dev.post('/validate-user', async(req, res) => {
       const db = database.collection("Information")
       const cursor = db.find()
       await cursor.forEach(doc => {
-        let data = (req.body.user in doc) ? doc[req.body.user] : {error: `Could not find: "${req.body.user}"`}
+        user = req.body.user
+        let data = (user in doc) ? doc[user] : {error: `Could not find: "${req.body.user}"`}
         if (!('error' in data)) {
           let msg = {}
           msg[req.body.name] = (data.name = req.body.name)
