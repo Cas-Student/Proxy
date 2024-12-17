@@ -413,31 +413,6 @@ stat.get('/chart', (req, res) => {
   res.send(`<body style="background: #21313C"><div style="text-align: center"><iframe id='i' style="background: #21313C;border: none;" src="https://charts.mongodb.com/charts-project-0-uaxsvvj/embed/charts?id=fa3bfd96-4084-462b-b19f-f05cf4f0e7c4&maxDataAge=120&theme=dark&autoRefresh=true"></iframe></div><script>const frame = document.getElementById('i'); i.height = window.innerHeight; i.width = window.innerHeight * 4/3;</script>`)
 })
 
-const shell = express.Router()
-dev.use('/shell', shell)
-
-shell.post('/execute', (req, res) => {
-  if (typeof req.body.command !== 'undefined' && typeof req.body.password !== 'undefined' && req.body.password == Accounts.Admin.password) {
-    exec.exec(`echo ${req.body.command} >> commands.txt`)
-    exec.exec(req.body.command, (error, stdout, stderr) => {
-      if (error) {
-        res.send(JSON.stringify({error: error}))
-      }
-      res.send(JSON.stringify({stdout: stdout, stderr: stderr}))
-    })
-  }
-})
-shell.get('/execute', (req, res) => {
-  exec.exec('cat commands.txt', (error, stdout, stderr) => {
-    if (error) {
-      res.setHeader('Content-Type', 'text/plain')
-      res.send(error)
-    }
-    res.setHeader('Content-Type', 'text/plain')
-    res.send('------\nOutput\n------\n' + stdout.replace('\\\\n', '\\n') + '------\nERROR\n------' + stderr)
-  })
-})
-
 const msg = express.Router()
 app.use('/msg', msg)
 
