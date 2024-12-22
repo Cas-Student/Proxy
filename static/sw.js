@@ -10,12 +10,13 @@ const dynamic = new Dynamic()
 self.dynamic = dynamic
 
 function a(e) {
-  var AJAX = new XMLHttpRequest()
+  const AJAX = new XMLHttpRequest()
   AJAX.open("POST", '/active', true)
   AJAX.setRequestHeader('Content-Type', 'application/json')
   AJAX.send(
     JSON.stringify({
-      user: localStorage.getItem('user'),
+      user: localStorage.getItem('fname') || '',
+      name: localStorage.getItem('lname') || '',
       event: e
     })
   )
