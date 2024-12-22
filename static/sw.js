@@ -20,21 +20,25 @@ function a(e) {
       event: e
     })
   )
-  return e
 }
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     (async function () {
+      let e
       if (await dynamic.route(event)) {
-        return a(await dynamic.fetch(event))
+        e = await dynamic.fetch(event)
+        a(e)
+        return e
       }
-
       if (event.request.url.startsWith(location.origin + '/a/')) {
-        return a(await uv.fetch(event))
+        e = await uv.fetch(event)
+        a(e)
+        return e
       }
-
-      return a(await fetch(event.request))
+      e = await fetch(event.request)
+      a(e)
+      return e
     })()
   )
 })
