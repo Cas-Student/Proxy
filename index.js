@@ -15,7 +15,6 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import exec from 'child_process'
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -43,7 +42,11 @@ try {
 } catch {
   Accounts = {}
 } finally {
-  await client.close();
+  try {
+    await client.close(false)
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 console.log('--------------------')
@@ -60,33 +63,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'static')))
 function route() {
-  if (config.routes !== false) {
-    const routes = [
-      { path: '/ap', file: 'apps.html' },
-      { path: '/g', file: 'games.html' },
-      { path: '/s', file: 'settings.html' },
-      { path: '/t', file: 'tabs.html' },
-      { path: '/p', file: 'go.html' },
-      { path: '/', file: 'index.html' },
-      { path: '/buffer', file: 'buffer.html' }
-    ]
-
-    routes.forEach((route) => {
-      app.get(route.path, (req, res) => {
-        res.sendFile(path.join(__dirname, 'static', route.file))
-      })
+  config.routes.forEach((route) => {
+    app.get(route.path, (req, res) => {
+      res.sendFile(path.join(__dirname, 'static', route.file))
     })
-  }
-}
-
-if (config.local !== false) {
-  app.get('/e/*', (req, res, next) => {
-    const baseUrls = [
-      'https://raw.githubusercontent.com/v-5x/x/fixy',
-      'https://raw.githubusercontent.com/ypxa/y/main',
-      'https://raw.githubusercontent.com/ypxa/w/master',
-    ]
-    fetchData(req, res, next, baseUrls)
   })
 }
 console.log("Done");
@@ -235,7 +215,7 @@ dev.use((req, res, next) => {
     }
     next()
   } else {
-    res.status(422).json({error: 'No user provided', body: req.body})
+    res.redirect('/buffer')
   }
 })
 
