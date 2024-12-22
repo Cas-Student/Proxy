@@ -1,5 +1,5 @@
 let config = {
-  challenge: true, // Set to true if you want to enable password protection.
+  bufferArray: ['Cas'],
   routes: [
     { path: '/ap', file: 'apps.html' },
     { path: '/g', file: 'games.html' },
@@ -8,8 +8,7 @@ let config = {
     { path: '/p', file: 'go.html' },
     { path: '/', file: 'index.html' },
     { path: '/buffer', file: 'buffer.html' }
-  ],
-  local: true, // Change this to false to disable local assets.
+  ]
 }
 
 export default config

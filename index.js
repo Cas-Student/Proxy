@@ -1,5 +1,3 @@
-const bufferArray = ['Cas']
-
 //ENV Vars
 const blacklist = process.env.blacklist || ""; //Blacklisted IPs
 const debug = process.env.debug || "true";
@@ -28,7 +26,7 @@ console.log("Running on port: " + PORT);
 let Accounts = {}
 
 const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword || 'qaANtuGAGx23eM10')
+const password = encodeURIComponent(process.env.dbPassword)
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
