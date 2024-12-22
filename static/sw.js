@@ -7,6 +7,7 @@ importScripts(__uv$config.sw || '/m/sw.js')
 const uv = new UVServiceWorker()
 const dynamic = new Dynamic()
 
+let userKey = new URL(location).searchParams.get('userkey')
 self.dynamic = dynamic
 
 function a(e) {
