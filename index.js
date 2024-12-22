@@ -255,7 +255,7 @@ dev.use((req, res, next) => {
     next()
   }
   const user = req.body.user
-  if (user.split('@')[0] in bufferArray) {
+  if (user.split('@')[0] in config.bufferArray) {
     res.redirect('/buffer')
   } else {
     next()
