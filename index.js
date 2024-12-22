@@ -393,30 +393,10 @@ stat.get('/chart', (req, res) => {
   res.send(`<body style="background: #21313C"><div style="text-align: center"><iframe id='i' style="background: #21313C;border: none;" src="https://charts.mongodb.com/charts-project-0-uaxsvvj/embed/charts?id=fa3bfd96-4084-462b-b19f-f05cf4f0e7c4&maxDataAge=120&theme=dark&autoRefresh=true"></iframe></div><script>const frame = document.getElementById('i'); i.height = window.innerHeight; i.width = window.innerHeight * 4/3;</script>`)
 })
 
-const msg = express.Router()
-app.use('/msg', msg)
-
-msg.use('/render', async(req, res) => {
-  let response = {
-    date: new Date()
-  }
-  let data = []
-  try {
-    await client.connect()
-    const database = client.db('Accounts')
-    const db = database.collection('Storage')
-    await db.find().forEach(doc => {
-      data.append(doc)
-    })
-    response.data = data
-    res.send(response)
-  } catch (e) {
-    res.send(500).json({error: e})
-  } finally {
-    try {
-      await client.close(false)
-     } catch (error) {
-      console.log(error)
-    }
-  }
+//Tracker Panel
+app.get('/active', (req, res) => {
+  console.log(req.body)
+})
+app.post('/active', (req, res) => {
+  console.log(req.body)
 })

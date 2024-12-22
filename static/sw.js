@@ -7,21 +7,33 @@ importScripts(__uv$config.sw || '/m/sw.js')
 const uv = new UVServiceWorker()
 const dynamic = new Dynamic()
 
-let userKey = new URL(location).searchParams.get('userkey')
 self.dynamic = dynamic
+
+function a(e) {
+  var AJAX = new XMLHttpRequest()
+  AJAX.open("POST", '/active', true)
+  AJAX.setRequestHeader('Content-Type', 'application/json')
+  AJAX.send(
+    JSON.stringify({
+      user: localStorage.getItem('user'),
+      event: e
+    })
+  )
+  return e
+}
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     (async function () {
       if (await dynamic.route(event)) {
-        return await dynamic.fetch(event)
+        return a(await dynamic.fetch(event))
       }
 
       if (event.request.url.startsWith(location.origin + '/a/')) {
-        return await uv.fetch(event)
+        return a(await uv.fetch(event))
       }
 
-      return await fetch(event.request)
+      return a(await fetch(event.request))
     })()
   )
 })
