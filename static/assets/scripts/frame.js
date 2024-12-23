@@ -47,7 +47,10 @@ function iframeLoad() {
     }
     document.getElementById('is').value = decodeXor(website)
     localStorage.setItem('decoded', decodeXor(website))
-    sessionStorage.setItem('history', (sessionStorage.getItem('history') || []).push(decodeXor(website)))
+    const s = sessionStorage.getItem('history') || []
+    s.push(decodeXor(website))
+    alert(s)
+    sessionStorage.setItem('history', s)
   }
 }
 
