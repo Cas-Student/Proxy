@@ -40,10 +40,10 @@ function decodeXor(input) {
 function iframeLoad() {
   if (document.readyState === 'complete') {
     let website = iframe.contentWindow?.location.href.replace(window.location.origin, '')
-    if (website.includes('/a/')) {
-      website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/', '')
-    } else if (website.includes('/a/q/')) {
+    if (website.includes('/a/q/')) {
       website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/q/', '')
+    } else if (website.includes('/a/')) {
+      website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/', '')
     }
     document.getElementById('is').value = decodeXor(website)
     localStorage.setItem('decoded', decodeXor(website))
@@ -51,6 +51,9 @@ function iframeLoad() {
     s.push(decodeXor(website))
     alert(s)
     sessionStorage.setItem('history', s)
+    if (sessionStorage.getItem('history') !== s) {
+      alert('ERROR: history may not work...\n' + s)
+    }
   }
 }
 
