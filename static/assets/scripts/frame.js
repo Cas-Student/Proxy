@@ -126,7 +126,9 @@ let index = (sessionStorage.getItem('history') || []).length -1
 // Back
 function goBack() {
   if (typeof sessionStorage.getItem('history') !== 'undefined' && iframe) {
-    iframe.src = sessionStorage.getItem('history')[index]
+    const past = sessionStorage.getItem('history')
+    alert(past)
+    iframe.src = past[index]
     if (index != 0) {
       index -= 1
     }
@@ -138,7 +140,9 @@ function goBack() {
 // Forward
 function goForward() {
   if (typeof sessionStorage.getItem('history') !== 'undefined' && iframe) {
-    iframe.src = sessionStorage.getItem('history')[index]
+    const past = sessionStorage.getItem('history')
+    alert(past)
+    iframe.src = past[index]
     if (index != sessionStorage.getItem('history').length -1) {
       index += 1
     }
