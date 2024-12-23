@@ -124,7 +124,7 @@ homeButton.addEventListener('click', function () {
 // Back
 function goBack() {
   if (iframe) {
-    iframe.contentWindow.history.back()
+    iframe.contentWindow.history.go(-1)
   } else {
     alert('Error')
     console.error('No iframe found')
@@ -133,7 +133,7 @@ function goBack() {
 // Forward
 function goForward() {
   if (iframe) {
-    iframe.contentWindow.history.forward()
+    iframe.contentWindow.history.go(1)
   } else {
     alert('Error')
     console.error('No iframe found')
