@@ -39,16 +39,15 @@ function decodeXor(input) {
 
 function iframeLoad() {
   if (document.readyState === 'complete') {
-    const website = iframe.contentWindow?.location.href.replace(window.location.origin, '')
+    let website = iframe.contentWindow?.location.href.replace(window.location.origin, '')
     if (website.includes('/a/')) {
-      const website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/', '')
-      document.getElementById('is').value = decodeXor(website)
-      localStorage.setItem('decoded', decodeXor(website))
+      website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/', '')
     } else if (website.includes('/a/q/')) {
-      const website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/q/', '')
-      document.getElementById('is').value = decodeXor(website)
-      localStorage.setItem('decoded', decodeXor(website))
+      website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/q/', '')
     }
+    document.getElementById('is').value = decodeXor(website)
+    localStorage.setItem('decoded', decodeXor(website))
+    sessionStorage.setItem('history', (sessionStorage.getItem('history') || []).push(decodeXor(website)))
   }
 }
 
@@ -121,10 +120,16 @@ const homeButton = document.getElementById('home-page')
 homeButton.addEventListener('click', function () {
   window.location.href = './'
 })
+
+//History
+let index = (sessionStorage.getItem('history') || []).length -1
 // Back
 function goBack() {
-  if (iframe) {
-    iframe.contentWindow.history.go(-1)
+  if (typeof sessionStorage.getItem('history') !== 'undefined' && iframe) {
+    iframe.src = sessionStorage.getItem('history')[index]
+    if (index != 0) {
+      index -= 1
+    }
   } else {
     alert('Error')
     console.error('No iframe found')
@@ -132,8 +137,11 @@ function goBack() {
 }
 // Forward
 function goForward() {
-  if (iframe) {
-    iframe.contentWindow.history.go(1)
+  if (typeof sessionStorage.getItem('history') !== 'undefined' && iframe) {
+    iframe.src = sessionStorage.getItem('history')[index]
+    if (index != sessionStorage.getItem('history').length -1) {
+      index += 1
+    }
   } else {
     alert('Error')
     console.error('No iframe found')

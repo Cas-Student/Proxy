@@ -8,11 +8,7 @@ if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && loca
   location.href = '/'
 }
 
-const form = document.getElementById('fs')
-const input = document.getElementById('is')
-
 const uri = new URLSearchParams(window.location.search)
-
 if (uri.has('search')) {
   if ((localStorage.getItem('ASP') === 'true') || false) {
     go(uri.get('search'))
@@ -21,7 +17,6 @@ if (uri.has('search')) {
   }
   req(uri.get('search'))
 }
-
 
 async function req(text) {
   let AJAX  = new XMLHttpRequest()
