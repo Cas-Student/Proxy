@@ -7,6 +7,7 @@ let config = {
     { path: '/t', file: 'tabs.html' },
     { path: '/p', file: 'go.html' },
     { path: '/', file: 'index.html' },
+    { path: '/chat', file: 'msg.html' },
     { path: '/buffer', file: 'buffer.html' }
   ]
 }

@@ -13,7 +13,7 @@ if (uri.has('search')) {
   if ((localStorage.getItem('ASP') === 'true') || false) {
     go(uri.get('search'))
   } else {
-    processUrl(uri.get('search'), '')
+    processUrl(uri.get('search'))
   }
   req(uri.get('search'))
 }

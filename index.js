@@ -5,7 +5,7 @@ const headers = process.env.headers || "false";
 const tracker = process.env.tracker || "true";
 
 //Imports
-console.log("loading imports...");
+console.log("Loading imports...");
 import { MongoClient } from "mongodb";
 import express from 'express'
 import http from 'node:http'
@@ -13,6 +13,8 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
+import { msg } from  './routes/msg.js'
+import { dev } from'./routes/system.js'
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -55,346 +57,41 @@ for (let user in Accounts) {
   console.log('--------------------')
 }
 
-console.log("Loading routes")
+console.log("Loading dependencies...")
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, 'static')))
-function route() {
-  config.routes.forEach((route) => {
-    app.get(route.path, (req, res) => {
-      res.sendFile(path.join(__dirname, 'static', route.file))
-    })
+console.log("Done");
+
+console.log('Loading routes...')
+app.use('/dev', dev) //Route to /dev - system directory
+app.use('/msg', msg) //Route to /msg - messages
+config.routes.forEach((route) => {
+  app.get(route.path, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', route.file))
   })
-}
-console.log("Done");
+})
+console.log('Done')
 
-console.log("Fetching data...");
-const fetchData = async (req, res, next, baseUrls) => {
-  try {
-    const reqTarget = baseUrls.map((baseUrl) => `${baseUrl}/${req.params[0]}`)
-    let data
-    let asset
-
-    for (const target of reqTarget) {
-      asset = await fetch(target)
-      if (asset.ok) {
-        data = await asset.arrayBuffer()
-        break
-      }
-    }
-
-    if (data) {
-      res.end(Buffer.from(data))
-    } else {
-      next()
-    }
-  } catch (error) {
-    console.error('Error fetching:', error)
-    next(error)
-  }
-}
-console.log("Done");
-
-server.on('request', (req, res) => {
+server
+.on('request', (req, res) => {
   if (bareServer.shouldRoute(req)) {
     bareServer.routeRequest(req, res)
   } else {
     app(req, res)
   }
 })
-
-server.on('upgrade', (req, socket, head) => {
+.on('upgrade', (req, socket, head) => {
   if (bareServer.shouldRoute(req)) {
     bareServer.routeUpgrade(req, socket, head)
   } else {
     socket.end()
   }
 })
-
-server.on('listening', () => {
+.on('listening', () => {
   console.log(`Running at http://localhost:${PORT}`)
 })
-
-server.listen({
+.listen({
   port: PORT,
-})
-
-if (tracker) {
-  let last = ''
-  console.log("----------\nTracking\n----------");
-  app.use((req, res, next) => {
-    let file = req.path
-    let IP = req.headers["x-forwarded-for"]
-    if (
-      (debug === 'true') ||
-      (last != file) &&
-      (
-        !(file.substring(0, 4) === '/dy/') &&
-        !(file.substring(0, 3) === '/m/') &&
-        !(file.substring(0, 9) === '/bundles/') &&
-        !(file.substring(0, 8) === '/assets/') &&
-        !(file.substring(0, 3) === '/a/')
-      )
-    ) {
-      last = file
-      let output = ''
-      let logged = false;
-      for (let user in Accounts) {
-        if ("ip" in Accounts[user]) {
-          if (Accounts[user]["ip"] === IP) {
-            output += 'Request from: ' + user
-            logged = true
-          }
-        }
-      }
-      if (!logged) {
-        output += 'Request: ' + IP
-      }
-      if ((blacklist.split(/[ ;]+/)).includes(IP)) {
-        console.log(output + ' > BLACKLISTED')
-        process.exit(1)
-      } else {
-        route()
-      }
-      if (file.substring(2, 8) != 'ADMIN@') {
-        if (file.charAt(1) !== '$') {
-          console.log(output + ' > ' + req.method + ': ' + file)
-        } else {
-          file = file.replaceAll('%20', ' ')
-          console.log(output + ' > ' + file.substring(2))
-        }
-      }
-      if (headers === "true") {
-        console.log(
-          'headers:\n' + JSON.stringify(req.headers) //All headers
-          .replaceAll('\",\"', '\",\"\n  ') //Makes indents for new headers
-          .replaceAll(';', ';\n    ') //Makes indents for new parts of header
-          .replaceAll(':', ' : ') //Makes value/key differance easier to see
-          .replace('{', '{\n')
-          .slice(0,-1) + '\n}'
-        )
-      }
-      next()
-    } else {
-      if ((blacklist.split(/[ ;]+/)).includes(IP)) {
-        console.log('Request: ' + IP + ' > BLACKLISTED')
-        process.exit(1)
-      } else {
-        route()
-      }
-      next()
-    }
-  })
-} else {
-  route()
-}
-
-/*
-const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword)
-const cluster = "hacker-hub.vd4tq.mongodb.net"
-const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
-const client = new MongoClient(uri)
-*/
-
-//Route to /dev - system directory
-const dev = express.Router()
-app.use('/dev', dev)
-
-//Checks if user exists
-dev.use((req, res, next) => {
-  if (req.method == 'GET') {
-    next()
-  }
-  if (typeof req.body.user !== 'undefined') {
-    if (typeof req.body.name !== 'undefined') {
-      req.body.user += '@' + req.body.name
-    }
-    next()
-  } else {
-    res.redirect('/buffer')
-  }
-})
-
-//Checks if request was made by a set user
-dev.use((req, res, next) => {
-  if (req.method == 'GET') {
-    next()
-  }
-  let user = req.body.user
-  user = user.split('@')
-  if (user[0] in Accounts) {
-    next()
-  } else {
-    console.log('Error loging in... ' + JSON.parse(req.body))
-    res.status(422).json({error: 'user not found', user: user[0]})
-  }
-})
-
-//Reduces requests
-let lastRequest, lastMinute
-dev.use((req, res, next) => {
-  if (req != lastRequest) {
-    lastRequest = req
-    lastMinute = new Date().getMinutes()
-    next()
-  } else if(lastMinute = new Date().getMinutes()) {
-    lastRequest = req
-    lastMinute = new Date().getMinutes()
-    next()
-  } else {
-    console.log(`Spam request from: ${req.body.user}`)
-    res.send(JSON.stringify({error: 'Request made too soon!'}))
-  }
-})
-
-//Checks user's buffer state
-dev.use((req, res, next) => {
-  if (req.method == 'GET') {
-    next()
-  }
-  const user = req.body.user
-  if (user.split('@')[0] in config.bufferArray) {
-    res.redirect('/buffer')
-  } else {
-    next()
-  }
-})
-
-//User validation
-dev.post('/validate-user', async(req, res) => {
-  if (req.method == 'POST') {
-    try {
-      await client.connect()
-      const database = client.db("Accounts")
-      const db = database.collection("Information")
-      const cursor = db.find()
-      await cursor.forEach(doc => {
-        const user = (req.body.user).split('@')[0]
-        let data = (user in doc) ? doc[user] : {error: `Could not find: "${req.body.user}"`}
-        if (!('error' in data)) {
-          let msg = {}
-          msg[req.body.name] = (data.name = req.body.name)
-          msg[req.body.password] = (data.password = req.body.password)
-          msg.status = data.status
-          console.log(req.body.user + ' attempted to log in')
-          res.status(200).json(msg)
-        } else {
-          console.log('Body: ' + JSON.stringify(req.body))
-          console.log('Response' + JSON.stringify(data))
-          res.status(404).json(data)
-        }
-      })
-    } catch (error) {
-      res.status(500).json({error: error.message})
-    } finally {
-      try {
-        await client.close(false)
-       } catch (error) {
-        console.log(error)
-      }
-    }
-  } else {
-    res.status(403).json({error: `Method: ${req.method} is not supported`})
-  }
-})
-
-//Records search history
-dev.post('/insert-database', async(req, res) => {
-  let data = {}
-  data['user'] = req['body']['user']
-  if (typeof req.body.is !== 'undefined') {
-    data['searched'] = req['body']['is']
-  } else if (typeof req.body.opened !== 'undefined') {
-    data['opened'] = req.body.opened
-  } else {
-    console.log(`Error in ${req.body.user}'s request: ${req.body}`)
-  }
-  data['website'] = req.headers.host
-  data['date'] = new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"long", day:"numeric", hour: "numeric", minute: 'numeric', second: 'numeric'})
-  try {
-    await client.connect()
-    const database = client.db('Accounts')
-    const db = database.collection('Users')
-    db.insertOne(data)
-    if (data.user) {
-      res.redirect('/?search=' + req.body.is)
-    } else {
-      res.end()
-    }
-  } catch (error) {
-    res.status(500).json({error: error.message})
-  } finally {
-    try {
-      await client.close(false)
-     } catch (error) {
-      console.log(error)
-    }
-  }
-})
-
-//Server and localStorage
-dev.use('/storage', async(req, res) => {
-  if (req.method == 'POST') {
-    try {
-      await client.connect()
-      const database = client.db('Accounts')
-      const db = database.collection('Storage')
-      if (req.body.action == 'Send') {
-        console.log('Sending to storage...' + req.body.user)
-        db.insertOne({user: req.body.user, storage: req.body.storage, date: new Date()})
-        res.status(200)
-        console.log('Sent...' + req.body.user)
-      } else if (req.body.action == 'Recieve') {
-        console.log('Sending to client...' + req.body.user)
-        let d
-        let array = []
-        await db.find({user: req.body.user}).sort().forEach(doc => {
-          if (d > doc.date) {
-            d = doc.date
-          } else if (typeof d === 'undefined') {
-            d = doc.date
-          }
-          array.push(doc)
-        })
-        for (let key in array) {
-          if (array[key]['date'] == d) {
-            res.status(200).json(array[key]['storage'])
-            console.log('Sent...' + req.body.user)
-          }
-        }
-      } else {
-        console.log('Action not found!')
-        res.status(422).json({error: 'Action not found'})
-      }
-    } catch (error) {
-      res.status(500).json({error: error.message})
-    } finally {
-      try {
-        await client.close(false)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  } else {
-    res.status(403).json({error: `Method: ${req.method} is not supported`})
-  }
-})
-
-//Route to /stat
-const stat = express.Router()
-app.use('/stat', stat)
-
-//Data Charts
-stat.get('/chart', (req, res) => {
-  res.send(`<body style="background: #21313C"><div style="text-align: center"><iframe id='i' style="background: #21313C;border: none;" src="https://charts.mongodb.com/charts-project-0-uaxsvvj/embed/charts?id=fa3bfd96-4084-462b-b19f-f05cf4f0e7c4&maxDataAge=120&theme=dark&autoRefresh=true"></iframe></div><script>const frame = document.getElementById('i'); i.height = window.innerHeight; i.width = window.innerHeight * 4/3;</script>`)
-})
-
-//Tracker Panel
-app.get('/active', (req, res) => {
-  console.log(req.body)
-})
-app.post('/active', (req, res) => {
-  console.log(req.body)
 })
