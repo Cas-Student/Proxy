@@ -1,9 +1,3 @@
-//ENV Vars
-const blacklist = process.env.blacklist || ""; //Blacklisted IPs
-const debug = process.env.debug || "true";
-const headers = process.env.headers || "false";
-const tracker = process.env.tracker || "true";
-
 //Imports
 console.log("Loading imports...");
 import { MongoClient } from "mongodb";
@@ -14,7 +8,7 @@ import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
 import { msg } from  './routes/msg.js'
-import { dev } from'./routes/system.js'
+import { dev, tracker } from'./routes/system.js'
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -74,6 +68,13 @@ config.routes.forEach((route) => {
 })
 console.log('Done')
 
+if (process.env.tracker || true) {
+  tracker(app, {
+    debug: process.env.debug || "true",
+    headers: process.env.headers || "false"
+  })
+}
+
 server
 .on('request', (req, res) => {
   if (bareServer.shouldRoute(req)) {
@@ -83,6 +84,7 @@ server
   }
 })
 .on('upgrade', (req, socket, head) => {
+  console.log('Server upgrading')
   if (bareServer.shouldRoute(req)) {
     bareServer.routeUpgrade(req, socket, head)
   } else {
