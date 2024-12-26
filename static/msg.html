@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="referrer" content="no-referrer" />
+        <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+        <link rel="shortcut icon" id="tab-favicon" href="favicon.png" />
+        <title id="tab-title">start.hcps.org</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/assets/styles/main.css?v=8" />
+        <link rel="stylesheet" href="/assets/styles/themes/default.css?v=5" />
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://kit.fontawesome.com/9649b2c966.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="fixed-nav-bar">
+            <div class="fixed-nav-bar-container">
+                <a class="icon" href="/./"><img alt="nav" id="INImg" src="/assets/media/favicon/main.png" /></a>
+            </div>
+            <div class="fixed-nav-bar-right">
+                <a class="navbar-link" href="/./g"><i class="fa-solid fa-gamepad navbar-icon"></i>Games</a>
+                <a class="navbar-link" href="/./ap"><i class="fa-solid fa-phone navbar-icon"></i>Apps</a>
+                <a class="navbar-link" href="/./msg"><i class="fa-solid fa-message navbar-icon"></i>Chat (beta)</a>
+                <a class="navbar-link" href="/./t"><i class="fa-solid fa-laptop navbar-icon"></i>Tabs</a>
+                <a class="navbar-link" href="/./s"><i class="fa-solid fa-gear navbar-icon settings-icon"></i>Settings</a>
+            </div>
+        </div>
+        <div class="input-container">
+            <table>
+                <tr>
+                    <th colspan="2"><div id="messages"></div></th>
+                </tr>
+                <tr>
+                    <th><input type="text" id="send"></tb>
+                    <th>
+                        <button id="sender" class="send-button">
+                            <i class="fa-solid fa-message"></i>
+                        </button>
+                    </tb>
+                </tr>
+            </table>
+        </div>
+    </body>
+    <script src="assets/scripts/index.js"></script>
+    <script src="assets/scripts/h.js"></script>
+    <script src="https://kit.fontawesome.com/1237c86ba0.js" crossorigin="anonymous"></script>
+    <script src="assets/scripts/main.js?v=22"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJQ5QHQTJ"></script>
+    <script src="../config.js" type="text/javascript"></script>
+    <script type="module" src="assets/scripts/msg.js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || []
+        function gtag() {
+            dataLayer.push(arguments)
+        }
+        gtag('js', new Date())
+        gtag('config', 'G-WKJQ5QHQTJ')
+    </script>
+</html>

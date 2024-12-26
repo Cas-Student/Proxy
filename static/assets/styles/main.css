@@ -68,6 +68,38 @@ body {
   backdrop-filter: var(--background-filter);
 }
 
+.send-button {
+  width: 50px;
+  padding: 20px;
+  font-size: 16px;
+  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.2);
+  background: var(--background-secondary);
+  -webkit-backdrop-filter: var(--background-filter);
+  backdrop-filter: var(--background-filter);
+}
+
+#messages {
+  position: relative;
+  padding: 20px;
+  width: 600px;
+  border-radius: 5px;
+  background: var(--column);
+  text-align: left;
+  font-size: 24px;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  transition: 0.4s;
+}
+
+.message {
+  list-style-type: none;
+  padding: 25px;
+  width: 550px;
+  border-radius: 5px;
+  background: var(--background-secondary);
+}
+
 .main-search {
   width: 45vw;
   height: 5vh;

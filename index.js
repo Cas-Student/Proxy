@@ -10,7 +10,7 @@ import cors from 'cors'
 import config from './config.js'
 import { msg } from  './routes/msg.js'
 import { dev, tracker } from'./routes/system.js'
-import os from 'os'
+import { json } from "node:stream/consumers";
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -102,24 +102,15 @@ server
   port: PORT,
 })
 
-/*
-socket
-.on('connect', () => {
-  console.log('Connected to:', socket.id)
-})
-.on('connect_error', (err) => {
-  console.log('socket.io connect error:', err)
-})
-*/
-
 const io = new Server(server, {
-  cors: {
-      origin: '*'
-  }
+  cors: { origin: '*' }
 })
-io.on('connection', (socket) => {
-  console.log('user connected: ', socket.id)
-  socket.on('disconnect', () => {
-      console.log('user disconnected:', socket.id)
+
+// Emit welcome message on connection
+io.on('connection', function(socket) {
+  socket.on('Client.msg', function(data) {
+    console.log(data)
+    data = JSON.parse(data)
+    socket.emit('Server.msg', { message: data.message, user: data.user })
   })
 })
