@@ -106,7 +106,9 @@ const io = new Server(server, {
   cors: { origin: '*' }
 })
 
-// Emit welcome message on connection
+//Unlimited amount of users
+io.setMaxListeners(0)
+
 io.on('connection', function(socket) {
   socket.on('Client.msg', function(data) {
     console.log(data)
