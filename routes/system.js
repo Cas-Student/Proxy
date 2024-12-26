@@ -1,6 +1,6 @@
 import express from 'express'
-import { error } from 'node:console'
-const dev = express.Router()
+import config from '../config.js'
+export const dev = express.Router()
 
 //Checks if user exists
 dev.use((req, res, next) => {
@@ -19,15 +19,15 @@ dev.use((req, res, next) => {
 
 //Checks if request was made by a set user
 dev.use((req, res, next) => {
-  if (req.method == 'GET') {
+  if (typeof dev.Accounts === 'undefined' || req.method == 'GET') {
     next()
   }
   let user = req.body.user
   user = user.split('@')
-  if (user[0] in Accounts) {
+  if (user[0] in dev.Accounts) {
     next()
   } else {
-    console.log('Error loging in... ' + JSON.parse(req.body))
+    console.log('Error loging in... ' + JSON.stringify(req.body))
     res.status(422).json({error: 'user not found', user: user[0]})
   }
 })
@@ -65,8 +65,8 @@ dev.use((req, res, next) => {
 dev.post('/validate-user', async(req, res) => {
     if (req.method == 'POST') {
       try {
-        await client.connect()
-        const database = client.db("Accounts")
+        await dev.client.connect()
+        const database = dev.client.db("Accounts")
         const db = database.collection("Information")
         const cursor = db.find()
         await cursor.forEach(doc => {
@@ -89,7 +89,7 @@ dev.post('/validate-user', async(req, res) => {
         res.status(500).json({error: error.message})
       } finally {
         try {
-          await client.close(false)
+          await dev.client.close(false)
          } catch (error) {
           console.log(error)
         }
@@ -113,8 +113,8 @@ dev.post('/validate-user', async(req, res) => {
     data['website'] = req.headers.host
     data['date'] = new Date().toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"long", day:"numeric", hour: "numeric", minute: 'numeric', second: 'numeric'})
     try {
-      await client.connect()
-      const database = client.db('Accounts')
+      await dev.client.connect()
+      const database = dev.client.db('Accounts')
       const db = database.collection('Users')
       db.insertOne(data)
       if (data.user) {
@@ -126,7 +126,7 @@ dev.post('/validate-user', async(req, res) => {
       res.status(500).json({error: error.message})
     } finally {
       try {
-        await client.close(false)
+        await dev.client.close(false)
        } catch (error) {
         console.log(error)
       }
@@ -137,8 +137,8 @@ dev.post('/validate-user', async(req, res) => {
   dev.use('/storage', async(req, res) => {
     if (req.method == 'POST') {
       try {
-        await client.connect()
-        const database = client.db('Accounts')
+        await dev.client.connect()
+        const database = dev.client.db('Accounts')
         const db = database.collection('Storage')
         if (req.body.action == 'Send') {
           console.log('Sending to storage...' + req.body.user)
@@ -146,7 +146,7 @@ dev.post('/validate-user', async(req, res) => {
           res.status(200)
           console.log('Sent...' + req.body.user)
         } else if (req.body.action == 'Recieve') {
-          console.log('Sending to client...' + req.body.user)
+          console.log('Sending to dev.client...' + req.body.user)
           let d
           let array = []
           await db.find({user: req.body.user}).sort().forEach(doc => {
@@ -171,7 +171,7 @@ dev.post('/validate-user', async(req, res) => {
         res.status(500).json({error: error.message})
       } finally {
         try {
-          await client.close(false)
+          await dev.client.close(false)
         } catch (error) {
           console.log(error)
         }
@@ -181,9 +181,9 @@ dev.post('/validate-user', async(req, res) => {
     }
 })
 
-function tracker(app, options = {}) {
+export function tracker(app, options = {}) {
   let last = ''
-  app.use((req, res, next) => {
+  app.all('*', (req, res, next) => {
     let file = req.path
     if (file == '/ads.txt' || file == '/robots.txt') {
       res.status(404)
@@ -203,9 +203,9 @@ function tracker(app, options = {}) {
       last = file
       let output = ''
       let logged = false;
-      for (let user in Accounts) {
-        if ("ip" in Accounts[user]) {
-          if (Accounts[user]["ip"] === IP) {
+      for (let user in dev.Accounts) {
+        if ("ip" in dev.Accounts[user]) {
+          if (dev.Accounts[user]["ip"] === IP) {
               output += 'Request from: ' + user
               logged = true
             }
@@ -236,5 +236,3 @@ function tracker(app, options = {}) {
       }
   })
 }
-
-module.exports = { dev, tracker }

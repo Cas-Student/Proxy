@@ -1,6 +1,7 @@
 //Imports
 console.log("Loading imports...");
-import { MongoClient } from "mongodb";
+import { MongoClient } from "mongodb"
+import { Server } from 'socket.io'
 import express from 'express'
 import http from 'node:http'
 import { createBareServer } from '@tomphttp/bare-server-node'
@@ -9,6 +10,7 @@ import cors from 'cors'
 import config from './config.js'
 import { msg } from  './routes/msg.js'
 import { dev, tracker } from'./routes/system.js'
+import os from 'os'
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -16,16 +18,19 @@ const server = http.createServer()
 const app = express(server)
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
+const socket = io(os.hostname + ':' + PORT, {transports: ['websocket']})
+console.log(socket)
 console.log("Running on port: " + PORT);
 
 //Stored Accounts
 let Accounts = {}
 
 const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword)
+const password = encodeURIComponent(process.env.dbPassword || '1Q3W5E7R9T2Y4U6I8O0P')
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
+dev.client = client
 
 try {
   await client.connect()
@@ -34,7 +39,7 @@ try {
   const cursor = db.find()
   await cursor.forEach(doc => Accounts = doc)
 } catch {
-  Accounts = {}
+  Accounts = {User: {name: 'name'}}
 } finally {
   try {
     await client.close(false)
@@ -50,6 +55,7 @@ for (let user in Accounts) {
   console.log(user + ' | ' + Accounts[user]['name'])
   console.log('--------------------')
 }
+dev.Accounts = Accounts
 
 console.log("Loading dependencies...")
 app.use(express.json())
@@ -96,4 +102,26 @@ server
 })
 .listen({
   port: PORT,
+})
+
+/*
+socket
+.on('connect', () => {
+  console.log('Connected to:', socket.id)
+})
+.on('connect_error', (err) => {
+  console.log('socket.io connect error:', err)
+})
+*/
+
+const io = new Server(server, {
+  cors: {
+      origin: '*'
+  }
+})
+io.on('connection', (socket) => {
+  console.log('user connected: ', socket.id)
+  socket.on('disconnect', () => {
+      console.log('user disconnected:', socket.id)
+  })
 })

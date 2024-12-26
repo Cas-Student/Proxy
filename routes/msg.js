@@ -1,8 +1,9 @@
 import express from 'express'
-const msg = express.Router()
+import { createServer } from 'http'
+
+export const msg = express.Router()
+const server = createServer(msg)
 
 msg.get('*', (req, res) => {
-    res.sendFile('/chat')
+    res.redirect('/chat')
 })
-
-module.exports = msg
