@@ -111,8 +111,8 @@ io.setMaxListeners(0)
 
 io.on('connection', function(socket) {
   socket.on('Client.msg', function(data) {
-    console.log(data)
     data = JSON.parse(data)
+    console.log(data.user + ': ' + data.message)
     socket.emit('Server.msg', { message: data.message, user: data.user })
   })
 })
