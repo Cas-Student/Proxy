@@ -18,8 +18,6 @@ const server = http.createServer()
 const app = express(server)
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
-const socket = io(os.hostname + ':' + PORT, {transports: ['websocket']})
-console.log(socket)
 console.log("Running on port: " + PORT);
 
 //Stored Accounts

@@ -47,7 +47,15 @@ function iframeLoad() {
     }
     document.getElementById('is').value = decodeXor(website)
     localStorage.setItem('decoded', decodeXor(website))
-    const s = sessionStorage.getItem('history') || []
+    const s = () => {
+      if (typeof sessionStorage.getItem('history') === 'undefined') {
+        return []
+      } else if (typeof sessionStorage.getItem('history') === 'object') {
+        return sessionStorage.getItem('history')
+      } else if (typeof sessionStorage.getItem('history') === 'string') {
+        return [sessionStorage.getItem('history')]
+      }
+    }
     s.push(decodeXor(website))
     alert(s)
     sessionStorage.setItem('history', s)
