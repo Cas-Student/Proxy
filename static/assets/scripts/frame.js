@@ -47,7 +47,7 @@ function iframeLoad() {
     }
     document.getElementById('is').value = decodeXor(website)
     localStorage.setItem('decoded', decodeXor(website))
-    let s = sessionStorage.getItem('history') || []
+    let s = [sessionStorage.getItem('history')] || []
     s.push(decodeXor(website))
     alert(s)
     sessionStorage.setItem('history', s)
@@ -132,7 +132,7 @@ let index = (sessionStorage.getItem('history') || []).length -1
 // Back
 function goBack() {
   if (typeof sessionStorage.getItem('history') !== 'undefined' && iframe) {
-    const past = sessionStorage.getItem('history')
+    const past = [].push(sessionStorage.getItem('history'))
     alert(past)
     iframe.src = past[index]
     if (index != 0) {
@@ -146,7 +146,7 @@ function goBack() {
 // Forward
 function goForward() {
   if (typeof sessionStorage.getItem('history') !== 'undefined' && iframe) {
-    const past = sessionStorage.getItem('history')
+    const past = [].push(sessionStorage.getItem('history'))
     alert(past)
     iframe.src = past[index]
     if (index != sessionStorage.getItem('history').length -1) {
