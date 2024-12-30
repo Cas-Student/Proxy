@@ -8,7 +8,7 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import { msg, webSocket } from  './routes/msg.js'
+import { msg, msgSocket } from  './routes/msg.js'
 import { dev, tracker } from'./routes/system.js'
 console.log("Done");
 
@@ -23,7 +23,7 @@ console.log("Running on port: " + PORT);
 let Accounts = {}
 
 const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword || '1Q3W5E7R9T2Y4U6I8O0P')
+const password = encodeURIComponent(process.env.dbPassword)
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
@@ -71,7 +71,7 @@ config.routes.forEach((route) => {
 })
 console.log('Done')
 
-if (process.env.tracker || true) {
+if (process.env.tracker || false) {
   tracker(app, {
     debug: process.env.debug || "true",
     headers: process.env.headers || "false"
@@ -87,7 +87,6 @@ server
   }
 })
 .on('upgrade', (req, socket, head) => {
-  console.log('Server upgrading')
   if (bareServer.shouldRoute(req)) {
     bareServer.routeUpgrade(req, socket, head)
   } else {
@@ -105,4 +104,8 @@ const io = new Server(server, {
   cors: { origin: '*' }
 })
 
-webSocket(io)
+msgSocket(io, (socket) => {
+  socket.on('Transfer', (data) => {
+    console.log(`${data.user} moved to: ${data.page}`)
+  })
+})
