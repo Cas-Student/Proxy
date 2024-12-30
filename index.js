@@ -8,9 +8,8 @@ import { createBareServer } from '@tomphttp/bare-server-node'
 import path from 'node:path'
 import cors from 'cors'
 import config from './config.js'
-import { msg } from  './routes/msg.js'
+import { msg, webSocket } from  './routes/msg.js'
 import { dev, tracker } from'./routes/system.js'
-import { json } from "node:stream/consumers";
 console.log("Done");
 
 const __dirname = process.cwd()
@@ -106,17 +105,4 @@ const io = new Server(server, {
   cors: { origin: '*' }
 })
 
-//Unlimited amount of users
-io.setMaxListeners(0)
-
-io.on('connection', function(socket) {
-  console.log('Connected to: ' + socket.id)
-  socket.on('Client.msg', function(data) {
-    data = JSON.parse(data)
-    console.log(`${socket.id} as ${data.user}: ${data.message}`)
-    io.emit('Server.msg', { message: data.message, user: data.user })
-  })
-  socket.on('disconnect', function() {
-    console.log('Disconnected from: ' + socket.id)
-  })
-})
+webSocket(io)
