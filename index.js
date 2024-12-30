@@ -110,9 +110,13 @@ const io = new Server(server, {
 io.setMaxListeners(0)
 
 io.on('connection', function(socket) {
+  console.log('Connected to: ' + socket.id)
   socket.on('Client.msg', function(data) {
     data = JSON.parse(data)
-    console.log(data.user + ': ' + data.message)
-    socket.emit('Server.msg', { message: data.message, user: data.user })
+    console.log(`${socket.id} as ${data.user}: ${data.message}`)
+    io.emit('Server.msg', { message: data.message, user: data.user })
+  })
+  socket.on('disconnect', function() {
+    console.log('Disconnected from: ' + socket.id)
   })
 })
