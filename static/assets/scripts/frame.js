@@ -47,13 +47,7 @@ function iframeLoad() {
     }
     document.getElementById('is').value = decodeXor(website)
     localStorage.setItem('decoded', decodeXor(website))
-    let s = [sessionStorage.getItem('history')] || []
-    s.push(decodeXor(website))
-    alert(s)
-    sessionStorage.setItem('history', s)
-    if (sessionStorage.getItem('history') !== s) {
-      alert('ERROR: history may not work...\n' + s)
-    }
+    console.log(decodeXor(website))
   }
 }
 
@@ -131,31 +125,12 @@ homeButton.addEventListener('click', function () {
 let index = (sessionStorage.getItem('history') || []).length -1
 // Back
 function goBack() {
-  if (typeof sessionStorage.getItem('history') !== 'undefined' && iframe) {
-    const past = [].push(sessionStorage.getItem('history'))
-    alert(past)
-    iframe.src = past[index]
-    if (index != 0) {
-      index -= 1
-    }
-  } else {
-    alert('Error')
-    console.error('No iframe found')
-  }
+  iframe.contentWindow.history.back()
 }
 // Forward
 function goForward() {
-  if (typeof sessionStorage.getItem('history') !== 'undefined' && iframe) {
-    const past = [].push(sessionStorage.getItem('history'))
-    alert(past)
-    iframe.src = past[index]
-    if (index != sessionStorage.getItem('history').length -1) {
-      index += 1
-    }
-  } else {
-    alert('Error')
-    console.error('No iframe found')
-  }
+  iframe.contentWindow.history.forward()
+
 }
 
 // Remove Nav
