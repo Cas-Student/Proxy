@@ -4,7 +4,7 @@ This is a proxy.
 
 <h1>Deploying</h1>
 
-When using this proxy, 6 enviormental variables must be configured.
+When using this proxy, 4 enviormental variables must be configured.
 <ol>
     <li>
         <h2 name="debug">debug</h2>
