@@ -48,6 +48,14 @@ function iframeLoad() {
     document.getElementById('is').value = decodeXor(website)
     localStorage.setItem('decoded', decodeXor(website))
     console.log(decodeXor(website))
+    try {
+      io.emit('Transfer', {
+        user: localStorage.getItem('fname') + '@' + localStorage.getItem('lname'),
+        page: decodeXor(website)
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
