@@ -1,5 +1,5 @@
-const socket = io()
-io.emit('Transfer', {
+window.io = io()
+window.io.emit('Transfer', {
     user: localStorage.getItem('fname') + '@' + localStorage.getItem('lname'),
     page: location.pathname
 })
