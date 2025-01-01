@@ -1,5 +1,5 @@
 window.io = io()
-window.io.emit('Transfer', {
+async () => window.io.emit('Transfer', {
     user: localStorage.getItem('fname') + '@' + localStorage.getItem('lname'),
     page: location.pathname
 })
