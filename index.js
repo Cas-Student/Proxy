@@ -106,6 +106,6 @@ const io = new Server(server, {
 
 msgSocket(io, (socket) => {
   socket.on('Transfer', (data) => {
-    console.log(`${data.user} moved to: ${data.page}`)
+    console.log(`${socket.id} as ${data.user} moved to: ${data.page}`)
   })
 })
