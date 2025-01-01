@@ -1,3 +1,7 @@
+//ENV
+const debug = (typeof process.env.debug !== 'undefined') ? process.env.debug : 'true'
+const headers = (typeof process.env.headers !== 'undefined') ? process.env.headers : 'false'
+
 //Imports
 console.log("Loading imports...");
 import { MongoClient } from "mongodb"
@@ -23,7 +27,7 @@ console.log("Running on port: " + PORT);
 let Accounts = {}
 
 const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword)
+const password = encodeURIComponent(process.env.dbPassword || '')
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
@@ -73,8 +77,8 @@ console.log('Done')
 
 if (process.env.tracker || false) {
   tracker(app, {
-    debug: process.env.debug || "true",
-    headers: process.env.headers || "false"
+    debug: debug,
+    headers: headers
   })
 }
 
@@ -108,4 +112,4 @@ msgSocket(io, (socket) => {
   socket.on('Transfer', (data) => {
     console.log(`${socket.id} as ${data.user} moved to: ${data.page}`)
   })
-})
+}, { debug: debug })
