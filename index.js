@@ -75,7 +75,7 @@ config.routes.forEach((route) => {
 })
 console.log('Done')
 
-if (process.env.tracker || false) {
+if ((typeof process.env.tracker !== 'undefined') ? process.env.tracker : 'false') {
   tracker(app, {
     debug: debug,
     headers: headers
@@ -99,6 +99,9 @@ server
 })
 .on('listening', () => {
   console.log(`Running at http://localhost:${PORT}`)
+})
+.on('error', (err) => {
+  console.log('Server Error: ' + err)
 })
 .listen({
   port: PORT,
