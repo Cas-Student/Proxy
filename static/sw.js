@@ -14,7 +14,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     (async function () {
       try {
-        window.io().emit('Transfer', {
+        async() => window.io().emit('Transfer', {
           user: localStorage.getItem('fname') + '@' + localStorage.getItem('lname'),
           page: location.pathname
         })
