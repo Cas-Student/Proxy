@@ -13,13 +13,15 @@ self.dynamic = dynamic
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     (async function () {
-      try {
-        async() => window.io().emit('Transfer', {
-          user: localStorage.getItem('fname') + '@' + localStorage.getItem('lname'),
-          page: location.pathname
-        })
-      } catch (e) {
-        console.log(e)
+      async() => {
+        try {
+          window.io().emit('Transfer', {
+            user: localStorage.getItem('fname') + '@' + localStorage.getItem('lname'),
+            page: location.pathname
+          })
+        } catch (e) {
+          console.log(e)
+        }
       }
       if (await dynamic.route(event)) {
         return await dynamic.fetch(event)
