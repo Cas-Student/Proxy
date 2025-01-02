@@ -9,15 +9,6 @@ if (navigator.userAgent.includes('Chrome')) {
 // Iframe
 window.onload = function () {
   let GoUrl = sessionStorage.getItem('GoUrl')
-  let dyValue = localStorage.getItem('dy')
-
-  if (!GoUrl.startsWith('/e/')) {
-    if (dyValue === 'true' || dyValue === 'auto') {
-      GoUrl = '/a/q/' + GoUrl
-    } else {
-      GoUrl = '/a/' + GoUrl
-    }
-  }
   console.log(GoUrl)
   if (iframe) {
     iframe.src = GoUrl
