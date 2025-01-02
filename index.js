@@ -32,6 +32,7 @@ const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
 dev.client = client
+msg.client = client
 
 try {
   await client.connect()
