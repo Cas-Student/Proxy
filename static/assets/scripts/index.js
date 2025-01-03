@@ -10,6 +10,7 @@ if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && loca
 
 const uri = new URLSearchParams(window.location.search)
 if (uri.has('search')) {
+  document.getElementById('is').textContent = uri.get('search')
   if (typeof localStorage.getItem('ASP') === 'undefined') {
     localStorage.setItem('ASP', 'true')
   }
