@@ -112,8 +112,4 @@ const io = new Server(server, {
   cors: { origin: '*' }
 })
 
-msgSocket(io, (socket) => {
-  socket.on('Transfer', (data) => {
-    console.log(`${socket.id} as ${data.user} moved to: ${data.page}`)
-  })
-}, { debug: debug })
+msgSocket(io)
