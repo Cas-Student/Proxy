@@ -13,6 +13,7 @@ self.dynamic = dynamic
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     (async function () {
+      /*
       async() => {
         try {
           window.io().emit('Transfer', {
@@ -23,6 +24,7 @@ self.addEventListener('fetch', (event) => {
           console.log(e)
         }
       }
+      */
       if (await dynamic.route(event)) {
         return await dynamic.fetch(event)
       }

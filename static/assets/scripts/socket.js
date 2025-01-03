@@ -1,3 +1,4 @@
+/*
 window.io = io()
 
 async() => {
@@ -10,3 +11,4 @@ async() => {
         console.log(e)
     }
 }
+*/
