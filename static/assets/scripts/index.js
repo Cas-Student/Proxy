@@ -13,10 +13,10 @@ if (uri.has('search')) {
   if (typeof localStorage.getItem('ASP') === 'undefined') {
     localStorage.setItem('ASP', 'true')
   }
-  if (localStorage.getItem('ASP') === 'true') {
-    go(uri.get('search'))
-  } else {
+  if (localStorage.getItem('ASP') == 'false') {
     processUrl(uri.get('search'))
+  } else {
+    go(uri.get('search'))
   }
   req(uri.get('search'))
 }
