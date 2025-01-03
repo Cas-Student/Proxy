@@ -31,7 +31,7 @@ function decodeXor(input) {
 function iframeLoad() {
   if (document.readyState === 'complete') {
     let website = iframe.contentWindow?.location.href.replace(window.location.origin, '')
-    if (!website.startsWith('/a/')) {
+    if (!website.includes('hvtrs8%2F-')) {
       if (website.includes('/a/q/')) {
         website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/q/', '')
       } else if (website.includes('/a/')) {
