@@ -31,13 +31,11 @@ function decodeXor(input) {
 function iframeLoad() {
   if (document.readyState === 'complete') {
     let website = iframe.contentWindow?.location.href.replace(window.location.origin, '')
-    /*
     if (website.includes('/a/q/')) {
       website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/q/', '')
     } else if (website.includes('/a/')) {
       website = iframe.contentWindow?.location.href.replace(window.location.origin, '').replace('/a/', '')
     }
-    */
     document.getElementById('is').value = decodeXor(website)
     localStorage.setItem('decoded', decodeXor(website))
     console.log(decodeXor(website))

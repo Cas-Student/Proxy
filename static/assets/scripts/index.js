@@ -43,6 +43,7 @@ function processUrl(value, path) {
     sessionStorage.setItem('GoUrl', url)
   }
   sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(url))
+  console.log(__uv$config.encodeUrl(url))
   const dy = localStorage.getItem('dy')
   if (path) {
     location.href = path
