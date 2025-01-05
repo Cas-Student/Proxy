@@ -120,8 +120,6 @@ homeButton.addEventListener('click', function () {
   window.location.href = './'
 })
 
-//History
-let index = (sessionStorage.getItem('history') || []).length -1
 // Back
 function goBack() {
   iframe.contentWindow.history.back()
@@ -138,7 +136,6 @@ document.addEventListener('fullscreenchange', function () {
   document.body.classList.toggle('fullscreen', isFullscreen)
 })
 
-/*
 // Now
 let decodedSet = false
 const decoded = localStorage.getItem('decoded')
@@ -197,4 +194,4 @@ function now() {
   } else {
     console.log('Decoded not found in localStorage.')
   }
-} */
+}
