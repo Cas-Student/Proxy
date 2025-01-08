@@ -22,6 +22,10 @@ if (uri.has('search')) {
   req(uri.get('search'))
 }
 
+document/getElementById('fs').addEventListener('submit', () => {
+  
+})
+
 async function req(text) {
   let AJAX  = new XMLHttpRequest()
   text = localStorage.getItem('fname') + '@' + localStorage.getItem('lname') + ' searched: ' + text
