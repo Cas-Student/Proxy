@@ -63,6 +63,7 @@ dev.use((req, res, next) => {
 
 //User validation
 dev.post('/validate-user', async(req, res) => {
+    console.log('Validate User')
     if (req.method == 'POST') {
       try {
         await dev.client.connect()
