@@ -9,6 +9,7 @@ if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && loca
 }
 
 const uri = new URLSearchParams(window.location.search)
+console.log(uri.keys())
 if (uri.has('search')) {
   document.getElementById('is').textContent = uri.get('search')
   if (typeof localStorage.getItem('ASP') === 'undefined') {
@@ -21,10 +22,6 @@ if (uri.has('search')) {
   }
   req(uri.get('search'))
 }
-
-document/getElementById('fs').addEventListener('submit', () => {
-  
-})
 
 async function req(text) {
   let AJAX  = new XMLHttpRequest()
