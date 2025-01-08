@@ -102,6 +102,7 @@ dev.post('/validate-user', async(req, res) => {
   
   //Records search history
   dev.post('/insert-database', async(req, res) => {
+    console.log('Insert: ' + req.body)
     let data = {}
     data['user'] = req['body']['user']
     if (typeof req.body.is !== 'undefined') {
