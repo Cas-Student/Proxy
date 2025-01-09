@@ -1,5 +1,5 @@
 window.addEventListener('beforeunload', function (event) {
-  event.stopImmediatePropagation();
+  //event.stopImmediatePropagation()
 });
 
 let inFrame
