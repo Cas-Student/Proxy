@@ -12,6 +12,7 @@ window.onload = function(e)
   const uri = new URLSearchParams(window.location.search)
   if (uri.has('search')) {
     document.getElementsByClass('search-container').innerHTML = 'Searching... ' + uri.get('search')
+    alert(uri.get('search'))
     if (typeof localStorage.getItem('ASP') === 'undefined') {
       localStorage.setItem('ASP', 'true')
     }
@@ -21,7 +22,8 @@ window.onload = function(e)
       go(uri.get('search'))
     }
     req(uri.get('search'))
-  }
+  } else {
+    alert(uri.keys(())
 }
 
 async function req(text) {
