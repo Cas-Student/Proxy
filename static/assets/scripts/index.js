@@ -8,7 +8,7 @@ if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && loca
   location.href = '/'
 }
 
-window.onload = function(e) 
+window.onload = function(e) {
   const uri = new URLSearchParams(window.location.search)
   if (uri.has('search')) {
     document.getElementsByClass('search-container').innerHTML = 'Searching... ' + uri.get('search')
@@ -24,6 +24,7 @@ window.onload = function(e)
     req(uri.get('search'))
   } else {
     alert(uri.keys(())
+  }
 }
 
 async function req(text) {
