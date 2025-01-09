@@ -8,19 +8,20 @@ if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && loca
   location.href = '/'
 }
 
-const uri = new URLSearchParams(window.location.search)
-console.log(uri.keys())
-if (uri.has('search')) {
-  document.getElementById('is').textContent = uri.get('search')
-  if (typeof localStorage.getItem('ASP') === 'undefined') {
-    localStorage.setItem('ASP', 'true')
+window.onload = function(e) 
+  const uri = new URLSearchParams(window.location.search)
+  if (uri.has('search')) {
+    document.getElementById('is').textContent = uri.get('search')
+    if (typeof localStorage.getItem('ASP') === 'undefined') {
+      localStorage.setItem('ASP', 'true')
+    }
+    if (localStorage.getItem('ASP') == 'false') {
+      processUrl(uri.get('search'))
+    } else {
+      go(uri.get('search'))
+    }
+    req(uri.get('search'))
   }
-  if (localStorage.getItem('ASP') == 'false') {
-    processUrl(uri.get('search'))
-  } else {
-    go(uri.get('search'))
-  }
-  req(uri.get('search'))
 }
 
 async function req(text) {
