@@ -1,4 +1,4 @@
-const list = ['../sw.js', '../../m/config.js']
+const list = ['../sw.js']
 
 window.addEventListener("load", () => {
   for (let i in list ) {
