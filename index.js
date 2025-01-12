@@ -38,8 +38,14 @@ try {
   await client.connect()
   const database = client.db("Accounts")
   const db = database.collection("Information")
-  const cursor = db.find()
-  await cursor.forEach(doc => Accounts = doc)
+  const cursor = db.find({})
+  await cursor.toArray(function(err, result) {
+    if (err) throw err
+    for (let i in result) {
+      Accounts = Object.assign(Accounts, result[i])
+    }
+    db.close()
+  })
 } catch {
   Accounts = {User: {name: 'name'}}
 } finally {
