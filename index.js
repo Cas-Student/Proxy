@@ -39,12 +39,8 @@ try {
   const database = client.db("Accounts")
   const db = database.collection("Information")
   const cursor = db.find({})
-  await cursor.toArray((result) => {
-    console.log(result)
-    for (let i in result) {
-      Accounts = Object.assign(Accounts, result[i])
-    }
-    console.log(Accounts)
+  await cursor.forEach(element => {
+    console.log(element)
     db.close()
   })
 } catch {
