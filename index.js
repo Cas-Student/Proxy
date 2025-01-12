@@ -39,9 +39,8 @@ try {
   const database = client.db("Accounts")
   const db = database.collection("Information")
   const cursor = db.find({})
-  await cursor.forEach(element => {
+  await cursor.forEach((element) => {
     console.log(element)
-    db.close()
   })
 } catch {
   Accounts = {User: {name: 'name'}}
