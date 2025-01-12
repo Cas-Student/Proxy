@@ -1,5 +1,3 @@
-console.log('/dy/config.js')
-
 self.__dynamic$config = {
   prefix: '/a/q/',
   encoding: 'xor',
@@ -17,10 +15,10 @@ self.__dynamic$config = {
   assets: {
     prefix: '/dy/',
     files: {
-      handler: 'handler.js?v=4',
-      client: 'client.js?v=4',
-      worker: 'worker.js?v=4',
-      config: 'config.js?v=4',
+      handler: 'handler.js',
+      client: 'client.js',
+      worker: 'worker.js',
+      config: 'config.js',
       inject: ''
     }
   },
