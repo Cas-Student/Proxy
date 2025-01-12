@@ -1,7 +1,11 @@
+list = ['../sw.js']
+
 window.addEventListener("load", () => {
-  navigator.serviceWorker.register('../sw.js', {
-    scope: '/a/',
-  })
+  for (let i in list ) {
+    navigator.serviceWorker.register(list[i], {
+      scope: '/a/',
+    })
+  }
 })
 
 if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && location.pathname != '/') {
