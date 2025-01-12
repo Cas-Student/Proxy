@@ -1,3 +1,5 @@
+const list = ['../sw.js', '../../m/config.js']
+
 window.addEventListener("load", () => {
   navigator.serviceWorker.register('../sw.js', {
     scope: '/a/',
