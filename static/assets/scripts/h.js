@@ -1,11 +1,12 @@
 window.addEventListener('beforeunload', function (event) {
   event.stopImmediatePropagation()
-});
+})
 
-let inFrame = try {
-  return (window !== top)
+let inFrame
+try {
+  inFrame = (window !== top)
 } catch (e) {
-  return true
+  inFrame = true
 }
 
 if (!inFrame && !navigator.userAgent.includes('Firefox')) {

@@ -22,7 +22,7 @@ if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && loca
     }
     req(uri.get('search'))
   } else {
-    alert(uri.keys(())
+    alert(uri.keys())
   }
 
 async function req(text) {
@@ -38,18 +38,18 @@ function processUrl(value, path) {
   const engine = localStorage.getItem('engine')
   const searchUrl = engine ? engine : 'https://www.google.com/search?safe=off&hl=' + (localStorage.getItem('lang') || 'en') + '&lr=' + (localStorage.getItem('lang') || 'en') + '&q='
   if (!isUrl(url)) {
-    url = searchUrl + url
-  } else if (!(url.startsWith('https://') || url.startsWith('http://'))) {
-    url = 'https://' + url
+    url = searchUrl + url;
+  } else if (!(url.startsWith("https://") || url.startsWith("http://"))) {
+    url = `https://${url}`;
   }
   sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(url))
   const dy = localStorage.getItem('dy')
-  if (path) {
-    location.href = path
-  } else if (dy === 'true') {
-    window.location.href = '/a/q/' + __uv$config.encodeUrl(url)
+  if (dy === "true") {
+    window.location.href = `/a/q/${__uv$config.encodeUrl(url)}`;
+  } else if (path) {
+    location.href = path;
   } else {
-    window.location.href = '/a/' + __uv$config.encodeUrl(url)
+    window.location.href = `/a/${__uv$config.encodeUrl(url)}`;
   }
 }
 
