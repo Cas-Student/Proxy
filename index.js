@@ -40,7 +40,7 @@ try {
   const db = database.collection("Information")
   const cursor = db.find({})
   await cursor.forEach((element) => {
-    console.log(element)
+    Accounts = Object.assign(Accounts, element)
   })
 } catch {
   Accounts = {User: {name: 'name'}}
