@@ -6,6 +6,13 @@ window.addEventListener('load', () => {
 
 let appInd;
 
+async function req(app) {
+  let AJAX  = new XMLHttpRequest()
+  AJAX.open('POST', '/dev/insert-database')
+  AJAX.setRequestHeader('Content-Type', 'application/json');
+  AJAX.send(JSON.stringify({user: `${localStorage.getItem('fname')}@${localStorage.getItem('lname')}`, opened: app}))
+}
+
 function saveToLocal(path) {
   sessionStorage.setItem('GoUrl', path)
 }
@@ -17,6 +24,7 @@ function handleClick(app, path) {
   sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(app.link))
   const dy = localStorage.getItem('dy')
   console.log(dy)
+  req(app.name)
   if (path) {
     location.href = path
   } else if (dy === 'true') {

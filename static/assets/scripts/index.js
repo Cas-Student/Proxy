@@ -1,12 +1,10 @@
+const list = ['../sw.js']
+
 window.addEventListener("load", () => {
   navigator.serviceWorker.register('../sw.js', {
     scope: '/a/',
   })
 })
-
-if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && location.pathname != '/') {
-  location.href = '/'
-}
 
 const uri = new URLSearchParams(window.location.search)
 if (uri.has('search')) {
@@ -19,6 +17,10 @@ if (uri.has('search')) {
   } else {
     go(uri.get('search'))
   }
+}
+
+if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && location.pathname != '/') {
+  location.href = '/'
 }
 
 function processUrl(value, path) {
