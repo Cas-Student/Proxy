@@ -1,4 +1,4 @@
-list = ['../sw.js']
+list = ['../sw.js', '../../m/config.js']
 
 window.addEventListener("load", () => {
   for (let i in list ) {
