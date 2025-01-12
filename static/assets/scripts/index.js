@@ -1,36 +1,24 @@
-const list = ['../sw.js']
-
 window.addEventListener("load", () => {
-  for (let i in list ) {
-    navigator.serviceWorker.register(list[i], {
-      scope: '/a/',
-    })
-  }
-  const uri = new URLSearchParams(window.location.search)
-  if (uri.has('search')) {
-  document.getElementsByClassName('search-container').innerHTML = 'Searching... ' + uri.get('search')
-    if (typeof localStorage.getItem('ASP') === 'undefined') {
-      localStorage.setItem('ASP', 'true')
-    }
-    if (localStorage.getItem('ASP') == 'false') {
-      processUrl(uri.get('search'))
-    } else {
-      go(uri.get('search'))
-    }
-    req(uri.get('search'))
-  }
+  navigator.serviceWorker.register('../sw.js', {
+    scope: '/a/',
+  })
 })
+
+const uri = new URLSearchParams(window.location.search)
+if (uri.has('search')) {
+  document.getElementsByClassName('search-container').innerHTML = 'Searching... ' + uri.get('search')
+  if (typeof localStorage.getItem('ASP') === 'undefined') {
+    localStorage.setItem('ASP', 'true')
+  }
+  if (localStorage.getItem('ASP') == 'false') {
+    processUrl(uri.get('search'))
+  } else {
+    go(uri.get('search'))
+  }
+}
 
 if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && location.pathname != '/') {
   location.href = '/'
-}
-
-async function req(text) {
-  let AJAX  = new XMLHttpRequest()
-  text = localStorage.getItem('fname') + '@' + localStorage.getItem('lname') + ' searched: ' + text
-  AJAX.open('POST', '$' + text)
-  AJAX.setRequestHeader('Content-Type', 'text/plain');
-  AJAX.send(text)
 }
 
 function processUrl(value, path) {
