@@ -1,3 +1,5 @@
+console.log('sw.js')
+
 importScripts('/dy/config.js')
 importScripts('/dy/worker.js')
 importScripts('/m/bundle.js')
@@ -11,6 +13,7 @@ let userKey = new URL(location).searchParams.get('userkey')
 self.dynamic = dynamic
 
 self.addEventListener('fetch', (event) => {
+  console.log(event)
   event.respondWith(
     (async function () {
       if (await dynamic.route(event)) {

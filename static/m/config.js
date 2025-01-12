@@ -1,3 +1,5 @@
+console.log('/m/config.js')
+
 self.__uv$config = {
     prefix: '/a/',
     bare: '/o/',

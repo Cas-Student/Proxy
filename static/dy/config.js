@@ -1,3 +1,5 @@
+console.log('/dy/config.js')
+
 self.__dynamic$config = {
   prefix: '/a/q/',
   encoding: 'xor',
