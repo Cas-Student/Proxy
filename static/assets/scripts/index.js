@@ -1,4 +1,4 @@
-list = ['../sw.js', '../../m/config.js']
+const list = ['../sw.js', '../../m/config.js']
 
 window.addEventListener("load", () => {
   for (let i in list ) {
@@ -6,25 +6,23 @@ window.addEventListener("load", () => {
       scope: '/a/',
     })
   }
+  const uri = new URLSearchParams(window.location.search)
+  if (uri.has('search')) {
+  document.getElementsByClassName('search-container').innerHTML = 'Searching... ' + uri.get('search')
+    if (typeof localStorage.getItem('ASP') === 'undefined') {
+      localStorage.setItem('ASP', 'true')
+    }
+    if (localStorage.getItem('ASP') == 'false') {
+      processUrl(uri.get('search'))
+    } else {
+      go(uri.get('search'))
+    }
+    req(uri.get('search'))
+  }
 })
 
 if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && location.pathname != '/') {
   location.href = '/'
-}
-
-const uri = new URLSearchParams(window.location.search)
-if (uri.has('search')) {
-  document.getElementsByClassName('search-container').innerHTML = 'Searching... ' + uri.get('search')
-  alert(uri.get('search'))
-  if (typeof localStorage.getItem('ASP') === 'undefined') {
-    localStorage.setItem('ASP', 'true')
-  }
-  if (localStorage.getItem('ASP') == 'false') {
-    processUrl(uri.get('search'))
-  } else {
-    go(uri.get('search'))
-  }
-  req(uri.get('search'))
 }
 
 async function req(text) {
