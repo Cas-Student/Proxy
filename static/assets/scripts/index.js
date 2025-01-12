@@ -1,6 +1,6 @@
-window.addEventListener('load', () => {
-  navigator.serviceWorker.register('../sw.js', {
-    scope: '/a/',
+window.addEventListener("load", () => {
+  navigator.serviceWorker.register(`../sw.js?v=${new Date()}`, {
+    scope: "/a/",
   })
 })
 
@@ -8,22 +8,20 @@ if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && loca
   location.href = '/'
 }
 
-  const uri = new URLSearchParams(window.location.search)
-  if (uri.has('search')) {
-    document.getElementsByClassName('search-container').innerHTML = 'Searching... ' + uri.get('search')
-    alert(uri.get('search'))
-    if (typeof localStorage.getItem('ASP') === 'undefined') {
-      localStorage.setItem('ASP', 'true')
-    }
-    if (localStorage.getItem('ASP') == 'false') {
-      processUrl(uri.get('search'))
-    } else {
-      go(uri.get('search'))
-    }
-    req(uri.get('search'))
-  } else {
-    alert(uri.keys())
+const uri = new URLSearchParams(window.location.search)
+if (uri.has('search')) {
+  document.getElementsByClassName('search-container').innerHTML = 'Searching... ' + uri.get('search')
+  alert(uri.get('search'))
+  if (typeof localStorage.getItem('ASP') === 'undefined') {
+    localStorage.setItem('ASP', 'true')
   }
+  if (localStorage.getItem('ASP') == 'false') {
+    processUrl(uri.get('search'))
+  } else {
+    go(uri.get('search'))
+  }
+  req(uri.get('search'))
+}
 
 async function req(text) {
   let AJAX  = new XMLHttpRequest()
