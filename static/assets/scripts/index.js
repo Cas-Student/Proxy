@@ -26,18 +26,18 @@ function processUrl(value, path) {
   const engine = localStorage.getItem('engine')
   const searchUrl = engine ? engine : 'https://www.google.com/search?safe=off&hl=' + (localStorage.getItem('lang') || 'en') + '&lr=' + (localStorage.getItem('lang') || 'en') + '&q='
   if (!isUrl(url)) {
-    url = searchUrl + url
+    url = searchUrl + url;
   } else if (!(url.startsWith("https://") || url.startsWith("http://"))) {
-    url = `https://${url}`
+    url = `https://${url}`;
   }
   sessionStorage.setItem('GoUrl', __uv$config.encodeUrl(url))
   const dy = localStorage.getItem('dy')
   if (dy === "true") {
-    window.location.href = `/a/q/${__uv$config.encodeUrl(url)}`
+    window.location.href = `/a/q/${__uv$config.encodeUrl(url)}`;
   } else if (path) {
-    location.href = path
+    location.href = path;
   } else {
-    window.location.href = `/a/${__uv$config.encodeUrl(url)}`
+    window.location.href = `/a/${__uv$config.encodeUrl(url)}`;
   }
 }
 
