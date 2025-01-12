@@ -1,8 +1,8 @@
-window.addEventListener("load", () => {
+//window.addEventListener("load", () => {
   navigator.serviceWorker.register('../sw.js', {
     scope: '/a/',
   })
-})
+//})
 
 if (!(localStorage.getItem('fname')) && !(localStorage.getItem('lname')) && location.pathname != '/') {
   location.href = '/'
