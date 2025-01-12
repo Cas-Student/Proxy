@@ -10,7 +10,7 @@ if (navigator.userAgent.includes('Chrome')) {
 window.onload = function () {
   let GoUrl = sessionStorage.getItem('GoUrl')
   console.log(GoUrl)
-  if (iframe) {
+  if (iframe && (GoUrl.includes('/a/') || GoUrl.includes('/a/q/'))) {
     iframe.src = GoUrl
   }
 }

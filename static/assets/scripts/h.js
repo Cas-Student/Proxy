@@ -40,8 +40,8 @@ if (!inFrame && !navigator.userAgent.includes('Firefox')) {
     const script = doc.createElement('script')
     script.textContent = `
       window.addEventListener('beforeunload', function (event) {
-        event.stopImmediatePropagation();
-      });
+        event.stopImmediatePropagation()
+      })
     `
     doc.head.appendChild(script)
   }
