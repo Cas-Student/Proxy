@@ -1,6 +1,7 @@
 //ENV
 const debug = (typeof process.env.debug !== 'undefined') ? process.env.debug : 'true'
 const headers = (typeof process.env.headers !== 'undefined') ? process.env.headers : 'false'
+const password = (typeof process.env.dbPassword !== 'undefined') ? encodeURIComponent(process.env.dbPassword) : 'false'
 
 //Imports
 console.log("Loading imports...");
@@ -21,13 +22,15 @@ const server = http.createServer()
 const app = express(server)
 const bareServer = createBareServer('/o/')
 const PORT = process.env.PORT || 8080
-console.log("Running on port: " + PORT);
+console.log("Running on port: " + PORT)
 
+if (password) {
+  console.log('password works!')
+}
 //Stored Accounts
 let Accounts = {}
 
 const username = encodeURIComponent("userProbe")
-const password = encodeURIComponent(process.env.dbPassword || '')
 const cluster = "hacker-hub.vd4tq.mongodb.net"
 const uri = `mongodb+srv://${username}:${password}@${cluster}/?retryWrites=true&w=majority&appName=Hacker-Hub`
 const client = new MongoClient(uri)
